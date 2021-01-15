@@ -1,8 +1,8 @@
-# ROUTES
+# Backend (API) ROUTES
 
 - /
-- /login
-- /register
-- /shop
-- /checkout
-- /about
+- /API/login
+- /API/register
+- /API/shop
+- /API/checkout
+- /API/about
