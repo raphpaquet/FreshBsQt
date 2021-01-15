@@ -1,6 +1,17 @@
 import './App.css';
+<<<<<<< HEAD
 import React from 'react';
 import ItemDropDown from './components/ItemDropDown'
+=======
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Home from './components/Home';
+
+>>>>>>> master
 
 import {
   BrowserRouter as Router,
@@ -12,6 +23,7 @@ import {
 export default function App () {
   return (
     <Router>
+<<<<<<< HEAD
       <div>
         <nav>
           <ul>
@@ -53,6 +65,15 @@ export default function App () {
           </Route>
         </Switch>
       </div>
+=======
+    <div className="App">
+    <Switch>
+      <Route path='/'>
+        <Home />
+      </Route>
+      </Switch>
+    </div>
+>>>>>>> master
     </Router>
   );
 }
