@@ -1,6 +1,9 @@
 import './App.css';
 import React from 'react';
 import ItemDropDown from './components/ItemDropDown'
+import Home from './components/Home'
+import './components/Home.css'
+import './components/NavBar.css'
 
 import {
   BrowserRouter as Router,
@@ -8,13 +11,15 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Navbar from './components/NavBar';
 
 export default function App () {
   return (
     <Router>
       <div>
+        <Navbar />
         <nav>
-          <ul>
+          {/* <ul>
             <li>
               <Link to="/">Home</Link>
             </li>
@@ -30,7 +35,7 @@ export default function App () {
             <li>
               <Link to="/checkout">Checkout Cart</Link>
             </li>
-          </ul>
+          </ul> */}
         </nav>
 
         {/* A <Switch> looks through its children <Route>s and
@@ -57,9 +62,6 @@ export default function App () {
   );
 }
 
-function Home () {
-  return <h2>Home page</h2>;
-}
 
 function Shop () {
   return (
