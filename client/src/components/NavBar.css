@@ -1,0 +1,17 @@
+.navbar {
+  background-color: lightgreen;
+  height: 90px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-family: none;
+  font-size: 50px;
+}
+
+.logo {
+  margin: 20px;
+}
+
+.dropdown-menu {
+  margin: 20px;
+}
