@@ -10,12 +10,24 @@
 .packages-icon {
   height: 1.7rem; 
   width: auto;
-
 }
 
-.map {
-  background-image: url('../public/images/fruits.png');
+.drop-down-menu {
+  padding: 1rem;
 }
+
+.map-section {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid red;
+  height: 27rem; 
+  width: auto;
+  
+}
+
+
+
+
 
 
 

@@ -1,13 +1,28 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import 'Shop.css'
+// For the swipeable drawer that has all the items
+import clsx from 'clsx';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
 
+const useStyles = makeStyles({
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
+});
 
 const StyledMenu = withStyles({
   paper: {
@@ -43,36 +58,34 @@ const StyledMenuItem = withStyles((theme) => ({
 export default function ItemDropDown () {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  return (
-    <div className="map-section">
-      <div className="map">
-        <h3>this is the map section</h3>
-      </div>
-      <div className="drop-down-menu">
-        <Button
-          aria-controls="customized-menu"
-          aria-haspopup="true"
-          variant="contained"
-          color="primary"
-          onClick={handleClick}
-        >
-          Open Menu
-      </Button>
-        <StyledMenu
-          id="customized-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
+  // For the bottom drawer that holds the items
+  const classes = useStyles();
+  const [state, setState] = React.useState({
+    bottom: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+      })}
+      role="presentation"
+
+    >
+      <section className="pop-up-menu">
+        <div className="food-categories">
           <StyledMenuItem>
             <ListItemIcon>
               <img className="egg-icon" src="./images/egg.png" alt="egg" />
@@ -133,8 +146,45 @@ export default function ItemDropDown () {
             </ListItemIcon>
             <ListItemText primary="Other" />
           </StyledMenuItem>
-        </StyledMenu>
-      </div>
+        </div>
+
+        <div className="food-item-list">
+          <div>food items here</div>
+        </div>
+
+      </section>
+    </div>
+  );
+
+  return (
+    <div>
+      <section className="map-section">
+        <h3>Map goes here</h3>
+
+        <div className="drop-down-menu">
+
+
+          <div>
+            {['bottom'].map((anchor) => (
+              <React.Fragment key={anchor}>
+                <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                <SwipeableDrawer
+                  anchor={anchor}
+                  open={state[anchor]}
+                  onClose={toggleDrawer(anchor, false)}
+                  onOpen={toggleDrawer(anchor, true)}
+                >
+                  {list(anchor)}
+                </SwipeableDrawer>
+              </React.Fragment>
+            ))}
+          </div>
+
+        </div>
+      </section>
     </div>
   );
 }
+
+
+
