@@ -149,7 +149,7 @@ export default function ItemDropDown () {
         </div>
 
         <div className="food-item-list">
-          <div>food items here</div>
+          <div>ALL food items get displayed here</div>
         </div>
 
       </section>

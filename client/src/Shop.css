@@ -22,7 +22,14 @@
   border: 1px solid red;
   height: 27rem; 
   width: auto;
-  
+}
+
+.pop-up-menu {
+  display: flex;
+}
+
+.food-categories {
+  border: 1px solid red;
 }
 
 
