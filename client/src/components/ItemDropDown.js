@@ -5,8 +5,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
+
+import 'Shop.css'
 
 
 const StyledMenu = withStyles({
@@ -52,84 +52,89 @@ export default function ItemDropDown () {
   };
 
   return (
-    <div>
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      >
-        Open Menu
+    <div className="map-section">
+      <div className="map">
+        <h3>this is the map section</h3>
+      </div>
+      <div className="drop-down-menu">
+        <Button
+          aria-controls="customized-menu"
+          aria-haspopup="true"
+          variant="contained"
+          color="primary"
+          onClick={handleClick}
+        >
+          Open Menu
       </Button>
-      <StyledMenu
-        id="customized-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <StyledMenuItem>
-          <ListItemIcon>
-            <img className="egg-icon" src="./images/egg.png" alt="egg" />
-          </ListItemIcon>
-          <ListItemText primary="Eggs" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <DraftsIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Bread" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Cheese" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Fruit" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Vegetables" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Meat" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Drinks" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Snacks" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Desserts" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Other" />
-        </StyledMenuItem>
-      </StyledMenu>
+        <StyledMenu
+          id="customized-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <StyledMenuItem>
+            <ListItemIcon>
+              <img className="egg-icon" src="./images/egg.png" alt="egg" />
+            </ListItemIcon>
+            <ListItemText primary="Eggs" />
+          </StyledMenuItem>
+          <StyledMenuItem>
+            <ListItemIcon>
+              <img className="bread-icon" src="./images/bread.png" alt="bread" />
+            </ListItemIcon>
+            <ListItemText primary="Bread" />
+          </StyledMenuItem>
+          <StyledMenuItem>
+            <ListItemIcon>
+              <img className="cheese-icon" src="./images/cheese.png" alt="cheese" />
+            </ListItemIcon>
+            <ListItemText primary="Cheese" />
+          </StyledMenuItem>
+          <StyledMenuItem>
+            <ListItemIcon>
+              <img className="fruits-icon" src="./images/fruits.png" alt="fruit" />
+            </ListItemIcon>
+            <ListItemText primary="Fruit" />
+          </StyledMenuItem>
+          <StyledMenuItem>
+            <ListItemIcon>
+              <img className="vegetable-icon" src="./images/vegetable.png" alt="vegetable" />
+            </ListItemIcon>
+            <ListItemText primary="Vegetables" />
+          </StyledMenuItem>
+          <StyledMenuItem>
+            <ListItemIcon>
+              <img className="meat-icon" src="./images/meat.png" alt="meat" />
+            </ListItemIcon>
+            <ListItemText primary="Meat" />
+          </StyledMenuItem>
+          <StyledMenuItem>
+            <ListItemIcon>
+              <img className="drinks-icon" src="./images/juice.png" alt="juice" />
+            </ListItemIcon>
+            <ListItemText primary="Drinks" />
+          </StyledMenuItem>
+          <StyledMenuItem>
+            <ListItemIcon>
+              <img className="snacks-icon" src="./images/potato-chips.png" alt="snacks" />
+            </ListItemIcon>
+            <ListItemText primary="Snacks" />
+          </StyledMenuItem>
+          <StyledMenuItem>
+            <ListItemIcon>
+              <img className="desserts-icon" src="./images/cake-slice.png" alt="desserts" />
+            </ListItemIcon>
+            <ListItemText primary="Desserts" />
+          </StyledMenuItem>
+          <StyledMenuItem>
+            <ListItemIcon>
+              <img className="packages-icon" src="./images/packages.png" alt="other" />
+            </ListItemIcon>
+            <ListItemText primary="Other" />
+          </StyledMenuItem>
+        </StyledMenu>
+      </div>
     </div>
   );
 }

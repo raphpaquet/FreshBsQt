@@ -1,4 +1,5 @@
 import './App.css';
+import './Shop.css';
 import React from 'react';
 import ItemDropDown from './components/ItemDropDown'
 

@@ -1,0 +1,23 @@
+.egg-icon, 
+.bread-icon,
+.cheese-icon,
+.fruits-icon,
+.vegetable-icon,
+.meat-icon,
+.drinks-icon,
+.snacks-icon,
+.desserts-icon,
+.packages-icon {
+  height: 1.7rem; 
+  width: auto;
+
+}
+
+.map {
+  background-image: url('../public/images/fruits.png');
+}
+
+
+
+
+
