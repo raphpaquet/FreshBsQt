@@ -1,6 +1,8 @@
 import './App.css';
 import React from 'react';
 import ItemDropDown from './components/ItemDropDown'
+import Home from './components/Home'
+import './components/Home.css'
 
 import {
   BrowserRouter as Router,
@@ -57,9 +59,6 @@ export default function App () {
   );
 }
 
-function Home () {
-  return <h2>Home page</h2>;
-}
 
 function Shop () {
   return (

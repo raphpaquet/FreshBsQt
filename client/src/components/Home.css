@@ -1,0 +1,32 @@
+.header {
+  /* // display: -webkit-box;
+  // display: -webkit-flex;
+  // display: -ms-flexbox; */
+  display: flex;
+  width: 100%;
+  margin-top: -90px;
+  padding: 210px 30px 40px;
+  /* // -webkit-box-orient: vertical;
+  // -webkit-box-direction: normal;
+  // -webkit-flex-direction: column;
+  // -ms-flex-direction:column; */
+  flex-direction: column;
+  /* // -webkit-box-pack:center;
+  // -webkit-justify-content:center;
+  // -ms-flex-pack:center;  */
+  justify-content: center;
+  /* // -webkit-box-align: center;
+  // -webkit-align-items: center;
+  // -ms-flex-align: center; */
+  align-items:center;
+  background-position: 0px 0px;
+  background-size: cover;
+  background-attachment: fixed;
+}
+  .header-content {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: none;
+}
