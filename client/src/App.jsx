@@ -1,9 +1,9 @@
 import './App.css';
 import React from 'react';
-import ItemDropDown from './components/ItemDropDown'
-import Home from './components/Home'
-import './components/Home.css'
-import './components/NavBar.css'
+import ItemDropDown from './components/ItemDropDown';
+import Home from './components/Home';
+import './components/Home.css';
+import './components/NavBar.css';
 
 import {
   BrowserRouter as Router,
@@ -17,25 +17,8 @@ export default function App () {
   return (
     <Router>
       <div>
-        <Navbar />
         <nav>
-          {/* <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/shop">Enter postal code and click here to shop local</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-            <li>
-              <Link to="/checkout">Checkout Cart</Link>
-            </li>
-          </ul> */}
+          <Navbar />
         </nav>
 
         {/* A <Switch> looks through its children <Route>s and
