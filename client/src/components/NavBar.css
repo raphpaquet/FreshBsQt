@@ -1,11 +1,12 @@
 .navbar {
-  background-color: lightgreen;
+  background-color: #5ab963;
   height: 90px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   font-family: none;
   font-size: 50px;
+  top: 0;
 }
 
 .logo {
