@@ -46,8 +46,8 @@
 }
 
 .food-item-list {
-  max-height: 30rem;
-  min-height: 30rem;
+  max-height: 33rem;
+  min-height: 33rem;
   width: 100%;
   overflow-y: scroll;
   background-color: lightgreen;
