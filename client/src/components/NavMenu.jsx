@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,7 +10,7 @@ import {
 } from "react-router-dom";
 
 
-export default function NavMenu() {
+export default function NavMenu () {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
