@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -9,11 +9,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 // For the swipeable drawer that has all the items
 import clsx from 'clsx';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 
 const useStyles = makeStyles({
   list: {
@@ -56,11 +51,9 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 export default function ItemDropDown () {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [showEggs, setShowEggs] = useState(false);
+  const [showAll, setShowAll] = useState(true);
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   // For the bottom drawer that holds the items
   const classes = useStyles();
@@ -86,7 +79,7 @@ export default function ItemDropDown () {
     >
       <section className="pop-up-menu">
         <div className="food-categories">
-          <StyledMenuItem>
+          <StyledMenuItem onClick={() => setShowEggs(true)}>
             <ListItemIcon>
               <img className="egg-icon" src="./images/egg.png" alt="egg" />
             </ListItemIcon>
@@ -148,9 +141,25 @@ export default function ItemDropDown () {
           </StyledMenuItem>
         </div>
 
-        <div className="food-item-list">
-          <div>ALL food items get displayed here</div>
-        </div>
+        {showEggs === true ? (
+          <h3>This is eggs category</h3>
+        ) : null}
+
+        {showAll === true ? (
+          <div className="food-item-list">
+            <div>ALL food items get displayed here</div>
+            <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
+            <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
+            <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
+            <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
+            <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
+            <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
+            <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
+            <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
+          </div>
+        ) : null}
+
+
 
       </section>
     </div>
@@ -159,29 +168,23 @@ export default function ItemDropDown () {
   return (
     <div>
       <section className="map-section">
-        <h3>Map goes here</h3>
-
-        <div className="drop-down-menu">
-
-
-          <div>
-            {['bottom'].map((anchor) => (
-              <React.Fragment key={anchor}>
-                <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-                <SwipeableDrawer
-                  anchor={anchor}
-                  open={state[anchor]}
-                  onClose={toggleDrawer(anchor, false)}
-                  onOpen={toggleDrawer(anchor, true)}
-                >
-                  {list(anchor)}
-                </SwipeableDrawer>
-              </React.Fragment>
-            ))}
-          </div>
-
-        </div>
+        <img className="map-placeholder" src="./images/google-placeholder.png" alt="bread" />
       </section>
+      <div className="open-items-menu">
+        {['bottom'].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <SwipeableDrawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+              onOpen={toggleDrawer(anchor, true)}
+            >
+              {list(anchor)}
+            </SwipeableDrawer>
+          </React.Fragment>
+        ))}
+      </div>
     </div>
   );
 }
