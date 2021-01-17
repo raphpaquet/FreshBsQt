@@ -1,25 +1,60 @@
+.home {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 .header-image {
   width: 100%;
   background-size: cover;
   background-attachment: fixed;
-  background-position: 0px 0px;
+  background-position: 1750px 0px;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items:center;
+  flex-direction: column;
+}
+
+#background-video {
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: start;
+  align-items:center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  top:0;
+  position: fixed;
+  z-index: -1;
+  object-fit: cover;
+}
+
+.home-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown-bars {
+  align-self: center;
+  margin-right: 30px;
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: bold;
 }
 
 .header-content {
-  align-self: end;
-  width: 100%;
+  align-self: center;
   padding: 30px 40px;
   color: #fff;
   font-family: 'Libre Franklin', sans-serif;
   text-decoration: none;
-  margin-left:15px;
-  margin-right: 15px;
+  margin-left:50px;
+  margin-right: 50px;
+  margin-top: 50px;
   text-align: center;
 }
+
 
 .h1 {
   font-size: 38px;
@@ -28,6 +63,23 @@
   margin-top: 20px;
   margin-bottom: 10px;
   text-align: center;
+}
+
+.ml10 {
+  font-weight: 600;
+  font-size: 38px;
+}
+
+.ml10 .text-wrapper {
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml10 .letter {
+  line-height: 1em;
+  transform-origin: 0 0;
 }
 
 .paragraph {
@@ -40,9 +92,65 @@
   text-align: center;
 }
 
-.input {
-  align-self: center;
+.postal {
+  background-color: transparent;
 }
+
+.submit-button {
+  background-color: transparent;
+  outline: none;
+  border:none;
+  display: inline-block;
+  margin:8px;
+  padding: 8px;
+  border-radius: 1%;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.submit-button:after {
+  outline: none;
+  border:none;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #5ab963;
+  border-radius: 10%;
+  z-index: -2;
+}
+.submit-button:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: darkgreen;
+  transition: all 0.3s;
+  border-radius: 10%;
+  z-index: -1;
+}
+.submit-button:hover {
+  color: #fff;
+}
+.submit-button:hover:before {
+  width: 100%;
+}
+
+
+#zip {
+  align-self: center;
+  width: 110px;
+}
+
 .paragraph-2 {
   font-size: 14px;
   font-weight: 400;
