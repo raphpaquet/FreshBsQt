@@ -18,6 +18,7 @@
 
 .drop-down-menu {
   padding: 1rem;
+  
 }
 
 .map-section {
@@ -29,6 +30,10 @@
 
 .pop-up-menu {
   display: flex;
+}
+
+.food-categories {
+  border-right: 1px solid rgb(194, 194, 194);
 }
 
 
@@ -50,13 +55,67 @@
   min-height: 33rem;
   width: 100%;
   overflow-y: scroll;
-  background-color: lightgreen;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: row;
 }
 
 .food-item-list img {
   margin-bottom: 2rem;
 }
 
+/* Product Item */
+
+.product-wrapper { 
+  margin: 2rem;
+  width: 11.3rem;
+  position: relative;
+  
+}
+
+.product-image-section button {
+  all: unset;
+  background-color: rgb(0, 0, 0, 0.75);
+  text-align: center;
+  padding: 0.5rem;
+  width: 4rem;
+  z-index: 2;
+  color: rgb(255, 255, 255);
+  border-radius: 33px;
+  position: absolute;
+  margin-left: -4rem;
+  margin-top: 1rem;
+  transition: 0.3s ease-out;
+  
+}
+
+.product-image-section button:hover {
+  background-color: rgb(16, 194, 0);
+  color: black;
+  cursor: pointer;
+}
+
+.product-image-section img {
+  height: 15rem;
+  width: auto;
+  z-index: 0;
+  border-radius: 5px;
+  margin-bottom: 0rem;
+}
+
+.product-wrapper h3 {
+  font-weight: 300;
+  font-size: 22px;
+  margin-top: 0.7rem;
+  margin-bottom: 0.8rem;
+}
+
+.product-wrapper h5 {
+  font-weight: 300;
+  font-size: 14px;
+  margin-top: 0rem;
+  margin-bottom: 0.8rem;
+}
 
 
 

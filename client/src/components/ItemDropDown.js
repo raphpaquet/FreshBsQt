@@ -232,20 +232,110 @@ export default function ItemDropDown () {
 
           {showAll === true ? (
             <div>
-              <div>ALL food items get displayed here</div>
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
+              <div className="product-wrapper">
+                <div className="product-image-section">
+                  <img src="./images/citrus.jpeg" alt="citrus" />
+                  <button>Add</button>
+                </div>
+                <h3>Product Title</h3>
+                <h5>From Store Name</h5>
+                <span>$1.99</span>
+              </div>
+
+
+
+              <div className="product-wrapper">
+                <div className="product-image-section">
+                  <img src="./images/citrus.jpeg" alt="citrus" />
+                  <button>Add</button>
+                </div>
+                <h3>Product Title</h3>
+                <h5>From Store Name</h5>
+                <span>$1.99</span>
+              </div>
+
+
+
+              <div className="product-wrapper">
+                <div className="product-image-section">
+                  <img src="./images/citrus.jpeg" alt="citrus" />
+                  <button>Add</button>
+                </div>
+                <h3>Product Title</h3>
+                <h5>From Store Name</h5>
+                <span>$1.99</span>
+              </div>
+
+
+
+              <div className="product-wrapper">
+                <div className="product-image-section">
+                  <img src="./images/citrus.jpeg" alt="citrus" />
+                  <button>Add</button>
+                </div>
+                <h3>Product Title</h3>
+                <h5>From Store Name</h5>
+                <span>$1.99</span>
+              </div>
+
+
             </div>
           ) : null}
 
           {showEggs === true ? (
-            <div>this is the EGGS category</div>
+
+            <div>
+              <article className="product-display">
+                <div className="product-wrapper">
+                  <div className="product-image-section">
+                    <img src="./images/citrus.jpeg" alt="citrus" />
+                    <button>Add</button>
+                  </div>
+                  <h3>Product Title</h3>
+                  <h5>From Store Name</h5>
+                  <span>$1.99</span>
+                </div>
+              </article>
+
+              <article className="product-display">
+                <div className="product-wrapper">
+                  <div className="product-image-section">
+                    <img src="./images/citrus.jpeg" alt="citrus" />
+                    <button>Add</button>
+                  </div>
+                  <h3>Product Title</h3>
+                  <h5>From Store Name</h5>
+                  <span>$1.99</span>
+                </div>
+              </article>
+
+              <article className="product-display">
+                <div className="product-wrapper">
+                  <div className="product-image-section">
+                    <img src="./images/citrus.jpeg" alt="citrus" />
+                    <button>Add</button>
+                  </div>
+                  <h3>Product Title</h3>
+                  <h5>From Store Name</h5>
+                  <span>$1.99</span>
+                </div>
+              </article>
+
+              <article className="product-display">
+                <div className="product-wrapper">
+                  <div className="product-image-section">
+                    <img src="./images/citrus.jpeg" alt="citrus" />
+                    <button>Add</button>
+                  </div>
+                  <h3>Product Title</h3>
+                  <h5>From Store Name</h5>
+                  <span>$1.99</span>
+                </div>
+              </article>
+
+            </div>
+
+
           ) : null}
 
           {showBread === true ? (
