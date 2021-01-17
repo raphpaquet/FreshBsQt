@@ -41,6 +41,7 @@ export default function NavMenu () {
           <MenuItem><Link to="/register" onClick={handleClose}>Register</Link></MenuItem>
           <MenuItem><Link to="/checkout" onClick={handleClose}>Checkout Cart</Link></MenuItem>
           <MenuItem><Link to="/logout" onClick={handleClose}>Logout</Link></MenuItem>
+          <MenuItem><Link to="/shop" onClick={handleClose}>Market</Link></MenuItem>
         </div>
       </Menu>
     </div>

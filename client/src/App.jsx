@@ -1,5 +1,6 @@
 import './App.css';
 import './Shop.css';
+import axios from 'axios';
 import React, { useEffect } from 'react';
 // import axios from 'axios';
 import ItemDropDown from './components/ItemDropDown';
@@ -8,9 +9,7 @@ import Register from './components/Register'
 import './components/Register.css';
 import './components/Home.css';
 import './components/NavBar.css';
-
-
-
+import useApplicationData from './hooks/useApplicationData'
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,6 +19,15 @@ import {
 
 
 export default function App () {
+
+  const {
+    state,
+    dispatch
+  } = useApplicationData();
+
+  const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>))
+
+
   return (
     <Router>
       <div>
@@ -37,6 +45,8 @@ export default function App () {
           </Route>
           <Route path="/checkout">
             <Checkout />
+            <h1> Users </h1>
+            <ul> {userList} </ul>
           </Route>
           <Route path="/" exact>
             <Home />
