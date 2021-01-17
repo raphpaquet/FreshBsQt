@@ -6,6 +6,14 @@ body {
   background-color: rgb(98, 103, 93);
 }
 
+.food-item-list header button {
+  position: absolute; 
+  right: 0;
+  margin-right: 2rem;
+  margin-top: 1rem;  
+  cursor: pointer;
+}
+
 .egg-icon, 
 .bread-icon,
 .cheese-icon,

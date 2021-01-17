@@ -5,6 +5,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import NavMenu from './NavMenu';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 // For the swipeable drawer that has all the items
@@ -229,6 +231,11 @@ export default function ItemDropDown () {
 
 
         <section className="food-item-list">
+          <header>
+            <button onClick={toggleDrawer(anchor, false)}>
+              <CloseIcon />
+            </button>
+          </header>
 
           {showAll === true ? (
             <section>
@@ -361,13 +368,21 @@ export default function ItemDropDown () {
 
   return (
     <div>
+
+      <div className="home-nav">
+        <img className="logo" src="./images/basket.png" style={{ "height": "60px", "width": "60px" }}></img>
+        <div className="dropdown-bars">
+          <NavMenu />
+        </div>
+      </div>
+
       <section className="map-section">
         <img className="map-placeholder" src="./images/google-placeholder.png" alt="bread" />
       </section>
       <div className="open-items-menu">
         {['bottom'].map((anchor) => (
           <React.Fragment key={anchor}>
-            <Button className="items-menu-button" onClick={toggleDrawer(anchor, true)}> Cick Here To View Local Groceries</Button>
+            <Button className="items-menu-button" onClick={toggleDrawer(anchor, true)}> Click Here To Shop Local</Button>
             <SwipeableDrawer
               anchor={anchor}
               transitionDuration={1100}

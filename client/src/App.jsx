@@ -2,7 +2,6 @@ import './App.css';
 import './Shop.css';
 import axios from 'axios';
 import React, { useEffect } from 'react';
-// import axios from 'axios';
 import ItemDropDown from './components/ItemDropDown';
 import Home from './components/Home';
 import Register from './components/Register'
