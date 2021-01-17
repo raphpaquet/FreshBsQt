@@ -10,9 +10,13 @@
 }
 
 .logo {
-  margin: 20px;
+  margin: 30px;
 }
 
-.dropdown-menu {
-  margin: 20px;
+.dropdown-bars {
+  margin-right: 40px;
+}
+
+#menu-title {
+  color: #fff;
 }
