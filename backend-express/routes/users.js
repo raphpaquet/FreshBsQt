@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {
-    getPostsByUsers
+    getProducts
 } = require('../helpers/dataHelpers');
 
 module.exports = ({
@@ -21,8 +21,8 @@ module.exports = ({
 
     router.get('/posts', (req, res) => {
         getProducts()
-            .then((usersPosts) => {
-                const formattedPosts = getPostsByUsers(usersPosts);
+            .then((products) => {
+                const formattedPosts = getProducts(products);
                 res.json(formattedPosts);
             })
             .catch((err) => res.json({
