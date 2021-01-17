@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 // import axios from 'axios';
 import ItemDropDown from './components/ItemDropDown';
 import Home from './components/Home';
+import Register from './components/Register'
+import './components/Register.css';
 import './components/Home.css';
 import './components/NavBar.css';
 
@@ -15,7 +17,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Navbar from './components/NavBar';
+
 
 export default function App () {
   return (
@@ -60,9 +62,7 @@ function Login () {
   return <h2>This is the login page</h2>;
 }
 
-function Register () {
-  return <h2>This is the register page</h2>
-}
+
 
 function Checkout () {
   return <h2>This is the checkout page</h2>
