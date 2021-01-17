@@ -60,3 +60,5 @@ module.exports = ({
 
     return router;
 };
+
+module.exports = router
