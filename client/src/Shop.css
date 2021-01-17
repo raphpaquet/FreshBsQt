@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgb(98, 103, 93);
+}
+
 .egg-icon, 
 .bread-icon,
 .cheese-icon,
@@ -23,7 +27,6 @@
 
 .map-section {
  text-align: center;
-  border: 1px solid red;
   height: 21rem; 
   width: auto;
 }
@@ -56,12 +59,22 @@
   width: 100%;
   overflow-y: scroll;
   background-color: rgb(255, 255, 255);
-  display: flex;
-  flex-direction: row;
 }
 
 .food-item-list img {
   margin-bottom: 2rem;
+}
+
+.food-item-list section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 400px);
+  margin-left: 2rem;
+}
+
+
+.open-items-menu {
+  text-align: center;
 }
 
 /* Product Item */
@@ -86,8 +99,8 @@
   margin-left: -4rem;
   margin-top: 1rem;
   transition: 0.3s ease-out;
-  
 }
+
 
 .product-image-section button:hover {
   background-color: rgb(16, 194, 0);
@@ -96,8 +109,9 @@
 }
 
 .product-image-section img {
-  height: 15rem;
-  width: auto;
+  height: 13rem;
+  min-width: 156px;
+  width: auto; 
   z-index: 0;
   border-radius: 5px;
   margin-bottom: 0rem;
@@ -120,7 +134,26 @@
 
 
 
+@media only screen and (max-width: 1160px) {
+  .food-item-list section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 400px);
+  }
+}
 
+@media only screen and (max-width: 900px) {
+  .food-item-list section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 400px);
+  }
+}
 
-
-
+@media only screen and (max-width: 670px) {
+  .food-item-list section {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, 400px);
+  }
+}

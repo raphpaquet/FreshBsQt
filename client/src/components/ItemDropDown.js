@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
+
 // For the swipeable drawer that has all the items
 import clsx from 'clsx';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -62,8 +63,6 @@ export default function ItemDropDown () {
   const [showSnacks, setShowSnacks] = useState(false);
   const [showDesserts, setShowDesserts] = useState(false);
   const [showOther, setShowOther] = useState(false);
-
-
   // For the bottom drawer that holds the items
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -150,9 +149,10 @@ export default function ItemDropDown () {
   };
 
   const list = (anchor) => (
+
     <div
       className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+        [classes.fullList]: anchor === 'bottom',
       })}
       role="presentation"
 
@@ -231,10 +231,22 @@ export default function ItemDropDown () {
         <section className="food-item-list">
 
           {showAll === true ? (
-            <div>
+            <section>
               <div className="product-wrapper">
                 <div className="product-image-section">
                   <img src="./images/citrus.jpeg" alt="citrus" />
+                  <button >Add</button>
+                </div>
+                <h3>Product Title</h3>
+                <h5>From Store Name</h5>
+                <span>$1.99</span>
+              </div>
+
+
+
+              <div className="product-wrapper">
+                <div className="product-image-section">
+                  <img src="./images/tomatos.jpeg" alt="citrus" />
                   <button>Add</button>
                 </div>
                 <h3>Product Title</h3>
@@ -267,24 +279,12 @@ export default function ItemDropDown () {
               </div>
 
 
-
-              <div className="product-wrapper">
-                <div className="product-image-section">
-                  <img src="./images/citrus.jpeg" alt="citrus" />
-                  <button>Add</button>
-                </div>
-                <h3>Product Title</h3>
-                <h5>From Store Name</h5>
-                <span>$1.99</span>
-              </div>
-
-
-            </div>
+            </section>
           ) : null}
 
           {showEggs === true ? (
 
-            <div>
+            <section>
               <article className="product-display">
                 <div className="product-wrapper">
                   <div className="product-image-section">
@@ -309,31 +309,7 @@ export default function ItemDropDown () {
                 </div>
               </article>
 
-              <article className="product-display">
-                <div className="product-wrapper">
-                  <div className="product-image-section">
-                    <img src="./images/citrus.jpeg" alt="citrus" />
-                    <button>Add</button>
-                  </div>
-                  <h3>Product Title</h3>
-                  <h5>From Store Name</h5>
-                  <span>$1.99</span>
-                </div>
-              </article>
-
-              <article className="product-display">
-                <div className="product-wrapper">
-                  <div className="product-image-section">
-                    <img src="./images/citrus.jpeg" alt="citrus" />
-                    <button>Add</button>
-                  </div>
-                  <h3>Product Title</h3>
-                  <h5>From Store Name</h5>
-                  <span>$1.99</span>
-                </div>
-              </article>
-
-            </div>
+            </section>
 
 
           ) : null}
@@ -391,9 +367,10 @@ export default function ItemDropDown () {
       <div className="open-items-menu">
         {['bottom'].map((anchor) => (
           <React.Fragment key={anchor}>
-            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Button className="items-menu-button" onClick={toggleDrawer(anchor, true)}> Cick Here To View Local Groceries</Button>
             <SwipeableDrawer
               anchor={anchor}
+              transitionDuration={1100}
               open={state[anchor]}
               onClose={toggleDrawer(anchor, false)}
               onOpen={toggleDrawer(anchor, true)}

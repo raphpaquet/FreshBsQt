@@ -50,10 +50,7 @@ export default function App () {
 
 function Shop () {
   return (
-    <div>
-      <h2>The shop local page with map and items</h2>
-      <ItemDropDown />
-    </div>
+    <ItemDropDown />
 
   )
 }
