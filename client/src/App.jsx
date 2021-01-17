@@ -2,7 +2,6 @@ import './App.css';
 import './Shop.css';
 import axios from 'axios';
 import React, { useEffect } from 'react';
-// import axios from 'axios';
 import ItemDropDown from './components/ItemDropDown';
 import Home from './components/Home';
 import Register from './components/Register'
@@ -60,10 +59,7 @@ export default function App () {
 
 function Shop () {
   return (
-    <div>
-      <h2>The shop local page with map and items</h2>
-      <ItemDropDown />
-    </div>
+    <ItemDropDown />
 
   )
 }

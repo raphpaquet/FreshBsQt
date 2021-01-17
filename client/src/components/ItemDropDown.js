@@ -5,6 +5,9 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import NavMenu from './NavMenu';
+import CloseIcon from '@material-ui/icons/Close';
+
 
 // For the swipeable drawer that has all the items
 import clsx from 'clsx';
@@ -62,8 +65,6 @@ export default function ItemDropDown () {
   const [showSnacks, setShowSnacks] = useState(false);
   const [showDesserts, setShowDesserts] = useState(false);
   const [showOther, setShowOther] = useState(false);
-
-
   // For the bottom drawer that holds the items
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -150,9 +151,10 @@ export default function ItemDropDown () {
   };
 
   const list = (anchor) => (
+
     <div
       className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+        [classes.fullList]: anchor === 'bottom',
       })}
       role="presentation"
 
@@ -229,23 +231,94 @@ export default function ItemDropDown () {
 
 
         <section className="food-item-list">
+          <header>
+            <button onClick={toggleDrawer(anchor, false)}>
+              <CloseIcon />
+            </button>
+          </header>
 
           {showAll === true ? (
-            <div>
-              <div>ALL food items get displayed here</div>
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-              <img className="placeholder" src="./images/placeholder1.png" alt="bread" />
-            </div>
+            <section>
+              <div className="product-wrapper">
+                <div className="product-image-section">
+                  <img src="./images/citrus.jpeg" alt="citrus" />
+                  <button >Add</button>
+                </div>
+                <h3>Product Title</h3>
+                <h5>From Store Name</h5>
+                <span>$1.99</span>
+              </div>
+
+
+
+              <div className="product-wrapper">
+                <div className="product-image-section">
+                  <img src="./images/tomatos.jpeg" alt="citrus" />
+                  <button>Add</button>
+                </div>
+                <h3>Product Title</h3>
+                <h5>From Store Name</h5>
+                <span>$1.99</span>
+              </div>
+
+
+
+              <div className="product-wrapper">
+                <div className="product-image-section">
+                  <img src="./images/citrus.jpeg" alt="citrus" />
+                  <button>Add</button>
+                </div>
+                <h3>Product Title</h3>
+                <h5>From Store Name</h5>
+                <span>$1.99</span>
+              </div>
+
+
+
+              <div className="product-wrapper">
+                <div className="product-image-section">
+                  <img src="./images/citrus.jpeg" alt="citrus" />
+                  <button>Add</button>
+                </div>
+                <h3>Product Title</h3>
+                <h5>From Store Name</h5>
+                <span>$1.99</span>
+              </div>
+
+
+            </section>
           ) : null}
 
           {showEggs === true ? (
-            <div>this is the EGGS category</div>
+
+            <section>
+              <article className="product-display">
+                <div className="product-wrapper">
+                  <div className="product-image-section">
+                    <img src="./images/citrus.jpeg" alt="citrus" />
+                    <button>Add</button>
+                  </div>
+                  <h3>Product Title</h3>
+                  <h5>From Store Name</h5>
+                  <span>$1.99</span>
+                </div>
+              </article>
+
+              <article className="product-display">
+                <div className="product-wrapper">
+                  <div className="product-image-section">
+                    <img src="./images/citrus.jpeg" alt="citrus" />
+                    <button>Add</button>
+                  </div>
+                  <h3>Product Title</h3>
+                  <h5>From Store Name</h5>
+                  <span>$1.99</span>
+                </div>
+              </article>
+
+            </section>
+
+
           ) : null}
 
           {showBread === true ? (
@@ -295,15 +368,24 @@ export default function ItemDropDown () {
 
   return (
     <div>
+
+      <div className="home-nav">
+        <img className="logo" src="./images/basket.png" style={{ "height": "60px", "width": "60px" }}></img>
+        <div className="dropdown-bars">
+          <NavMenu />
+        </div>
+      </div>
+
       <section className="map-section">
         <img className="map-placeholder" src="./images/google-placeholder.png" alt="bread" />
       </section>
       <div className="open-items-menu">
         {['bottom'].map((anchor) => (
           <React.Fragment key={anchor}>
-            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Button className="items-menu-button" onClick={toggleDrawer(anchor, true)}> Click Here To Shop Local</Button>
             <SwipeableDrawer
               anchor={anchor}
+              transitionDuration={1100}
               open={state[anchor]}
               onClose={toggleDrawer(anchor, false)}
               onOpen={toggleDrawer(anchor, true)}
