@@ -1,0 +1,67 @@
+* {
+  box-sizing: border-box;
+}
+
+.egg-icon, 
+.bread-icon,
+.cheese-icon,
+.fruits-icon,
+.vegetable-icon,
+.meat-icon,
+.drinks-icon,
+.snacks-icon,
+.desserts-icon,
+.packages-icon {
+  height: 1.7rem; 
+  width: auto;
+}
+
+.drop-down-menu {
+  padding: 1rem;
+}
+
+.map-section {
+ text-align: center;
+  border: 1px solid red;
+  height: 21rem; 
+  width: auto;
+}
+
+.pop-up-menu {
+  display: flex;
+}
+
+
+.placeholder {
+  height: 18rem;
+  width: auto;
+  margin-left: 3rem;
+}
+
+.map-placeholder {
+  height: 18rem;
+  width: auto; 
+  margin: 1rem;
+  
+}
+
+.food-item-list {
+  max-height: 33rem;
+  min-height: 33rem;
+  width: 100%;
+  overflow-y: scroll;
+  background-color: lightgreen;
+}
+
+.food-item-list img {
+  margin-bottom: 2rem;
+}
+
+
+
+
+
+
+
+
+

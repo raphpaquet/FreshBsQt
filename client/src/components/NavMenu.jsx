@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 
 
-export default function NavMenu() {
+export default function NavMenu () {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
