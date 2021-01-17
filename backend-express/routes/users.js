@@ -8,7 +8,7 @@ module.exports = ({
     getUsers,
     getUserByEmail,
     addUser,
-    getUsersPosts
+    getProducts
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
