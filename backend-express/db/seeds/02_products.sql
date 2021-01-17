@@ -1,9 +1,9 @@
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
-VALUES ('Artichokes', 'IMAGE', 'Fresh delicious artichokes', 3.99, 'Vegetables');
+VALUES ('Artichokes', './docs/artichoke', 'Fresh delicious artichokes', 3.99, 'Vegetables');
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
-VALUES ('Asparagus', 'IMAGE', 'Asparagus', 2.99, 'Vegetables');
+VALUES ('Asparagus', './docs/asparagus', 'Asparagus', 2.99, 'Vegetables');
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
-VALUES ('Cabbage', 'IMAGE', 'individual cabbage', 1.99, 'Vegetables');
+VALUES ('Cabbage', './docs/cabbage', 'individual cabbage', 1.99, 'Vegetables');
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
 VALUES ('Eggplant', 'IMAGE', 'eggplant', 1.99, 'Vegetables');
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
