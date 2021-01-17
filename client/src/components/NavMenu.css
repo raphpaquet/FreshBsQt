@@ -1,0 +1,20 @@
+.MuiButton-label {
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 0.5em;
+  font-family: none;
+}
+
+#simple-menu {
+  background-color: transparent;
+  color: black;
+  text-decoration: none;
+}
+
+.menu-item {
+  color: white;
+  font-size: 15px;
+  text-decoration: none;
+  outline: none;
+  background-color: transparent;
+}

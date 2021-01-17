@@ -1,9 +1,12 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import ItemDropDown from './components/ItemDropDown';
 import Home from './components/Home';
 import './components/Home.css';
 import './components/NavBar.css';
+
+
 
 import {
   BrowserRouter as Router,
@@ -17,13 +20,17 @@ export default function App () {
   return (
     <Router>
       <div>
-        <nav>
-          <Navbar />
-        </nav>
+        
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+        <nav>
+          <Navbar />
+        </nav>
           <Route path="/shop">
             <Shop />
           </Route>
@@ -35,9 +42,6 @@ export default function App () {
           </Route>
           <Route path="/checkout">
             <Checkout />
-          </Route>
-          <Route path="/">
-            <Home />
           </Route>
         </Switch>
       </div>
