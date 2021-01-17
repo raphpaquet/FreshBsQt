@@ -21,20 +21,12 @@ export default function App () {
   return (
     <Router>
       <div>
-
-
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/shop">
             <Shop />
           </Route>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <nav>
-            <Navbar />
-          </nav>
           <Route path="/login">
             <Login />
           </Route>
@@ -43,6 +35,9 @@ export default function App () {
           </Route>
           <Route path="/checkout">
             <Checkout />
+          </Route>
+          <Route path="/" exact>
+            <Home />
           </Route>
         </Switch>
       </div>
