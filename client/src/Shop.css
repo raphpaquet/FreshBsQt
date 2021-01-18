@@ -35,7 +35,7 @@ body {
 
 .map-section {
  text-align: center;
-  height: 21rem; 
+  height:10rem; 
   width: auto;
 }
 
@@ -54,12 +54,7 @@ body {
   margin-left: 3rem;
 }
 
-.map-placeholder {
-  height: 18rem;
-  width: auto; 
-  margin: 1rem;
-  
-}
+
 
 .food-item-list {
   max-height: 33rem;

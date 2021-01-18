@@ -7,6 +7,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import NavMenu from './NavMenu';
 import CloseIcon from '@material-ui/icons/Close';
+import GoogleMap from './GoogleMap';
 
 
 // For the swipeable drawer that has all the items
@@ -366,6 +367,13 @@ export default function ItemDropDown () {
     </div>
   );
 
+  // The location for google maps 
+  const location = {
+    address: '1600 Amphitheatre Parkway, Mountain View, california.',
+    lat: 37.42216,
+    lng: -122.08427,
+  }
+
   return (
     <div>
 
@@ -377,7 +385,9 @@ export default function ItemDropDown () {
       </div>
 
       <section className="map-section">
-        <img className="map-placeholder" src="./images/google-placeholder.png" alt="bread" />
+        <GoogleMap
+          location={location}
+        />
       </section>
       <div className="open-items-menu">
         {['bottom'].map((anchor) => (
