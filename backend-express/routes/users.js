@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const {
-    getProducts
-} = require('../helpers/dataHelpers');
+// const {
+//     getProducts
+// } = require('../helpers/dataHelpers');
 
 module.exports = ({
     getUsers,
@@ -12,11 +12,12 @@ module.exports = ({
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
-        getUsers()
-            .then((users) => res.json(users))
-            .catch((err) => res.json({
-                error: err.message
-            }));
+        res.send('Hello')
+        // getUsers()
+        //     .then((users) => res.json(users))
+        //     .catch((err) => res.json({
+        //         error: err.message
+        //     }));
     });
 
     router.get('/posts', (req, res) => {

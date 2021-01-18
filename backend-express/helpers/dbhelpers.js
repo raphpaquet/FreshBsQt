@@ -58,7 +58,6 @@ module.exports = (db) => {
         .then((result) => result.rows)
         .catch((err) => err);
 };
-
   return {
       getUsers,
       getUserByEmail,
@@ -66,3 +65,4 @@ module.exports = (db) => {
       getProducts
   };
 };
+
