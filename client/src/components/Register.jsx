@@ -66,14 +66,12 @@ export default function Register(props) {
     e.preventDefault();
     if(userData) {
         sendDetailsToServer()    
-    } else {
-        props.showError('Passwords do not match');
     }
   }
 
 
   const redirectToHome = () => {
-    history.push('/home')
+    history.push('/')
   }
 
 
@@ -94,7 +92,7 @@ export default function Register(props) {
         <span>
           <label for="firstName"></label>
           <input 
-            id="first-name"
+            id="firstName"
             name="firstName" 
             type="text"  
             placeholder="First Name"
@@ -106,11 +104,11 @@ export default function Register(props) {
         <span>
           <label for="lastName"></label>
           <input 
-            id="last-name"
+            id="lastName"
             name="lastName" 
             type="text"  
             placeholder="Last Name"
-            value={state.lasttName}
+            value={state.lastName}
             onChange={handleChange}
             required
           />
@@ -120,7 +118,7 @@ export default function Register(props) {
           <input 
             id="email"
             name="email" 
-            type="text"  
+            type="email"  
             placeholder="Email"
             value={state.email}
             onChange={handleChange}
@@ -166,7 +164,7 @@ export default function Register(props) {
         <span>
           <label for="phoneNumber"></label>
           <input 
-            id="phone-number"
+            id="phoneNumber"
             name="phoneNumber" 
             type="number"  
             placeholder="Phone Number"
@@ -176,7 +174,12 @@ export default function Register(props) {
           />
         </span>
         <div className="button-register">
-          <button type="submit" class="submit-button" onClick={handleSubmitClick}>Submit</button>
+          <button 
+            type="submit" 
+            class="submit-button" 
+            onClick={handleSubmitClick}>
+              Submit
+          </button>
         </div>
       </form>
       <div className="questionLogin">

@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import ItemDropDown from './components/ItemDropDown';
 import Home from './components/Home';
 import Register from './components/Register'
+import Login from './components/Login'
 import './components/Register.css';
 import './components/Home.css';
 import './components/NavBar.css';
@@ -64,9 +65,6 @@ function Shop () {
   )
 }
 
-function Login () {
-  return <h2>This is the login page</h2>;
-}
 
 
 
