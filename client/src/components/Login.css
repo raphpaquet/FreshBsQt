@@ -1,0 +1,59 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  margin-right: 80px;
+  margin-left: 80px;
+  line-height: 30px ;
+  background-color: transparent;
+  display: flex;
+  border-radius: 10%;
+  justify-content: center;
+}
+
+.questionLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.login-login {
+  color: white;
+  font-size: 14px;
+}
+
+#login-log {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border: 1px solid white;
+  padding: 1px 5px;
+  border-radius: 10px;
+
+}
+.login-form {
+  margin: 30px;
+  text-align: center;
+  display: contents;
+}
+
+.login-title {
+  font-size: 24px;
+  font-family: none;
+  letter-spacing: 0.5em;
+  color: white;
+}
+
+input {
+  background-color: ivory;
+  border: 0.5px solid white
+}
+
+.button-rgs {
+  background-color: transparent;
+  border: 0.5px solid white;
+  border-radius: 10%;
+  font-family: none;
+  text-transform: uppercase;
+  color: white
+
+}
