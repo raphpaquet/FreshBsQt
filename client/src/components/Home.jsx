@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import NavMenu from './NavMenu'
 import BottomNav from './BottomNav'
+import { useHistory } from 'react-router-dom';
+import Map from './Map'
 
 
 
 export default function Home(props) {
-  const [zipcode, setZipcode] = useState("");
+  // const [zipcode, setZipcode] = useState("");
+  const history = useHistory();
+  const [state, setState] = useState({
+    latitude: null,
+    longitude: null,
+  })
   
 
   return (
@@ -28,9 +35,9 @@ export default function Home(props) {
           </span>
         </h1>
           {/* <h1 id="title-animation" className="h1">Support local stores in your neigborhood</h1> */}
-          <p id="subtitle-animation" className="paragraph">Enter your postal code</p>
+          {/* <p id="subtitle-animation" className="paragraph">Enter your postal code</p> */}
           <form className="postal">
-            <input 
+            {/* <input 
               id="zip" 
               name="zip" 
               type="text" 
@@ -41,13 +48,14 @@ export default function Home(props) {
                 const { value } = event.target;
                 setZipcode(value)
               }}
-            />
-            <button 
+            /> */}
+            {/* <button 
               type="submit" 
               className="submit-button"
               // onClick={setZipcode}
-              >Submit</button>
+              >Submit</button> */}
           </form>
+          <Map />
           <p className="paragraph-2">Get your fresh local products basket in couple clicks</p>
         </div>
       </div>
