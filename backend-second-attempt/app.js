@@ -1,4 +1,6 @@
 // second attempt
+// below is the line that we are meant to add to the top of "SERVER"
+const dbHelpers = require('./helpers/dbHelpers')(db);
 
 const createError = require('http-errors');
 const express = require('express');
@@ -23,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter(dbHelpers));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

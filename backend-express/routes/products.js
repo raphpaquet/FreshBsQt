@@ -1,14 +1,17 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const db = require('../db')
 
 
-const { getUsers,
-  getUserByEmail,
-  addUser,
-  getProducts} = require('../helpers/dbHelpers')(db);
-
-getProducts()
-
-
-module.exports = router
+module.exports = ({
+  getProducts
+}) => {
+  router.get('/', (req, res) => {
+    getProducts()
+    .then((products) => res.json(products))
+    .catch((err) => res.json({
+      error: err.message
+    }));
+  })
+  return router;
+};
