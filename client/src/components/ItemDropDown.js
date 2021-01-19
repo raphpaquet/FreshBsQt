@@ -3,7 +3,6 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import NavMenu from './NavMenu';
 import CloseIcon from '@material-ui/icons/Close';
@@ -166,69 +165,36 @@ export default function ItemDropDown () {
       <section className="pop-up-menu">
         <div className="food-categories">
           <StyledMenuItem onClick={() => getCategory('All')} >
-            {/* <ListItemIcon>
-              <img className="egg-icon" src="./images/egg.png" alt="egg" />
-            </ListItemIcon> */}
             <ListItemText primary="All" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Eggs')}>
-            {/* <ListItemIcon>
-              <img className="egg-icon" src="./images/egg.png" alt="egg" />
-            </ListItemIcon> */}
             <ListItemText primary="Eggs" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Bread')}>
-            {/* <ListItemIcon>
-              <img className="bread-icon" src="./images/bread.png" alt="bread" />
-            </ListItemIcon> */}
             <ListItemText primary="Bread" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Cheese')}>
-            {/* <ListItemIcon>
-              <img className="cheese-icon" src="./images/cheese.png" alt="cheese" />
-            </ListItemIcon> */}
             <ListItemText primary="Cheese" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Fruit')}>
-            {/* <ListItemIcon>
-              <img className="fruits-icon" src="./images/fruits.png" alt="fruit" />
-            </ListItemIcon> */}
             <ListItemText primary="Fruit" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Vegetables')}>
-            {/* <ListItemIcon>
-              <img className="vegetable-icon" src="./images/vegetable.png" alt="vegetable" />
-            </ListItemIcon> */}
             <ListItemText primary="Vegetables" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Meat')}>
-            {/* <ListItemIcon>
-              <img className="meat-icon" src="./images/meat.png" alt="meat" />
-            </ListItemIcon> */}
             <ListItemText primary="Meat" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Drinks')}>
-            {/* <ListItemIcon>
-              <img className="drinks-icon" src="./images/juice.png" alt="juice" />
-            </ListItemIcon> */}
             <ListItemText primary="Drinks" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Snacks')}>
-            {/* <ListItemIcon>
-              <img className="snacks-icon" src="./images/potato-chips.png" alt="snacks" />
-            </ListItemIcon> */}
             <ListItemText primary="Snacks" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Desserts')}>
-            {/* <ListItemIcon>
-              <img className="desserts-icon" src="./images/cake-slice.png" alt="desserts" />
-            </ListItemIcon> */}
             <ListItemText primary="Desserts" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Other')}>
-            {/* <ListItemIcon>
-              <img className="packages-icon" src="./images/packages.png" alt="other" />
-            </ListItemIcon> */}
             <ListItemText primary="Other" />
           </StyledMenuItem>
         </div>
@@ -236,89 +202,53 @@ export default function ItemDropDown () {
 
         <section className="food-item-list">
           <header>
-            <button onClick={toggleDrawer(anchor, false)}>
+            <button className="close-products" onClick={toggleDrawer(anchor, false)}>
               <CloseIcon />
             </button>
           </header>
 
           {showAll === true ? (
+
             <section className="grid">
               <div className="product-wrapper">
                 <div className="product-image-section">
                   <img src="./images/citrus.jpeg" alt="citrus" />
-                  <button >Add</button>
                 </div>
                 <h3>Product Title</h3>
                 <h5>From Store Name</h5>
-                <span>$1.99</span>
-              </div>
-
-
-
-              <div className="product-wrapper">
-                <div className="product-image-section">
-                  <img src="./images/tomatos.jpeg" alt="citrus" />
-                  <button>Add</button>
+                <div className="price-and-add">
+                  <span>$1.99</span><button>Add</button>
                 </div>
-                <h3>Product Title</h3>
-                <h5>From Store Name</h5>
-                <span>$1.99</span>
               </div>
-
-
 
               <div className="product-wrapper">
                 <div className="product-image-section">
                   <img src="./images/citrus.jpeg" alt="citrus" />
-                  <button>Add</button>
                 </div>
                 <h3>Product Title</h3>
                 <h5>From Store Name</h5>
-                <span>$1.99</span>
-              </div>
-
-
-
-              <div className="product-wrapper">
-                <div className="product-image-section">
-                  <img src="./images/citrus.jpeg" alt="citrus" />
-                  <button>Add</button>
+                <div className="price-and-add">
+                  <span>$1.99</span><button>Add</button>
                 </div>
-                <h3>Product Title</h3>
-                <h5>From Store Name</h5>
-                <span>$1.99</span>
               </div>
-
 
             </section>
           ) : null}
 
           {showEggs === true ? (
 
-            <section>
-              <article className="product-display">
-                <div className="product-wrapper">
-                  <div className="product-image-section">
-                    <img src="./images/citrus.jpeg" alt="citrus" />
-                    <button>Add</button>
-                  </div>
-                  <h3>Product Title</h3>
-                  <h5>From Store Name</h5>
-                  <span>$1.99</span>
-                </div>
-              </article>
+            <section className="grid">
 
-              <article className="product-display">
-                <div className="product-wrapper">
-                  <div className="product-image-section">
-                    <img src="./images/citrus.jpeg" alt="citrus" />
-                    <button>Add</button>
-                  </div>
-                  <h3>Product Title</h3>
-                  <h5>From Store Name</h5>
-                  <span>$1.99</span>
+              <div className="product-wrapper">
+                <div className="product-image-section">
+                  <img src="./images/citrus.jpeg" alt="citrus" />
                 </div>
-              </article>
+                <h3>Product Title</h3>
+                <h5>From Store Name</h5>
+                <div className="price-and-add">
+                  <span>$1.99</span><button>Add</button>
+                </div>
+              </div>
 
             </section>
 
@@ -361,17 +291,13 @@ export default function ItemDropDown () {
             <div>this is the OTHER category</div>
           ) : null}
 
-
-
-
         </section>
-
       </section>
     </div>
   );
 
   return (
-    <div style={{backgroundImage:"url('../images/berries.jpg')", backgroundSize:"cover"}}>
+    <div style={{ backgroundImage: "url('../images/berries.jpg')", backgroundSize: "cover", height: '100vh' }}>
 
       <div className="home-nav">
         <img className="logo" src="./images/basket.png" style={{ "height": "60px", "width": "60px" }}></img>
@@ -383,6 +309,7 @@ export default function ItemDropDown () {
       <section className="map-section">
         <MapContainer />
       </section>
+
       <div className="open-items-menu">
         {['bottom'].map((anchor) => (
           <React.Fragment key={anchor}>
