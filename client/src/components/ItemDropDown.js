@@ -7,6 +7,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import NavMenu from './NavMenu';
 import CloseIcon from '@material-ui/icons/Close';
+import './ItemDropDown.css'
 
 
 // For the swipeable drawer that has all the items
@@ -78,6 +79,7 @@ export default function ItemDropDown () {
 
     setState({ ...state, [anchor]: open });
   };
+
 
   // This helps set the state when choosing a food category. 
   const getCategory = (category) => {
@@ -161,70 +163,70 @@ export default function ItemDropDown () {
     >
       <section className="pop-up-menu">
         <div className="food-categories">
-          <StyledMenuItem onClick={() => getCategory('All')}>
-            <ListItemIcon>
+          <StyledMenuItem onClick={() => getCategory('All')} >
+            {/* <ListItemIcon>
               <img className="egg-icon" src="./images/egg.png" alt="egg" />
-            </ListItemIcon>
+            </ListItemIcon> */}
             <ListItemText primary="All" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Eggs')}>
-            <ListItemIcon>
+            {/* <ListItemIcon>
               <img className="egg-icon" src="./images/egg.png" alt="egg" />
-            </ListItemIcon>
+            </ListItemIcon> */}
             <ListItemText primary="Eggs" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Bread')}>
-            <ListItemIcon>
+            {/* <ListItemIcon>
               <img className="bread-icon" src="./images/bread.png" alt="bread" />
-            </ListItemIcon>
+            </ListItemIcon> */}
             <ListItemText primary="Bread" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Cheese')}>
-            <ListItemIcon>
+            {/* <ListItemIcon>
               <img className="cheese-icon" src="./images/cheese.png" alt="cheese" />
-            </ListItemIcon>
+            </ListItemIcon> */}
             <ListItemText primary="Cheese" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Fruit')}>
-            <ListItemIcon>
+            {/* <ListItemIcon>
               <img className="fruits-icon" src="./images/fruits.png" alt="fruit" />
-            </ListItemIcon>
+            </ListItemIcon> */}
             <ListItemText primary="Fruit" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Vegetables')}>
-            <ListItemIcon>
+            {/* <ListItemIcon>
               <img className="vegetable-icon" src="./images/vegetable.png" alt="vegetable" />
-            </ListItemIcon>
+            </ListItemIcon> */}
             <ListItemText primary="Vegetables" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Meat')}>
-            <ListItemIcon>
+            {/* <ListItemIcon>
               <img className="meat-icon" src="./images/meat.png" alt="meat" />
-            </ListItemIcon>
+            </ListItemIcon> */}
             <ListItemText primary="Meat" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Drinks')}>
-            <ListItemIcon>
+            {/* <ListItemIcon>
               <img className="drinks-icon" src="./images/juice.png" alt="juice" />
-            </ListItemIcon>
+            </ListItemIcon> */}
             <ListItemText primary="Drinks" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Snacks')}>
-            <ListItemIcon>
+            {/* <ListItemIcon>
               <img className="snacks-icon" src="./images/potato-chips.png" alt="snacks" />
-            </ListItemIcon>
+            </ListItemIcon> */}
             <ListItemText primary="Snacks" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Desserts')}>
-            <ListItemIcon>
+            {/* <ListItemIcon>
               <img className="desserts-icon" src="./images/cake-slice.png" alt="desserts" />
-            </ListItemIcon>
+            </ListItemIcon> */}
             <ListItemText primary="Desserts" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Other')}>
-            <ListItemIcon>
+            {/* <ListItemIcon>
               <img className="packages-icon" src="./images/packages.png" alt="other" />
-            </ListItemIcon>
+            </ListItemIcon> */}
             <ListItemText primary="Other" />
           </StyledMenuItem>
         </div>
@@ -238,7 +240,7 @@ export default function ItemDropDown () {
           </header>
 
           {showAll === true ? (
-            <section>
+            <section className="grid">
               <div className="product-wrapper">
                 <div className="product-image-section">
                   <img src="./images/citrus.jpeg" alt="citrus" />
@@ -367,7 +369,7 @@ export default function ItemDropDown () {
   );
 
   return (
-    <div>
+    <div style={{backgroundImage:"url('../images/bread.jpeg')", backgroundSize:"cover"}}>
 
       <div className="home-nav">
         <img className="logo" src="./images/basket.png" style={{ "height": "60px", "width": "60px" }}></img>
