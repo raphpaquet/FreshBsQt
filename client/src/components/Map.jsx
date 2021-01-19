@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-const API_KEY = 'AIzaSyAPY3zUv8lEYHs57b8-8av3GSRqhAtYY24'
+import React, {useState} from 'react';
+
 
 
 export default function Map(props) {
@@ -7,10 +7,7 @@ export default function Map(props) {
   const [state, setState] = useState({
     latitude: null,
     longitude: null,
-    userAdress: null
   })
-
-
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -26,6 +23,8 @@ export default function Map(props) {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude
     })
+    console.log(state.latitude)
+    console.log(state.longitude)
   }
 
   const handleLocationError =(error) => {
@@ -50,16 +49,7 @@ export default function Map(props) {
 
   return(
     <div className="map">
-      <button onClick={getLocation}>Get coordinates</button>
-      <h4>HTML5 coordinates</h4>
-      <p>Latitude: {state.latitude}</p>
-      <p>Longitude: {state.longitude}</p>
-      { 
-        state.latitude && state.longitude ?
-        <img src={`https://maps.googleapis.com/maps/api/staticmap?center=${state.latitude},${state.longitude}&zoom=13&size=400x400&markers=color:blue%7C${state.latitude},${state.longitude}&key=${API_KEY}`} alt="" />
-        :
-        null
-      }
+      <button className="location-btn" onClick={getLocation}>Support my neighborhood</button>
     </div>
   )
 }

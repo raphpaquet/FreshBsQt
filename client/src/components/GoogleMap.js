@@ -220,7 +220,7 @@ const MapContainer = (props) => {
       <GoogleMap
         mapContainerStyle={mapStyles}
         zoom={12}
-        center={state.latitude, state.longitude}
+        center={defaultCenter}
         options={{
           styles: mapTheme,
         }}
@@ -270,4 +270,3 @@ const MapContainer = (props) => {
 }
 
 export default MapContainer;
-export { getLocation } 
