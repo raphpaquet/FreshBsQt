@@ -35,10 +35,11 @@ export default function Home(props) {
               name="zip" 
               type="text" 
               placeholder="eg. H1X 4F5" 
+              pattern="^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$"
               onChange={event => {
                 console.log(zipcode)
                 const { value } = event.target;
-                setZipcode(value.replace("[A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9]").substr(0, 6))
+                setZipcode(value)
               }}
             />
             <button 
@@ -50,7 +51,6 @@ export default function Home(props) {
           <p className="paragraph-2">Get your fresh local products basket in couple clicks</p>
         </div>
       </div>
-    <BottomNav />
     </>
   )
 }

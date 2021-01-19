@@ -8,6 +8,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import NavMenu from './NavMenu';
 import CloseIcon from '@material-ui/icons/Close';
 import './ItemDropDown.css'
+import MapContainer from './GoogleMap'
+
 
 
 // For the swipeable drawer that has all the items
@@ -379,7 +381,7 @@ export default function ItemDropDown () {
       </div>
 
       <section className="map-section">
-        <img className="map-placeholder" src="./images/google-placeholder.png" alt="bread" />
+        <MapContainer />
       </section>
       <div className="open-items-menu">
         {['bottom'].map((anchor) => (
