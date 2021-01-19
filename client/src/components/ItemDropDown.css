@@ -1,0 +1,56 @@
+.MuiDrawer-paperAnchorBottom {
+  border-top-left-radius: 20px ;
+  border-top-right-radius: 20px ;
+}
+
+.pop-up-menu {
+  display: flex;
+  flex-direction: row;
+  border-radius: 20px;
+}
+
+.visible{
+  background-color: darkgreen;
+}
+
+.grid {
+  width: 100%;
+  display: flex !important;
+  flex-flow: wrap !important;
+  margin: 20px;
+  overflow: hidden;
+}
+
+.food-item-list {
+  width: 100%;
+}
+
+.product-wrapper {
+  width: 100px;
+  height: 200px
+}
+
+.product-wrapper h3 {
+  font-size: 14px;
+}
+
+.product-wrapper h5 {
+  font-size: 10px;
+}
+
+.product-image-section img{
+  height: 6em;
+  width: 6em;
+  min-width: 0;
+}
+
+.product-image-section button {
+  width: 2em; 
+  margin-top: 162px;
+  margin-left: -3rem;
+  padding: 0.2rem;
+  font-size: 14px;
+  background-color: darkgreen;
+  border-radius: 10px;
+}
+
