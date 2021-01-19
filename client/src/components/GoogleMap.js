@@ -8,6 +8,7 @@ import {
 
 
 const MapContainer = (props) => {
+  
 
   const mapStyles = {
     height: "50vh",
@@ -219,7 +220,7 @@ const MapContainer = (props) => {
       <GoogleMap
         mapContainerStyle={mapStyles}
         zoom={12}
-        center={defaultCenter}
+        center={state.latitude, state.longitude}
         options={{
           styles: mapTheme,
         }}
@@ -269,3 +270,4 @@ const MapContainer = (props) => {
 }
 
 export default MapContainer;
+export { getLocation } 

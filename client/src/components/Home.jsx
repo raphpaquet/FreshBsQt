@@ -1,11 +1,56 @@
 import React, { useState } from 'react';
 import NavMenu from './NavMenu'
 import BottomNav from './BottomNav'
+import { useHistory } from 'react-router-dom';
+import {getLocation} from './GoogleMap'
 
 
 
 export default function Home(props) {
   const [zipcode, setZipcode] = useState("");
+  const history = useHistory();
+  const [state, setState] = useState({
+    latitude: null,
+    longitude: null,
+    userAdress: null
+  })
+
+
+
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getCoordinates, handleLocationError);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  const getCoordinates = (position) => {
+    console.log(position)
+    setState({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    })
+  }
+
+  const handleLocationError =(error) => {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          alert("User denied the request for Geolocation.")
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert("Location information is unavailable.")
+          break;
+        case error.TIMEOUT:
+          alert("The request to get user location timed out.")
+          break;
+        case error.UNKNOWN_ERROR:
+          alert("An unknown error occurred.")
+          break;
+        default:
+        alert("An unknown error occurred.")
+      }
+    }
   
 
   return (
@@ -42,6 +87,7 @@ export default function Home(props) {
                 setZipcode(value)
               }}
             />
+            <button onClick={getLocation}>Get coordinates</button>
             <button 
               type="submit" 
               className="submit-button"

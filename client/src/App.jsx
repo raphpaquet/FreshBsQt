@@ -6,6 +6,7 @@ import ItemDropDown from './components/ItemDropDown';
 import Home from './components/Home';
 import Register from './components/Register'
 import Login from './components/Login'
+import Map from './components/Map'
 import './components/Register.css';
 import './components/Home.css';
 import './components/NavBar.css';
@@ -36,6 +37,9 @@ export default function App () {
         <Switch>
           <Route path="/shop">
             <Shop />
+          </Route>
+          <Route path="/map">
+            <Map />
           </Route>
           <Route path="/login">
             <Login />
