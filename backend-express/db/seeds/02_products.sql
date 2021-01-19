@@ -1,31 +1,31 @@
 INSERT INTO products (name, description, quantity, image, price, category)
-VALUES ('Artichokes', 'Fresh delicious artichokes', 10, './public/docs/artichoke', 3.99, 'Vegetables');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Asparagus', './docs/asparagus', 'Asparagus', 2.99, 'Vegetables');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Cabbage', './docs/cabbage', 'individual cabbage', 1.99, 'Vegetables');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Eggplant', 'IMAGE', 'eggplant', 1.99, 'Vegetables');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Onions', 'IMAGE', 'bags of onions', 3.99, 'Vegetables');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Parsnip', 'IMAGE', 'parsnips', 0.99, 'Vegetables');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Radishes', 'IMAGE', 'Radishes', 2.99, 'Vegetables');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Tomatoes', 'IMAGE', 'Tomatoes', 2.99, 'Vegetables');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Avocado', 'IMAGE', 'Avocado', 9.99, 'Vegetables');
+VALUES ('Artichokes', 'Fresh delicious artichokes', 10, './public/docs/artichoke.jpeg', 3.99, 'Vegetables');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Asparagus', 'Asparagus', 10, './public/docs/asparagus.jpeg', 2.99, 'Vegetables');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Cabbage', 'individual Cabbage', 8, './public/docs/cabbage.jpeg', 2.99, 'Vegetables');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Eggplant', 'individual Eggplant', 8, './public/docs/eggplant.jpeg', 1.99, 'Vegetables');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Onions', 'Bag og onions', 12, './public/docs/onion.jpeg', 3.99, 'Vegetables');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Pasnip', 'parsnips', 12, './public/docs/parsnip.jpeg', 0.99, 'Vegetables');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Radishes', 'Radishes', 9, './public/docs/raddish.jpeg', 3.99, 'Vegetables');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Tomatoes', 'box of fresh tomatoes', 14, './public/docs/tomato.jpeg', 2.99, 'Vegetables');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Avocado', 'Great on toast', 5, './public/docs/avocado.jpeg', 3.99, 'Vegetables');
 
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Blueberries', 'IMAGE', 'Blueberries', 3.99, 'Fruits');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Raspberries', 'IMAGE', 'Raspberries', 3.99, 'Fruits');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Apples', 'IMAGE', 'Apples', 4.99, 'Fruits');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Strawberries', 'IMAGE', 'Strawberries', 3.49, 'Fruits');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Pineapple', 'IMAGE', 'Pineapple', 5.99, 'Fruits');
--- INSERT INTO products (name, description, quantity, image, price, category, store_id)
--- VALUES ('Grapefruit', 'IMAGE', 'Grapefruit', 2.99, 'Fruits');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Blueberries', 'Box of Blueberries', 20, './public/docs/blueberry.jpeg', 3.99, 'fruits');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Raspberries', 'Box of raspberries', 20, './public/docs/raspberry.jpeg', 3.99, 'fruits');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Apples', 'Apples', 7, './public/docs/apple.jpeg', 4.99, 'fruits');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Strawberries', 'fresh strawberries', 7, './public/docs/strawberry.jpeg', 3.99, 'fruits');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Pineapple', 'pineapple', 7, './public/docs/pineapple.jpeg', 5.99, 'fruits');
+INSERT INTO products (name, description, quantity, image, price, category)
+VALUES ('Grapefruit', 'grapefruit', 7, './public/docs/grapefruit.jpeg', 2.99, 'fruits');

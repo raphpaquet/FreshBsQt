@@ -16,6 +16,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import ProductList from './components/ProductList';
 
 
 export default function App () {
@@ -34,6 +35,9 @@ export default function App () {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+        <Route path="/products">
+            <ProductList />
+          </Route>
           <Route path="/shop">
             <Shop />
           </Route>
