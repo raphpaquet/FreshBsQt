@@ -45,7 +45,8 @@ export default function App () {
             <Checkout />
           </Route>
           <Route path="/" exact>
-            <Home />
+            <Home 
+            />
           </Route>
         </Switch>
       </div>
@@ -56,7 +57,9 @@ export default function App () {
 
 function Shop () {
   return (
-    <ItemDropDown />
+    <ItemDropDown 
+
+    />
 
   )
 }

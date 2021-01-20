@@ -6,13 +6,17 @@ import Map from './Map'
 
 
 
+
 export default function Home(props) {
   // const [zipcode, setZipcode] = useState("");
-  const history = useHistory();
   const [state, setState] = useState({
     latitude: null,
     longitude: null,
   })
+  const history = useHistory();
+  const newLatitude = state.latitude
+  const newLongitude = state.longitude
+
   
 
   return (
@@ -55,7 +59,10 @@ export default function Home(props) {
               // onClick={setZipcode}
               >Submit</button> */}
           </form>
-          <Map />
+          <Map 
+            newLatitude={newLatitude}
+            newLongitude={newLongitude}
+          />
           <p className="paragraph-2">Get your fresh local products basket in couple clicks</p>
         </div>
       </div>

@@ -56,7 +56,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-export default function ItemDropDown () {
+export default function ItemDropDown (props) {
   const [showAll, setShowAll] = useState(true);
   const [showEggs, setShowEggs] = useState(false);
   const [showBread, setShowBread] = useState(false);
@@ -73,6 +73,9 @@ export default function ItemDropDown () {
   const [state, setState] = React.useState({
     bottom: false,
   });
+
+
+
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -381,7 +384,10 @@ export default function ItemDropDown () {
       </div>
 
       <section className="map-section">
-        <MapContainer />
+        <MapContainer 
+          newLatitude={props.newLatitude}
+          newLongitude={props.newLongitude}
+        />
       </section>
       <div className="open-items-menu">
         {['bottom'].map((anchor) => (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }from 'react';
 import {
   GoogleMap,
   LoadScript,
@@ -8,7 +8,7 @@ import {
 
 
 const MapContainer = (props) => {
-  
+
 
   const mapStyles = {
     height: "50vh",
@@ -189,9 +189,9 @@ const MapContainer = (props) => {
   ]
 
 
-
   const defaultCenter = {
-    lat: 45.516136, lng: -73.656830
+    // lat: props.newLatitude, lng: props.newLongitude
+    lat: 45.570940, lng: -73.608520
   }
 
   const stores = {

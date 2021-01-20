@@ -3,12 +3,17 @@ import React, {useState} from 'react';
 
 
 export default function Map(props) {
-
+  
   const [state, setState] = useState({
     latitude: null,
     longitude: null,
   })
+  
+  // props I want to pass to Home.jsx
+  const newLatitude = state.latitude
+  const newLongitude = state.longitude
 
+  // HTML geolocation API that returns the user's position
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(getCoordinates, handleLocationError);
@@ -23,10 +28,12 @@ export default function Map(props) {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude
     })
-    console.log(state.latitude)
-    console.log(state.longitude)
   }
 
+  console.log('new lat: ', newLatitude)
+  console.log('new long:', newLongitude)
+
+  // If localisation fail === multiple reasons
   const handleLocationError =(error) => {
       switch(error.code) {
         case error.PERMISSION_DENIED:
@@ -46,7 +53,6 @@ export default function Map(props) {
       }
     }
   
-
   return(
     <div className="map">
       <button className="location-btn" onClick={getLocation}>Support my neighborhood</button>
