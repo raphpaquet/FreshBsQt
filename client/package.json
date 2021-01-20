@@ -24,6 +24,7 @@
     "react-scripts": "4.0.1",
     "react-stripe-elements": "^6.1.2",
     "stripe": "^8.131.1",
+    "use-local-storage": "^2.0.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
