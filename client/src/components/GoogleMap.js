@@ -8,7 +8,7 @@ import {
 
 
 const MapContainer = (props) => {
-  
+
 
   const mapStyles = {
     height: "50vh",
@@ -227,7 +227,7 @@ const MapContainer = (props) => {
 
       >
         <Marker
-          onClick={() => alert('your location')}
+          hello={props.hello}
           label='You Are Here'
           name='Customer Location'
           position={defaultCenter}
