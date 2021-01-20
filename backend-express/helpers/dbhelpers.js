@@ -45,6 +45,7 @@ module.exports = (db) => {
   
     }
   
+    console.log(addUser)
     return {
         getUsers,
         getUserByEmail,

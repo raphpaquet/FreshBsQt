@@ -29,7 +29,7 @@ module.exports = ({
             }));
     });
 
-    router.post('/', (req, res) => {
+    router.post('/register', (req, res) => {
 
         const {
             first_name,
