@@ -67,77 +67,9 @@ module.exports = ({
 
     })
 
-    // router.post('/register', (req,res) => {
-    //     const {
-    //         firstName,
-    //         lastName,
-    //         email,
-    //         password,
-    //         address,
-    //         city,
-    //         phoneNumber
-    //     } = req.body;
 
-    //     const user = req.body
-    //     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    //     const userEmail = req.body.email.toLowerCase();
 
-    //     getUserByEmail(userEmail)
-    //     .then(res => {
-    //         if(res) {
-    //             res.status(400).json({
-    //                 status:"error",
-    //                 message: "User's email already exist"
-    //             });
-    //         } else {
-    //             addUser(user)
-    //             .then(user => {
-    //                 if (!user) {
-    //                 res.status(400).json({
-    //                     status: 'error',
-    //                     message: "empty response lol"
-    //                 })
-    //             }
-    //             currentUser = user
-    //             req.session.user_id = user.user_id
-    //             return res.send(user)
-    //             })
-    //         }
-    //     })
-    //     .catch(error => {
-    //         return res.send(error)
-    //     })
-    // })
-
-    app.post('/register', (req, res) => {
-        const {
-            firstName,
-            lastName,
-            email,
-            password,
-            address,
-            city,
-            phoneNumber
-        } = req.body;
-
-        const userData = req.body
-        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-        const userEmail = req.body.email.toLowerCase();
-
-        getUserByEmail(userEmail)
-        .then((response) => {
-            if(!response) {
-                return addUser(userData)
-                .then(user => {
-                    req.session.user_id = result.rows[0].id;
-                    res.redirect('/')
-                    return result.rows[0]
-                })
-            } else {
-                res.redirect('/register')
-            }
-        })
-    })
+ 
 
    
     return router;
