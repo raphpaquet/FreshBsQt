@@ -7,6 +7,7 @@ const cors = require('cors');
 const db = require('./db')
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const stripeRouter = require('./routes/stripeRouter');
 const productsRouter = require('./routes/products');
 const dbHelpers = require('./helpers/dbHelpers')(db);
 
@@ -22,5 +23,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers));
 app.use('/api/products', productsRouter(dbHelpers));
+app.use('/api/stripe/charge', stripeRouter())
+
 
 module.exports = app;
