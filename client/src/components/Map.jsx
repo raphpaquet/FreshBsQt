@@ -1,31 +1,69 @@
 import React, { useState } from 'react';
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 
 
 export default function Map (props) {
 
-  const [state, setState] = useState({
-    latitude: null,
-    longitude: null,
-  })
+  // const [state, setState] = useState({
+  //   latitude: null,
+  //   longitude: null,
+  // })
 
-  const getLocation = () => {
+  // const getLocation = () => {
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(getCoordinates, handleLocationError);
-    } else {
-      alert("Geolocation is not supported by this browser.");
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(getCoordinates, handleLocationError);
+  //     addToLocalStorage();
+  //   } else {
+  //     alert("Geolocation is not supported by this browser.");
+  //   }
+  // }
+
+  // const getCoordinates = (position) => {
+  //   console.log(position)
+  //   setState({
+  //     latitude: position.coords.latitude,
+  //     longitude: position.coords.longitude
+  //   })
+  //   console.log(state.latitude)
+  //   console.log(state.longitude)
+  // }
+
+  const addToLocalStorage = (key,value) => {
+    let location = {
+      'latitude': value.latitude,
+      'longitude': value.longitude
     }
+    localStorage.setItem(key, JSON.stringify(location))
   }
 
-  const getCoordinates = (position) => {
-    console.log(position)
-    setState({
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude
-    })
-    console.log(state.latitude)
-    console.log(state.longitude)
+  const getToLocalStorage = (key) => {
+    return localStorage.getItem(key)
+  }
+
+
+  const success = (position) => {
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+
+    addToLocalStorage('latitude', latitude)
+    addToLocalStorage('longitude', longitude)
+    
+
+    let user_position = getToLocalStorage('user_location');
+    let newLat = getToLocalStorage('latitude')
+
+    console.log('user_position', JSON.parse(user_position))
+    console.log(JSON.parse(latitude))
+    console.log(localStorage)
+    console.log(newLat)
+  }
+
+
+
+  const getLocation = () => {
+    navigator.geolocation.getCurrentPosition(success, handleLocationError)
   }
 
   const handleLocationError = (error) => {
@@ -54,3 +92,4 @@ export default function Map (props) {
     </div>
   )
 }
+

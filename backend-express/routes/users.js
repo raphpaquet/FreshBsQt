@@ -33,22 +33,22 @@ module.exports = ({
             }));
     });
 
-    router.post('/', (req, res) => {
+    router.post('/register', (req, res) => {
 
         const {
             first_name,
             last_name,
             email,
             password,
-            address,
-            city,
-            phoneNumber
+
+            phone_number, 
+            address, 
+            city
         } = req.body;
 
-        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-        const userEmail = req.body.email.toLowerCase();
+        console.log(req.body)
+        getUserByEmail(email)
 
-        getUserByEmail(userEmail)
             .then(user => {
 
                 if (user) {
@@ -56,7 +56,8 @@ module.exports = ({
                         msg: 'Sorry, a user account with this email already exists'
                     });
                 } else {
-                    return addUser(first_name, last_name, email, password, address, city, phoneNumber)
+
+                    return addUser(first_name, last_name, email, password, phone_number, address, city)
                 }
 
             })

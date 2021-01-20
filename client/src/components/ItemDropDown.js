@@ -80,11 +80,17 @@ export default function ItemDropDown () {
 
   const classes = useStyles();
 
+
+
+  const userLocation = JSON.parse(localStorage.getItem('user_position'))
+  const locationFull = localStorage.user_location
+  const lat = locationFull['latitude']
+  console.log(lat)
+
   // Axios call to get the product list from the backend
   useEffect(() => {
     getProducts();
   }, []);
-
 
   const getProducts = () => {
     axios.get(`http://localhost:3001/api/products`)
@@ -324,7 +330,8 @@ export default function ItemDropDown () {
       </div>
 
       <section className="map-section">
-        <MapContainer />
+        <MapContainer
+        />
       </section>
 
       <div className="open-items-menu">
