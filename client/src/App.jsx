@@ -12,6 +12,7 @@ import { products } from './components/products';
 import Product from './components/Product'
 import { createBrowserHistory } from 'history'
 import Checkout from './components/Checkout'
+import { useLocalStorage } from './hooks/useLocalStorage'
 import './components/Register.css';
 import './components/Home.css';
 import './components/NavBar.css';
@@ -31,6 +32,7 @@ const history = createBrowserHistory();
 export default function App () {
 
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const [location, setLocation] = useLocalStorage(null)
 
 
   return (
@@ -40,7 +42,9 @@ export default function App () {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/shop">
-            <Shop />
+            <Shop 
+              
+            />
           </Route>
           <Route path="/map">
             <Map />
