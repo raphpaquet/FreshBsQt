@@ -38,6 +38,7 @@ module.exports = ({
             password
         } = req.body;
 
+        console.log(req.body)
         getUserByEmail(email)
             .then(user => {
 

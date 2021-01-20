@@ -5,11 +5,11 @@ import axios from 'axios';
 
 export default function Register(props) {
   const [state, setState] = useState({
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
-    phoneNumber: "",
+    phone_number: "",
     address: "",
     city: "",
   }) 
@@ -28,18 +28,18 @@ export default function Register(props) {
   }
 
   const userData = {
-    "firstName": state.firstName,
-    "lastName": state.lastName,
+    "first_name": state.first_name,
+    "last_name": state.last_name,
     "email": state.email,
     "password": state.password,
-    "phoneNumber": state.phoneNumber,
+    "phone_number": state.phone_number,
     "address": state.address,
     "city": state.city
   }
 
   // function to make a backend API request
   const sendDetailsToServer = () => {
-    if (!userData.firstName || !userData.lastName || !userData.email || !userData.password || !userData.address || !userData.phoneNumber || !userData.city ) {
+    if (!userData.first_name || !userData.last_name || !userData.email || !userData.password || !userData.address || !userData.phone_number || !userData.city ) {
         setError("Please fill all the forms")
     } else {
       axios.post('http://localhost:3001/api/users/register', userData)
@@ -90,25 +90,25 @@ export default function Register(props) {
       <form className="register-form" action="/register" method="POST">
         <h1 className="register-title">register</h1>
         <span>
-          <label for="firstName"></label>
+          <label for="first_name"></label>
           <input 
-            id="firstName"
-            name="firstName" 
+            id="first_name"
+            name="first_name" 
             type="text"  
             placeholder="First Name"
-            value={state.firstName}
+            value={state.first_name}
             onChange={handleChange}
             required
           />
         </span>
         <span>
-          <label for="lastName"></label>
+          <label for="last_name"></label>
           <input 
-            id="lastName"
-            name="lastName" 
+            id="last_name"
+            name="last_name" 
             type="text"  
             placeholder="Last Name"
-            value={state.lastName}
+            value={state.last_name}
             onChange={handleChange}
             required
           />
@@ -162,13 +162,13 @@ export default function Register(props) {
           />
         </span>
         <span>
-          <label for="phoneNumber"></label>
+          <label for="phone_number"></label>
           <input 
-            id="phoneNumber"
-            name="phoneNumber" 
+            id="phone_number"
+            name="phone_number" 
             type="number"  
             placeholder="Phone Number"
-            value={state.phoneNumber}
+            value={state.phone_number}
             onChange={handleChange}
             required
           />
