@@ -1,3 +1,8 @@
+const bcrypt = require('bcrypt')
+
+
+
+
 module.exports = (db) => {
     const getUsers = () => {
         const query = {
@@ -23,10 +28,10 @@ module.exports = (db) => {
             .catch((err) => err);
     }
   
-    const addUser = (firstName, lastName, email, password) => {
+    const addUser = (firstName, lastName, address, city, phoneNumber, email, password) => {
         const query = {
-            text: `INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *` ,
-            values: [firstName, lastName, email, password]
+            text: `INSERT INTO users (first_name, last_name, address, city, phone_number, email, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *` ,
+            values: [firstName, lastName, address, city, phoneNumber, email, password]
         }
   
         return db.query(query)

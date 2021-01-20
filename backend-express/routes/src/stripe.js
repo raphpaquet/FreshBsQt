@@ -1,4 +1,4 @@
-const stripe = require('stripe')(process.env.SECRET_KEY)
+const stripe = require('stripe')('sk_test_51I6Jt9HsmgbtTrbqZeHwe4pU1cmN7qxM1W3cN6W3OHrxGnHoT2zwfaFuhz6iJuD5HDgLwGPlOg2cFmYjPHqJt4pl00FiCiboql')
 
 async function postCharge(req, res) {
   console.log(req.body)
@@ -7,7 +7,7 @@ async function postCharge(req, res) {
 
     const charge = await stripe.charges.create({
       amount,
-      currency: 'usd',
+      currency: 'cad',
       source,
       receipt_email
     })
