@@ -2,9 +2,10 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: rgb(98, 103, 93);
+.close-products {
+  all: unset; 
 }
+
 
 .food-item-list header button {
   position: absolute; 
@@ -14,29 +15,10 @@ body {
   cursor: pointer;
 }
 
-.egg-icon, 
-.bread-icon,
-.cheese-icon,
-.fruits-icon,
-.vegetable-icon,
-.meat-icon,
-.drinks-icon,
-.snacks-icon,
-.desserts-icon,
-.packages-icon {
-  height: 1.7rem; 
-  width: auto;
-}
 
 .drop-down-menu {
   padding: 1rem;
   
-}
-
-.map-section {
- text-align: center;
-  height: 21rem; 
-  width: auto;
 }
 
 .pop-up-menu {
@@ -54,12 +36,6 @@ body {
   margin-left: 3rem;
 }
 
-.map-placeholder {
-  height: 18rem;
-  width: auto; 
-  margin: 1rem;
-  
-}
 
 .food-item-list {
   max-height: 33rem;
@@ -69,10 +45,6 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
-.food-item-list img {
-  margin-bottom: 2rem;
-}
-
 .food-item-list section {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -80,10 +52,10 @@ body {
   margin-left: 2rem;
 }
 
-
 .open-items-menu {
   text-align: center;
   margin-top: 3rem;
+ 
 }
 
 /* Product Item */
@@ -92,8 +64,37 @@ body {
   margin: 2rem;
   width: 11.3rem;
   position: relative;
-  
 }
+
+.product-wrapper h3, 
+.product-wrapper h5, 
+.price-and-add {
+  text-align: center;
+  margin-left: -0.5rem;
+}
+
+.price-and-add span {
+  margin-right: 0.5rem;
+}
+
+.price-and-add button {
+  all: unset;
+  color: white;
+  cursor: pointer;
+  padding: 0.2rem;
+  padding-left: 0.4rem;
+  padding-right: 0.5rem; 
+  font-size: 13px;
+  background-color: darkgreen;
+  border-radius: 33px;
+  transition: 0.3s ease-out;
+}
+
+.price-and-add button:hover {
+  background-color: lightgreen;
+  color: black; 
+}
+
 
 .product-image-section button {
   all: unset;
@@ -128,14 +129,12 @@ body {
 
 .product-wrapper h3 {
   font-weight: 300;
-  font-size: 22px;
   margin-top: 0.7rem;
   margin-bottom: 0.8rem;
 }
 
 .product-wrapper h5 {
   font-weight: 300;
-  font-size: 14px;
   margin-top: 0rem;
   margin-bottom: 0.8rem;
 }
@@ -143,26 +142,3 @@ body {
 
 
 
-@media only screen and (max-width: 1160px) {
-  .food-item-list section {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(1, 400px);
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .food-item-list section {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(1, 400px);
-  }
-}
-
-@media only screen and (max-width: 670px) {
-  .food-item-list section {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(1, 400px);
-  }
-}

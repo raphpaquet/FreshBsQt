@@ -44,13 +44,5 @@
   min-width: 0;
 }
 
-.product-image-section button {
-  width: 2em; 
-  margin-top: 162px;
-  margin-left: -3rem;
-  padding: 0.2rem;
-  font-size: 14px;
-  background-color: darkgreen;
-  border-radius: 10px;
-}
+
 
