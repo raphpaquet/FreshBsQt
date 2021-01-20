@@ -35,7 +35,10 @@ module.exports = ({
             first_name,
             last_name,
             email,
-            password
+            password,
+            phone_number, 
+            address, 
+            city
         } = req.body;
 
         console.log(req.body)
@@ -47,7 +50,7 @@ module.exports = ({
                         msg: 'Sorry, a user account with this email already exists'
                     });
                 } else {
-                    return addUser(first_name, last_name, email, password)
+                    return addUser(first_name, last_name, email, password, phone_number, address, city)
                 }
 
             })
