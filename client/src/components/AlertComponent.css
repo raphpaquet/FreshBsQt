@@ -1,0 +1,21 @@
+.alert  {
+  display: flex;
+  justify-content: center;
+}
+
+.alertMessage {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  background-color: rgb(241, 215, 166);
+  opacity: 0.7;
+  width: 200px;
+  font-family: none;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.close {
+  background-color: transparent;
+  border:none;
+}
