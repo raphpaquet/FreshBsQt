@@ -1,8 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 const {
-    getPostsByUsers
+    getPostsByUsers,
 } = require('../helpers/dataHelpers');
+
+
+
 
 module.exports = ({
     getUsers,
@@ -36,6 +40,7 @@ module.exports = ({
             last_name,
             email,
             password,
+
             phone_number, 
             address, 
             city
@@ -43,6 +48,7 @@ module.exports = ({
 
         console.log(req.body)
         getUserByEmail(email)
+
             .then(user => {
 
                 if (user) {
@@ -50,6 +56,7 @@ module.exports = ({
                         msg: 'Sorry, a user account with this email already exists'
                     });
                 } else {
+
                     return addUser(first_name, last_name, email, password, phone_number, address, city)
                 }
 
@@ -61,5 +68,10 @@ module.exports = ({
 
     })
 
+
+
+ 
+
+   
     return router;
 };

@@ -4,35 +4,41 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ItemDropDown from './components/ItemDropDown';
 import Home from './components/Home';
-import Register from './components/Register'
-import Login from './components/Login'
-import Map from './components/Map'
+import Register from './components/Register';
+import Login from './components/Login';
+import Map from './components/Map';
+import ProductList from './components/ProductList';
+import { products } from './components/products';
+import Product from './components/Product'
+import { createBrowserHistory } from 'history'
+import Checkout from './components/Checkout'
 import './components/Register.css';
 import './components/Home.css';
 import './components/NavBar.css';
 import './components/Map.css'
-import useApplicationData from './hooks/useApplicationData'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
-import ProductList from './components/ProductList';
+
+
+
+const history = createBrowserHistory();
 
 
 export default function App () {
 
+  const [selectedProduct, setSelectedProduct] = useState(null)
+
 
   return (
-    <Router>
+    <Router history={history}>
       <div>
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-        <Route path="/products">
-            <ProductList />
-          </Route>
           <Route path="/shop">
             <Shop />
           </Route>
@@ -46,7 +52,17 @@ export default function App () {
             <Register />
           </Route>
           <Route path="/checkout">
-            <Checkout />
+            <Checkout
+              selectedProduct={selectedProduct}
+              history={history}
+            />
+          </Route>
+          <Route path="/products">
+            <Product
+              products={products}
+              selectProduct={setSelectedProduct}
+              history={history}
+            />
           </Route>
           <Route path="/" exact>
             <Home />
@@ -68,6 +84,4 @@ function Shop () {
 
 
 
-function Checkout () {
-  return <h2>This is the checkout page</h2>
-}
+
