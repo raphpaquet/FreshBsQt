@@ -30,6 +30,4 @@ const stripePayment = () => {
   return router
 }
 
-console.log(path)
-
 module.exports = stripePayment
