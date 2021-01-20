@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -9,11 +10,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import './ItemDropDown.css'
 import MapContainer from './GoogleMap'
 
-
-
 // For the swipeable drawer that has all the items
 import clsx from 'clsx';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+
+
 
 const useStyles = makeStyles({
   list: {
@@ -72,6 +73,18 @@ export default function ItemDropDown () {
   const [state, setState] = React.useState({
     bottom: false,
   });
+
+  axios.get(`http://localhost:3001/api/products`)
+    .then(res => {
+      const products = res.data;
+      console.log(products);
+    })
+    .catch(error => {
+      console.log(error)
+    });
+
+
+
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
