@@ -14,7 +14,6 @@ export default function Home (props) {
     longitude: null,
   })
 
-  console.log(localStorage)
   return (
     <>
       <div className="home">
