@@ -74,10 +74,7 @@ export default function ItemDropDown () {
     bottom: false,
   });
 
-  const userLocation = JSON.parse(localStorage.getItem('user_position'))
-  const locationFull = localStorage.user_location
-  const lat = locationFull['latitude']
-  console.log(lat)
+
 
   axios.get(`http://localhost:3001/api/products`)
     .then(res => {

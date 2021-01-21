@@ -32,7 +32,6 @@ const history = createBrowserHistory();
 export default function App () {
 
   const [selectedProduct, setSelectedProduct] = useState(null)
-  const [location, setLocation] = useLocalStorage(null)
 
 
   return (

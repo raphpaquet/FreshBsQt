@@ -35,11 +35,11 @@ export default function Map (props) {
       'latitude': value.latitude,
       'longitude': value.longitude
     }
-    localStorage.setItem(key, JSON.stringify(location))
+    sessionStorage.setItem(key, JSON.stringify(location))
   }
 
   const getToLocalStorage = (key) => {
-    return localStorage.getItem(key)
+    return sessionStorage.getItem(key)
   }
 
 
@@ -47,17 +47,18 @@ export default function Map (props) {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
 
-    addToLocalStorage('latitude', latitude)
-    addToLocalStorage('longitude', longitude)
-    
+    addToLocalStorage('user_location', {
+      latitude: latitude,
+      longitude: longitude
+    })
+
+
 
     let user_position = getToLocalStorage('user_location');
-    let newLat = getToLocalStorage('latitude')
+
 
     console.log('user_position', JSON.parse(user_position))
-    console.log(JSON.parse(latitude))
-    console.log(localStorage)
-    console.log(newLat)
+    console.log(sessionStorage)
   }
 
 
