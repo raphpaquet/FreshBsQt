@@ -238,7 +238,7 @@ const MapContainer = (props) => {
       >
         <Circle
           center={defaultCenter}
-          radius={5000}
+          radius={1000}
           options={{
             fillColor: '#32CD32',
             fillOpacity: '0.2',
