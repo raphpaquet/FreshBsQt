@@ -4,19 +4,19 @@ import {
   LoadScript,
   Marker,
 } from '@react-google-maps/api';
-import {getToLocalStorage} from '../hooks/useLocalStorage'
+import { getToLocalStorage } from '../hooks/useLocalStorage'
 
 
 
 
 const MapContainer = (props) => {
 
-  const userLocation = JSON.parse(localStorage.getItem('user_location'))
-  console.log('userLocation', userLocation['latitude'])
-  
-  const latitudeLocation = userLocation['latitude']
-  const longitudeLocation = userLocation['longitude']
-  console.log(latitudeLocation, longitudeLocation)
+  // const userLocation = JSON.parse(localStorage.getItem('user_location'))
+  // console.log('userLocation', userLocation['latitude'])
+
+  // const latitudeLocation = userLocation['latitude']
+  // const longitudeLocation = userLocation['longitude']
+  // console.log(latitudeLocation, longitudeLocation)
 
 
   const mapStyles = {
@@ -198,9 +198,10 @@ const MapContainer = (props) => {
   ]
 
 
- 
+
   const defaultCenter = {
-    lat: latitudeLocation, lng: longitudeLocation
+    lat: 45.570940, lng: -73.628599
+    // lat: latitudeLocation, lng: longitudeLocation
   }
 
   const stores = {

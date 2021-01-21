@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
@@ -69,44 +69,31 @@ export default function ItemDropDown () {
   const [showDesserts, setShowDesserts] = useState(false);
   const [showOther, setShowOther] = useState(false);
   // For the bottom drawer that holds the items
+  const classes = useStyles();
   const [drawerState, setDrawerState] = useState({
     bottom: false,
   });
-  // The products from the axios call
-  const [productsData, setProductsData] = useState('');
+  const [state, setState] = {
 
-
-
-
-  const classes = useStyles();
-
-
+  }
 
   const userLocation = JSON.parse(localStorage.getItem('user_position'))
   const locationFull = localStorage.user_location
   const lat = locationFull['latitude']
   console.log(lat)
 
-  // Axios call to get the product list from the backend
-  useEffect(() => {
-    getProducts();
-  }, []);
-
-  const getProducts = () => {
-    axios.get(`http://localhost:3001/api/products`)
-      .then((response) => {
-        const products = response.data
-        setProductsData(products);
-        console.log(products)
-      })
-      .catch((error) => {
-        console.log(error)
-      });
-  }
+  axios.get(`http://localhost:3001/api/products`)
+    .then(res => {
+      const products = res.data;
+      console.log(products);
+    })
+    .catch(error => {
+      console.log(error)
+    });
 
 
 
-  // Handler for the products list that opens and closes on page. 
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -248,7 +235,18 @@ export default function ItemDropDown () {
                 <div className="product-image-section">
                   <img src="./images/citrus.jpeg" alt="citrus" />
                 </div>
-                <h3>{productsData[3].name}</h3>
+                <h3>Product Title</h3>
+                <h5>From Store Name</h5>
+                <div className="price-and-add">
+                  <span>$1.99</span><button>Add</button>
+                </div>
+              </div>
+
+              <div className="product-wrapper">
+                <div className="product-image-section">
+                  <img src="./images/citrus.jpeg" alt="citrus" />
+                </div>
+                <h3>Product Title</h3>
                 <h5>From Store Name</h5>
                 <div className="price-and-add">
                   <span>$1.99</span><button>Add</button>
@@ -353,6 +351,7 @@ export default function ItemDropDown () {
     </div>
   );
 }
+
 
 
 
