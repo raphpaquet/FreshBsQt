@@ -3,8 +3,9 @@ import {
   GoogleMap,
   LoadScript,
   Marker,
+  Circle
 } from '@react-google-maps/api';
-import {getToLocalStorage} from '../hooks/useLocalStorage'
+import { getToLocalStorage } from '../hooks/useLocalStorage'
 
 
 
@@ -13,7 +14,7 @@ const MapContainer = (props) => {
 
 
   const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
-  
+
   const latitudeLocation = userLocation['latitude']
   const longitudeLocation = userLocation['longitude']
   console.log(latitudeLocation, longitudeLocation)
@@ -198,7 +199,7 @@ const MapContainer = (props) => {
   ]
 
 
- 
+
   const defaultCenter = {
     lat: latitudeLocation, lng: longitudeLocation
   }
@@ -235,6 +236,15 @@ const MapContainer = (props) => {
         }}
 
       >
+        <Circle
+          center={defaultCenter}
+          radius={5000}
+          options={{
+            fillColor: '#32CD32',
+            fillOpacity: '0.2',
+            strokeWeight: '0.2',
+          }}
+        />
         <Marker
           hello={props.hello}
           label='You Are Here'
