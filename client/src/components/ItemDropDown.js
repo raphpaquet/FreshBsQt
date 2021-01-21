@@ -73,13 +73,16 @@ export default function ItemDropDown () {
   const [state, setState] = useState({
     bottom: false,
   });
-  const [products, setProducts] = useState('')
+  // For the axios call to render the products. Needs to be loaded to work. 
+  const [products, setProducts] = useState('');
+  const [loadingProducts, setLoadingProducts] = useState(true);
 
-
+  // Axios call to get the products
   useEffect(() => {
     axios.get(`http://localhost:3001/api/products`)
       .then(res => {
         setProducts(res.data)
+        setLoadingProducts(false)
       })
       .catch(error => {
         console.log(error)
@@ -87,6 +90,10 @@ export default function ItemDropDown () {
   }, []);
 
   console.log(products)
+  // Makes sure that the products do not load before the axios call. 
+  if (loadingProducts) {
+    return <section className="grid">Loading...</section>
+  }
 
 
   const toggleDrawer = (anchor, open) => (event) => {
