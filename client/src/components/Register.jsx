@@ -78,7 +78,7 @@ export default function Register(props) {
   return (
   <div className="register-page">
     <div className="home-nav">
-        <img className="logo" style={{ "height": "60px", "width": "60px" }}></img>
+        <img className="logo" src="./images/basket.svg" style={{ 'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
         <div className="dropdown-bars">
           <NavMenu />
         </div>
