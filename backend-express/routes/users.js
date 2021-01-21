@@ -39,10 +39,13 @@ module.exports = ({
         console.log(`login info: ${email} ${password}`)
         userLogin(email, password)
             .then(user => {
-               console.log("user:", user)
                if (user) {
+                   console.log("user found")
+                req.session.user_id = user.id
+                res.json(user)
                 res.send('This user is in the DB')
             } else {
+                console.log("no user")
                 res.send('No user with this login information')
             }
             })
@@ -53,7 +56,7 @@ module.exports = ({
         console.log(req.session.user_id)
         delete req.session.user_id
         console.log(req.session.user_id)
-        // res.clearCookie("session"); /// res.cookies can erase a cooking by refering only to it's name
+        res.clearCookie("session"); /// res.cookies can erase a cooking by refering only to it's name
         res.send("ok");  
     })
 
@@ -85,7 +88,6 @@ module.exports = ({
             .then(newUser => {
                 console.log("look here", newUser)
               req.session.user_id = newUser.id 
-              res.cookie("potatoe", newUser.id)
               res.json(newUser)
             })
                 

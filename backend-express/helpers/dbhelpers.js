@@ -31,8 +31,7 @@ module.exports = (db) => {
         return db
             .query(query)
             .then(result => {
-                console.log("This is RESULTS.row:",result.rows[0] )
-                result.rows[0]
+                return result.rows[0]
                 })
             .catch((err) => err);
     }
