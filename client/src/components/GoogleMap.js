@@ -3,8 +3,10 @@ import {
   GoogleMap,
   LoadScript,
   Marker,
-  Circle
+  Circle,
+  Polyline
 } from '@react-google-maps/api';
+import haversine from 'haversine-distance';
 import { getToLocalStorage } from '../hooks/useLocalStorage'
 
 
@@ -222,6 +224,10 @@ const MapContainer = (props) => {
     },
   }
 
+  const findDistance = (a, b) => {
+    haversine(a, b)
+  }
+
 
   return (
 
@@ -229,7 +235,7 @@ const MapContainer = (props) => {
       googleMapsApiKey='AIzaSyB-sEvFymghaZ6CcNL2FdooPD0Dc_8ACA0'>
       <GoogleMap
         mapContainerStyle={mapStyles}
-        zoom={12}
+        zoom={14}
         center={defaultCenter}
         options={{
           styles: mapTheme,
@@ -245,40 +251,35 @@ const MapContainer = (props) => {
             strokeWeight: '0.2',
           }}
         />
+
         <Marker
-          hello={props.hello}
           label='You Are Here'
           name='Customer Location'
           position={defaultCenter}
         />
 
         <Marker
-          onClick={() => alert('Sami Fruits 8220 19e avenue, Montreal, QC, H1Z4J8')}
           name='Store Location'
           position={stores.storeOne}
 
         />
 
         <Marker
-          onClick={() => alert('5180 st Urbain st, Montreal, QC, h2t 2w7')}
           name='Store Location'
           position={stores.storeTwo}
         />
 
         <Marker
-          onClick={() => alert('Fairmount Bagel - Something something best bagels around')}
           name='Store Location'
           position={stores.storeThree}
         />
 
         <Marker
-          onClick={() => alert('Guillaume - 5134 st-laurent, montreal, quebec, h2t 2m2')}
           name='Store Location'
           position={stores.storeFour}
         />
 
         <Marker
-          onClick={() => alert('Farine et Vanille, - Something something best bakery around')}
           name='Store Location'
           position={stores.storeFive}
         />
