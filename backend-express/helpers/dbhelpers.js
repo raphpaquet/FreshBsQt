@@ -22,6 +22,20 @@ module.exports = (db) => {
             .then(result => result.rows[0])
             .catch((err) => err);
     }
+
+    const userLogin = (email, password) =>{
+        const query = {
+            text: `SELECT * FROM users WHERE email = $1 AND password = $2` , 
+            values: [email, password]
+        }
+        return db
+            .query(query)
+            .then(result => {
+                console.log("This is RESULTS.row:",result.rows[0] )
+                result.rows[0]
+                })
+            .catch((err) => err);
+    }
   
     const addUser = (firstName, lastName, email, password, phone_number, address, city) => {
         const query = {
@@ -50,6 +64,7 @@ module.exports = (db) => {
         getUsers,
         getUserByEmail,
         addUser,
+        userLogin, 
         getProducts
     };
   };
