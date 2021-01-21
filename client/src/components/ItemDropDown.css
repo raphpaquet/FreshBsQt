@@ -38,11 +38,41 @@
   font-size: 10px;
 }
 
-.product-image-section img{
+.product-image-section img {
   height: 6em;
   width: 6em;
   min-width: 0;
 }
 
+.cart-title {
+  font-family: none;
+  font-size: 16px;
+  margin:20px;
+}
+.cart-product {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px;
+}
 
+.cart-product-amount {
+  font-family: none;
+  align-self: center;
+}
+
+.cart-name {
+  font-size: 16px;
+  margin-right: 20px;
+}
+
+.cart-price {
+  font-size: 12px;
+  margin-left: 20px;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px
+}
 

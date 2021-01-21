@@ -9,6 +9,7 @@ import NavMenu from './NavMenu';
 import CloseIcon from '@material-ui/icons/Close';
 import './ItemDropDown.css'
 import MapContainer from './GoogleMap'
+import DeleteIcon from '@material-ui/icons/Delete';
 
 // For the swipeable drawer that has all the items
 import clsx from 'clsx';
@@ -68,6 +69,7 @@ export default function ItemDropDown () {
   const [showSnacks, setShowSnacks] = useState(false);
   const [showDesserts, setShowDesserts] = useState(false);
   const [showOther, setShowOther] = useState(false);
+  const [showCart, setShowCart] = useState(false)
   // For the bottom drawer that holds the items
   const classes = useStyles();
   const [state, setState] = useState({
@@ -76,6 +78,60 @@ export default function ItemDropDown () {
   // For the axios call to render the products. Needs to be loaded to work. 
   const [products, setProducts] = useState('');
   const [loadingProducts, setLoadingProducts] = useState(true);
+
+  // CART IMPLEMENTATION // 
+  const [cart, setCart] = useState([]);
+  const cartTotal = cart.reduce((total, { price = 0 }) => total + price, 0);
+
+  // currentCart === 'prev'
+  const addToCart = (product) => setCart((currentCart) => [...currentCart, product]);
+  
+  const removeFromCart = (product) => {
+    setCart((currentCart) => {
+      const indexOfProductToRemove = currentCart.findIndex((cartProduct) => cartProduct.id === product.id);
+      
+      if(indexOfProductToRemove === -1) {
+        return currentCart;
+      }
+      
+      return [
+        ...currentCart.slice(0, indexOfProductToRemove),
+        ...currentCart.slice(indexOfProductToRemove + 1),
+      ]; 
+    });
+  };
+  
+  const amountOfProducts = (id) => cart.filter((product) => product.id === id).length;
+  
+  const listProductsToBuy = () => products.map((product) => (
+    <div className="product-wrapper">
+      <div key={product.id} className="product-image-section">
+        <img src="./images/citrus.jpeg" alt="citrus" />
+      </div>
+      <h3>{product.name}</h3>
+      <h5>From Store Name</h5>
+      <div className="price-and-add">
+        <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
+      </div>
+    </div>
+  ));
+  
+  const listProductsInCart = () => cart.map((product) => 
+      (
+    <div className="cart">
+      <div className="cart-product" key={product.id}>
+      <button className="garbage" style={{backgroundColor:"transparent", border:"none"}}type="submit" onClick={() => removeFromCart(product)}><DeleteIcon /></button>
+        <img src={"./images/citrus.jpeg"} alt="citrus" style={{width:"40px", height:"40px"}} />
+        <div className="cart-product-amount">
+          <span className="cart-name">{`${product.name}`}</span>
+          <span className="cart-price">{amountOfProducts(product.id)} x ${product.price} </span>
+        </div>
+      </div>
+    </div>
+      )
+  );
+  
+
 
   // Axios call to get the products
   useEffect(() => {
@@ -107,6 +163,11 @@ export default function ItemDropDown () {
 
   // This helps set the state when choosing a food category. 
   const getCategory = (category) => {
+    if (category == 'Cart') {
+      setShowCart(true)
+    } else if (category !== 'Cart') {
+      setShowCart(false)
+    }
 
     if (category == 'All') {
       setShowAll(true)
@@ -187,6 +248,9 @@ export default function ItemDropDown () {
     >
       <section className="pop-up-menu">
         <div className="food-categories">
+          <StyledMenuItem onClick={() => getCategory('Cart')} >
+            <ListItemText primary="CART" />
+          </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('All')} >
             <ListItemText primary="All" />
           </StyledMenuItem>
@@ -230,11 +294,21 @@ export default function ItemDropDown () {
             </button>
           </header>
 
+          {showCart === true ? (
+              <div className="cart-drawer">
+
+                <h1 className="cart-title">YOUR CART</h1>
+                 <div>{listProductsInCart()}</div>
+                 <div className='cart-total'>Total: {cartTotal}</div>
+              </div> 
+          ) : null}
+
+
           {showAll === true ? (
 
             <section className="grid">
-
-              {products.map((product) => (
+              {listProductsToBuy()}
+              {/* {products.map((product) => (
                 <div className="product-wrapper">
                   <div className="product-image-section">
                     <img src="./images/citrus.jpeg" alt="citrus" />
@@ -242,13 +316,15 @@ export default function ItemDropDown () {
                   <h3>{product.name}</h3>
                   <h5>From Store Name</h5>
                   <div className="price-and-add">
-                    <span>${product.price}</span><button>Add</button>
+                    <span>${product.price}</span><button onClick={() => addToCart(product)}>Add</button>
                   </div>
                 </div>
-              ))}
-
+              ))} */}
 
             </section>
+
+          
+          
           ) : null}
 
           {showEggs === true ? (
