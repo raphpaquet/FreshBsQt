@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
@@ -70,22 +70,23 @@ export default function ItemDropDown () {
   const [showOther, setShowOther] = useState(false);
   // For the bottom drawer that holds the items
   const classes = useStyles();
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     bottom: false,
   });
+  const [products, setProducts] = useState('')
 
 
+  useEffect(() => {
+    axios.get(`http://localhost:3001/api/products`)
+      .then(res => {
+        setProducts(res.data)
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  }, []);
 
-  axios.get(`http://localhost:3001/api/products`)
-    .then(res => {
-      const products = res.data;
-      console.log(products);
-    })
-    .catch(error => {
-      console.log(error)
-    });
-
-
+  console.log(products)
 
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -225,27 +226,20 @@ export default function ItemDropDown () {
           {showAll === true ? (
 
             <section className="grid">
-              <div className="product-wrapper">
-                <div className="product-image-section">
-                  <img src="./images/citrus.jpeg" alt="citrus" />
-                </div>
-                <h3>Product Title</h3>
-                <h5>From Store Name</h5>
-                <div className="price-and-add">
-                  <span>$1.99</span><button>Add</button>
-                </div>
-              </div>
 
-              <div className="product-wrapper">
-                <div className="product-image-section">
-                  <img src="./images/citrus.jpeg" alt="citrus" />
+              {products.map((product) => (
+                <div className="product-wrapper">
+                  <div className="product-image-section">
+                    <img src="./images/citrus.jpeg" alt="citrus" />
+                  </div>
+                  <h3>{product.name}</h3>
+                  <h5>From Store Name</h5>
+                  <div className="price-and-add">
+                    <span>${product.price}</span><button>Add</button>
+                  </div>
                 </div>
-                <h3>Product Title</h3>
-                <h5>From Store Name</h5>
-                <div className="price-and-add">
-                  <span>$1.99</span><button>Add</button>
-                </div>
-              </div>
+              ))}
+
 
             </section>
           ) : null}
@@ -322,7 +316,7 @@ export default function ItemDropDown () {
       </div>
 
       <section className="map-section">
-        <MapContainer 
+        <MapContainer
         />
       </section>
 
