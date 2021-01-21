@@ -11,8 +11,8 @@ import {getToLocalStorage} from '../hooks/useLocalStorage'
 
 const MapContainer = (props) => {
 
-  const userLocation = JSON.parse(localStorage.getItem('user_location'))
-  console.log('userLocation', userLocation['latitude'])
+
+  const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
   
   const latitudeLocation = userLocation['latitude']
   const longitudeLocation = userLocation['longitude']
