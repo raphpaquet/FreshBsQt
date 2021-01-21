@@ -315,7 +315,7 @@ export default function ItemDropDown () {
     <div style={{ backgroundImage: "url('../images/pinnaple.jpeg')", backgroundSize: "cover", height: '100vh' }}>
 
       <div className="home-nav">
-        <img className="logo" src="./images/basket.svg" style={{ "height": "60px", "width": "60px" }}></img>
+        <img className="logo" src="./images/basket.svg" style={{'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
         <div className="dropdown-bars">
           <NavMenu />
         </div>
