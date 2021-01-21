@@ -7,31 +7,6 @@ import { useHistory } from 'react-router-dom';
 export default function Map (props) {
   const history = useHistory()
 
-  // const [state, setState] = useState({
-  //   latitude: null,
-  //   longitude: null,
-  // })
-
-  // const getLocation = () => {
-
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(getCoordinates, handleLocationError);
-  //     addToLocalStorage();
-  //   } else {
-  //     alert("Geolocation is not supported by this browser.");
-  //   }
-  // }
-
-  // const getCoordinates = (position) => {
-  //   console.log(position)
-  //   setState({
-  //     latitude: position.coords.latitude,
-  //     longitude: position.coords.longitude
-  //   })
-  //   console.log(state.latitude)
-  //   console.log(state.longitude)
-  // }
-
   const addToLocalStorage = (key,value) => {
     let location = {
       'latitude': value.latitude,
@@ -58,7 +33,8 @@ export default function Map (props) {
 
     let user_position = getToLocalStorage('user_location');
 
-
+    history.push('/shop')
+    
     console.log('user_position', JSON.parse(user_position))
     console.log(sessionStorage)
   }
@@ -67,7 +43,6 @@ export default function Map (props) {
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(success, handleLocationError)
-    history.push('/shop')
     
   }
 
