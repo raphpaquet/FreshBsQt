@@ -55,12 +55,12 @@ module.exports = ({
             })
     })
 
-    router.post('logout', (req, res) => {
+    router.post('/logout', (req, res) => {
         console.log("logging out", req.session.user_id )
         console.log(req.session.user_id)
-        delete req.session.user_id
-        console.log(req.session.user_id)
+        // delete req.session.user_id
         res.clearCookie("session"); /// res.cookies can erase a cooking by refering only to it's name
+        console.log(req.session.user_id)
         res.send("ok");  
     })
 
