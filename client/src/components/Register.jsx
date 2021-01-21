@@ -42,7 +42,7 @@ export default function Register(props) {
     if (!userData.first_name || !userData.last_name || !userData.email || !userData.password || !userData.address || !userData.phone_number || !userData.city ) {
         setError("Please fill all the forms")
     } else {
-      axios.post('http://localhost:3001/api/users/register', userData)
+      axios.post('/api/users/register', userData)
       .then(function (response) {
         if(response.status === 200){
           setState(prevState => ({

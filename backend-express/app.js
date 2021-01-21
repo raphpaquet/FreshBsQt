@@ -1,10 +1,14 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session')
 const logger = require('morgan');
 const cors = require('cors');
+<<<<<<< HEAD
+=======
 const cookieSession = require('cookie-session')
 
+>>>>>>> 16fe33002de20be8ec7518139f2b5591d80fb110
 const db = require('./db')
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -14,6 +18,13 @@ const dbhelpers = require('./helpers/dbhelpers');
 const dbHelpers = require('./helpers/dbHelpers')(db);
 
 const app = express();
+
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
+  })
+);
 
 app.use(logger('dev'));
 app.use(express.json());
