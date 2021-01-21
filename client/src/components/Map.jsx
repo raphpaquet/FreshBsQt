@@ -19,7 +19,6 @@ export default function Map (props) {
     return sessionStorage.getItem(key)
   }
 
-
   const success = (position) => {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
@@ -29,8 +28,6 @@ export default function Map (props) {
       longitude: longitude
     })
 
-
-
     let user_position = getToLocalStorage('user_location');
 
     history.push('/shop')
@@ -38,8 +35,6 @@ export default function Map (props) {
     console.log('user_position', JSON.parse(user_position))
     console.log(sessionStorage)
   }
-
-
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(success, handleLocationError)
