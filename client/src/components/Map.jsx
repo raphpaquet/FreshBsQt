@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { useHistory } from 'react-router-dom';
 
 
 
 export default function Map (props) {
+  const history = useHistory()
 
   // const [state, setState] = useState({
   //   latitude: null,
@@ -65,6 +67,8 @@ export default function Map (props) {
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(success, handleLocationError)
+    history.push('/shop')
+    
   }
 
   const handleLocationError = (error) => {
