@@ -312,7 +312,7 @@ export default function ItemDropDown () {
   );
 
   return (
-    <div style={{ backgroundImage: "url('../images/berries.jpg')", backgroundSize: "cover", height: '100vh' }}>
+    <div style={{ backgroundImage: "url('../images/pinnaple.jpeg')", backgroundSize: "cover", height: '100vh' }}>
 
       <div className="home-nav">
         <img className="logo" src="./images/basket.png" style={{ "height": "60px", "width": "60px" }}></img>
