@@ -12,6 +12,7 @@ import {Animated} from "react-animated-css";
 
 export default function Home (props) {
   const user = props.user
+  const setUser = props.setUser
   const getCookie = () => {
     axios.get('/')
     .then((response) => {
@@ -34,6 +35,7 @@ export default function Home (props) {
           <div className="dropdown-bars">
             <NavMenu 
              user = {user}
+             setUser = {setUser}
             />
           </div>
         </div>
