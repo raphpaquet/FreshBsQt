@@ -43,7 +43,7 @@ export default function Login(props) {
 
             console.log("THIS IS THE RESPONSE IN LOGIN.JSX", response.data)
             props.setUser(response.data)
-            setError("")
+            // setError("")
             props.showError("")
 
           }
