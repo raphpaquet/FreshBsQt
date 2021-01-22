@@ -26,6 +26,8 @@ import haversine from 'haversine-distance';
 
 
 
+
+
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -88,6 +90,7 @@ export default function ItemDropDown () {
     storeFour: false,
     storeFive: false,
   })
+  const [totalProduct, setTotalProduct] = useState(0);
   // For the bottom drawer that holds the items
   const classes = useStyles();
   const [state, setState] = useState({
@@ -140,7 +143,7 @@ export default function ItemDropDown () {
   ));
 
   // Render products in the cart
-  const listProductsInCart = () => cart.map((product) =>
+  const listProductsInCart = () => (cart.filter((v, i) => cart.indexOf(v) === i).map((product) =>
     (
       <div className="cart">
         <div className="cart-product" key={product.id}>
@@ -156,7 +159,7 @@ export default function ItemDropDown () {
         </div>
       </div>
     )
-  );
+  ));
 
   //calculate the taxes
   const getTaxes = (amount) => SalesTax.getSalesTax("CA", "QC", amount)
@@ -394,10 +397,12 @@ export default function ItemDropDown () {
     >
       <section className="pop-up-menu">
         <div className="food-categories">
-          <StyledMenuItem onClick={() => getCategory('Cart')} >
-            <ListItemText primary="Basket" style={{ textTransform: "uppercase", letterSpacing: "0,2em", color: "darkgreen", display: "flex", alignContent: "center" }} />
-            <ShoppingBasketIcon />
-          </StyledMenuItem>
+          <div className="cart-category" style={{ justifyContent: "center" }}>
+            <StyledMenuItem onClick={() => getCategory('Cart')} style={{ display: "flex", alignItems: "normal", justifyContent: "center" }} >
+              <ShoppingBasketIcon />
+              <ListItemText className="cart-num">{cart.length}</ListItemText>
+            </StyledMenuItem>
+          </div>
           <StyledMenuItem onClick={() => getCategory('All')} >
             <ListItemText primary="All" />
           </StyledMenuItem>
@@ -434,6 +439,23 @@ export default function ItemDropDown () {
         </div>
 
 
+        {showCart === true ? (
+          <div className="cart-drawer">
+            <h1 className="cart-title">YOUR BASKET</h1>
+            <div>{listProductsInCart()}</div>
+            <container className="price-container">
+              <div className="taxes">
+                <span className="subtotal">Subtotal: {cartTotal.toFixed(2)}</span>
+                <span className="gst">Qst: {(cartTotal * qst).toFixed(2)}  </span>
+                <span className="qst">Gst: {(cartTotal * gst).toFixed(2)}</span>
+              </div>
+            </container>
+            <div className='cart-total'>Total: ${getTotal()}</div>
+            <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => history.push('/checkout')}>Checkout</button>
+          </div>
+        ) : null}
+
+
         <section className="food-item-list">
           <header>
             <button className="close-products" onClick={toggleDrawer(anchor, false)}>
@@ -441,81 +463,96 @@ export default function ItemDropDown () {
             </button>
           </header>
 
-          {showCart === true ? (
-            <div className="cart-drawer">
 
-              <h1 className="cart-title">YOUR BASKET</h1>
-              <div>{listProductsInCart()}</div>
-              <div className="taxes">
-                <span className="subtotal">Subtotal: {cartTotal.toFixed(2)}</span>
-                <span className="gst">Qst: {(cartTotal * qst).toFixed(2)}  </span>
-                <span className="qst">Gst: {(cartTotal * gst).toFixed(2)}</span>
-              </div>
-              <div className='cart-total'>Total: ${getTotal()}</div>
-              <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => history.push('/checkout')}>Checkout</button>
+          {showAll === true ? (
+            <div className="all">
+              <h1 className="cat-title">All products</h1>
+              <section className="grid">
+                {listProductsToBuy()}
+              </section>
             </div>
           ) : null}
 
-
-          {showAll === true ? (
-
-            <section className="grid">
-              {listProductsToBuy()}
-            </section>
-          ) : null}
-
           {showEggs === true ? (
-            <section className="grid">
-              {listCategoryToBuy('eggs')}
-            </section>
+            <div className="Eggs">
+              <h1 className="cat-title">Eggs</h1>
+              <section className="grid">
+                {listCategoryToBuy('eggs')}
+              </section>
+            </div>
+
           ) : null}
 
           {showBread === true ? (
-            <section className="grid">
-              {listCategoryToBuy('bread')}
-            </section>
+            <div className="Bread">
+              <h1 className="cat-title">Bakery</h1>
+              <section className="grid">
+                {listCategoryToBuy('bread')}
+              </section>
+            </div>
           ) : null}
 
           {showCheese === true ? (
-            <section className="grid">
-              {listCategoryToBuy('cheese')}
-            </section>
+            <div className="cheese">
+              <h1 className="cat-title">Our cheese</h1>
+              <section className="grid">
+                {listCategoryToBuy('cheese')}
+              </section>
+            </div>
           ) : null}
 
           {showFruit === true ? (
-            <section className="grid">
-              {listCategoryToBuy('fruits')}
-            </section>
+            <div className="fruits">
+              <h1 className="cat-title">Fresh fruits</h1>
+              <section className="grid">
+                {listCategoryToBuy('fruits')}
+              </section>
+            </div>
           ) : null}
 
           {showVegetables === true ? (
-            <section className="grid">
-              {listCategoryToBuy('Vegetables')}
-            </section>
+            <div className="vegetables">
+              <h1 className="cat-title">Fresh vegetables</h1>
+              <section className="grid">
+                {listCategoryToBuy('Vegetables')}
+              </section>
+            </div>
           ) : null}
 
           {showMeat === true ? (
-            <section className="grid">
-              {listCategoryToBuy('meat')}
-            </section>
+            <div className="butcher">
+              <h1 className="cat-title">Butcher</h1>
+              <section className="grid">
+                {listCategoryToBuy('meat')}
+              </section>
+            </div>
           ) : null}
 
           {showDrinks === true ? (
-            <section className="grid">
-              {listCategoryToBuy('drinks')}
-            </section>
+            <div className="drinks">
+              <h1 className="cat-title">Drinks</h1>
+              <section className="grid">
+                {listCategoryToBuy('drinks')}
+              </section>
+            </div>
           ) : null}
 
           {showSnacks === true ? (
-            <section className="grid">
-              {listCategoryToBuy('snacks')}
-            </section>
+            <div className="snacks">
+              <h1 className="cat-title">Feeling snacky ?</h1>
+              <section className="grid">
+                {listCategoryToBuy('snacks')}
+              </section>
+            </div>
           ) : null}
 
           {showDesserts === true ? (
-            <section className="grid">
-              {listCategoryToBuy('desserts')}
-            </section>
+            <div className="title">
+              <h1 className="cat-title">Feeling sweet ?</h1>
+              <section className="grid">
+                {listCategoryToBuy('desserts')}
+              </section>
+            </div>
           ) : null}
 
           {showOther === true ? (
@@ -526,7 +563,7 @@ export default function ItemDropDown () {
 
         </section>
       </section>
-    </div>
+    </div >
   );
 
   return (

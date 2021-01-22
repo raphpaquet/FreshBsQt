@@ -25,6 +25,30 @@
   width: 100%;
 }
 
+.pop-up-menu .cart-category {
+  display: flex;
+  align-items: center;
+  background-color: rgb(226, 250, 226);
+}
+
+.cart-category .cart-num {
+  font-size: 6px;
+  font-weight: bold;
+  align-items: center;
+  color: darkgreen;
+  margin-left: 5px;
+}
+
+.food-item-list .cat-title {
+  font-family: none;
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.5em;
+  font-weight: lighter;
+}
+
 .product-wrapper {
   width: 100px;
   height: 200px
@@ -44,6 +68,9 @@
   min-width: 0;
 }
 
+.cart-drawer {
+  margin-top: 30px;
+}
 .cart {
   border-bottom: 1px solid rgb(194, 194, 194)
 }
@@ -119,9 +146,13 @@
   margin-right: 50px;
   align-items: flex-end;
   line-height: 25px;;
-
+  font-size: 12px;
 }
 
 .btn-to-checkout {
   float: right;
+}
+
+.price-container {
+  background-color: blue;
 }
