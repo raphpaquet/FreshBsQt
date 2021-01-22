@@ -89,7 +89,7 @@ export default function ItemDropDown () {
 
   // CART IMPLEMENTATION // 
   const [cart, setCart] = useState([]);
-  const cartTotal = cart.reduce((total, { price = 0 }) => total + price, 0);
+  const cartTotal = (cart.reduce((total, { price = 0 }) => total + price, 0)).toFixed(2);
 
   // currentCart === 'prev'
   const addToCart = (product) => setCart((currentCart) => [...currentCart, product]);
@@ -334,7 +334,7 @@ export default function ItemDropDown () {
           {showCart === true ? (
               <div className="cart-drawer">
 
-                <h1 className="cart-title">YOUR CART</h1>
+                <h1 className="cart-title">YOUR BASKET</h1>
                  <div>{listProductsInCart()}</div>
                  <div className='cart-total'>Total: ${cartTotal}</div>
                  <button className="submit-button btn-to-checkout" style={{marginRight:"50px"}} onClick={()=> history.push('/checkout')}>Checkout</button>
