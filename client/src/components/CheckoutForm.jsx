@@ -17,7 +17,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history }) => {
 
    // session Storage to get the price
    const userPrice = JSON.parse(sessionStorage.getItem('total_price'))
-   const totalPrice = userPrice['totalPrice']
+   const totalPrice = (userPrice['totalPrice']).toFixed(2)
 
   const handleSubmit = async event => {
     event.preventDefault()
@@ -44,8 +44,6 @@ const CheckoutForm = ({ selectedProduct, stripe, history }) => {
       </div>
     )
   }
-
- 
 
   return (
   <div className="checkout-page">
