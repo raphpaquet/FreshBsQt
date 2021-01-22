@@ -29,7 +29,6 @@ const useStyles = makeStyles({
 export default function NavMenu (props) {
   const classes = useStyles();
   const user = props.user
-  console.log(user)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const history = useHistory()
 

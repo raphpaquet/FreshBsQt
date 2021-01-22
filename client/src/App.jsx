@@ -41,7 +41,7 @@ export default function App () {
   // axios request to users authetification which verifies 
   //if the session is present and returns a user object when it is
   useEffect(()=>{
-    axios.post('http://localhost:3003/api/users/auth')
+    axios.post('/api/users/auth')
       .then((res) => {
         setUser(res.data)
       })
