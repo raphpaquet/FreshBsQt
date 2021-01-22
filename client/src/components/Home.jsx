@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import NavMenu from './NavMenu'
 import BottomNav from './BottomNav'
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Map from './Map'
 
 
 
 export default function Home (props) {
-  console.log("this is props:", props)
-  // const [zipcode, setZipcode] = useState("");
+  const getCookie = () => {
+    axios.get('/')
+    .then((response) => {
+      console.log(response.data)
+    })
+  };
+  getCookie()
   const history = useHistory();
   const [state, setState] = useState({
     latitude: null,

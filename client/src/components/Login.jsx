@@ -41,6 +41,8 @@ export default function Login(props) {
               'successMessage' : 'Login successful. Redirecting to home page'
             }))
             redirectToHome();
+            console.log("THIS IS THE RESPONSE IN LOGIN.JSX", response.data)
+            props.setUser(response.data)
             setError("")
           }
           else if (response.code === 204) {

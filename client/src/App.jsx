@@ -33,9 +33,18 @@ const history = createBrowserHistory();
 export default function App () {
 
   const [selectedProduct, setSelectedProduct] = useState(null)
-  // might permit to set the cookeis as global states
-  const [userCookie, setUserCookie] = useState(null)
+  
+  //stores user state
+  const [user, setUser] = useState(null)
 
+  // axios request to users authetification which verifies 
+  //if the session is present and returns a user object when it is
+  useEffect(()=>{
+    axios.post('http://localhost:3003/api/users/auth')
+      .then((res) => {
+        setUser(res.data)
+      })
+  }, [])
 
   return (
     <Router history={history}>
@@ -52,7 +61,9 @@ export default function App () {
             <Map />
           </Route>
           <Route path="/login">
-            <Login />
+            <Login 
+            setUser = {setUser}
+            />
           </Route>
           <Route path="/register">
             <Register />
