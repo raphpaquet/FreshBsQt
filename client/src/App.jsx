@@ -12,7 +12,6 @@ import { products } from './components/products';
 import Product from './components/Product'
 import { createBrowserHistory } from 'history'
 import Checkout from './components/Checkout'
-import { useLocalStorage } from './hooks/useLocalStorage'
 import './components/Register.css';
 import './components/Home.css';
 import './components/NavBar.css';
@@ -32,6 +31,7 @@ const history = createBrowserHistory();
 export default function App () {
 
   const [selectedProduct, setSelectedProduct] = useState(null)
+
 
 
   return (
@@ -79,7 +79,8 @@ export default function App () {
 
 function Shop () {
   return (
-    <ItemDropDown />
+    <ItemDropDown 
+    />
 
   )
 }

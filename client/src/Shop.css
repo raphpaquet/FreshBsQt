@@ -27,6 +27,7 @@
 
 .food-categories {
   border-right: 1px solid rgb(194, 194, 194);
+  font-family: none !important;
 }
 
 
