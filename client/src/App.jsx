@@ -7,7 +7,6 @@ import Home from './components/Home';
 import Register from './components/Register';
 import Login from './components/Login';
 import Map from './components/Map';
-import ProductList from './components/ProductList';
 import { products } from './components/products';
 import Product from './components/Product';
 import { createBrowserHistory } from 'history';
@@ -43,9 +42,7 @@ export default function App () {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/shop">
-            <Shop 
-              
-            />
+            <Shop  />
           </Route>
           <Route path="/map">
             <Map />
