@@ -54,7 +54,7 @@ export default function App () {
         <Switch>
           <Route path="/shop">
             <Shop 
-              // userCookie = {userCookie}
+              user = {user}
             />
           </Route>
           <Route path="/map">
@@ -85,7 +85,9 @@ export default function App () {
             />
           </Route>
           <Route path="/" exact>
-            <Home />
+            <Home 
+            user = {user}
+            />
           </Route>
         </Switch>
       </div>
@@ -95,8 +97,9 @@ export default function App () {
 
 
 function Shop () {
+  
   return (
-    <ItemDropDown />
+    <ItemDropDown/>
 
   )
 }

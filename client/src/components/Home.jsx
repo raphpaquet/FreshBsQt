@@ -8,6 +8,7 @@ import Map from './Map'
 
 
 export default function Home (props) {
+  const user = props.user
   const getCookie = () => {
     axios.get('/')
     .then((response) => {
@@ -27,7 +28,9 @@ export default function Home (props) {
         <div className="home-nav">
           <img className="logo" src="./images/basket.svg" style={{ 'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
           <div className="dropdown-bars">
-            <NavMenu />
+            <NavMenu 
+             user = {user}
+            />
           </div>
         </div>
         <video autoPlay loop muted id="background-video">
