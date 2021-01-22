@@ -28,6 +28,7 @@ const useStyles = makeStyles({
 
 export default function NavMenu (props) {
   const classes = useStyles();
+  const setUser = props.setUser
   const user = props.user
   const [anchorEl, setAnchorEl] = React.useState(null);
   const history = useHistory()
@@ -44,6 +45,7 @@ export default function NavMenu (props) {
     axios.post('/api/users/logout')
     .then(function (response) {
       if(response.status === 200) {
+        setUser(null)
         history.push('/')
       }
       else {

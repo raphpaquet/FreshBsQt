@@ -92,6 +92,7 @@ export default function App () {
           <Route path="/" exact>
             <Home 
             user = {user}
+            setUser = {setUser}
             />
           </Route>
         </Switch>
