@@ -83,13 +83,11 @@ export default function ItemDropDown () {
   const [showCart, setShowCart] = useState(false);
   const [gst, setGst] = useState('');
   const [qst, setQst] = useState('');
-  const [range, setRange] = useState({
-    storeOne: false,
-    storeTwo: false,
-    storeThree: false,
-    storeFour: false,
-    storeFive: false,
-  })
+  const [rangeS1, setRangeS1] = useState(false);
+  const [rangeS2, setRangeS2] = useState(false);
+  const [rangeS3, setRangeS3] = useState(false);
+  const [rangeS4, setRangeS4] = useState(false);
+  const [rangeS5, setRangeS5] = useState(false);
   const [totalProduct, setTotalProduct] = useState(0);
   // For the bottom drawer that holds the items
   const classes = useStyles();
@@ -196,6 +194,78 @@ export default function ItemDropDown () {
   let user_price = getToSessionStorage('total_price');
 
   console.log('user_price', JSON.parse(user_price))
+
+  // This calculates the distance and makes sure it is under 1001m
+  const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
+
+  const latitudeLocation = userLocation['latitude']
+  const longitudeLocation = userLocation['longitude']
+
+  const defaultCenter = {
+    lat: latitudeLocation, lng: longitudeLocation
+  }
+
+  const stores = {
+    storeOne: {
+      id: 1,
+      distance: {
+        lat: 45.570940, lng: -73.608520
+      }
+    },
+    storeTwo: {
+      id: 2,
+      distance: {
+        lat: 45.522420, lng: -73.595520
+      }
+    },
+    storeThree: {
+      id: 3,
+      distance: {
+        lat: 45.522880, lng: -73.595200
+      }
+    },
+    storeFour: {
+      id: 4,
+      distance: {
+        lat: 45.523260, lng: -73.593780
+      }
+    },
+    storeFive: {
+      id: 5,
+      distance: {
+        lat: 45.518920, lng: -73.594740
+      }
+    },
+  }
+
+  const distanceOne = haversine(defaultCenter, stores.storeOne.distance);
+  const distanceTwo = haversine(defaultCenter, stores.storeTwo.distance);
+  const distanceThree = haversine(defaultCenter, stores.storeThree.distance);
+  const distanceFour = haversine(defaultCenter, stores.storeFour.distance);
+  const distanceFive = haversine(defaultCenter, stores.storeFive.distance);
+
+  useEffect(() => {
+    if (distanceOne <= 1000) {
+      console.log('store 1 in range')
+      setRangeS1(true);
+    }
+    if (distanceTwo <= 1000) {
+      console.log('store 2 in range')
+      setRangeS2(true);
+    }
+    if (distanceThree <= 1000) {
+      console.log('store 3 in range')
+      setRangeS3(true);
+    }
+    if (distanceFour <= 1000) {
+      console.log('store 4 in range')
+      setRangeS4(true);
+    }
+    if (distanceFive <= 1000) {
+      console.log('store 5 in range')
+      setRangeS5(true);
+    }
+  }, []);
 
   // Axios call to get the products
   useEffect(() => {
@@ -320,71 +390,7 @@ export default function ItemDropDown () {
 
   };
 
-  // This calculates the distance and makes sure it is under 1001m
-  const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
 
-  const latitudeLocation = userLocation['latitude']
-  const longitudeLocation = userLocation['longitude']
-
-  const defaultCenter = {
-    lat: latitudeLocation, lng: longitudeLocation
-  }
-
-  const stores = {
-    storeOne: {
-      id: 1,
-      distance: {
-        lat: 45.570940, lng: -73.608520
-      }
-    },
-    storeTwo: {
-      id: 2,
-      distance: {
-        lat: 45.522420, lng: -73.595520
-      }
-    },
-    storeThree: {
-      id: 3,
-      distance: {
-        lat: 45.522880, lng: -73.595200
-      }
-    },
-    storeFour: {
-      id: 4,
-      distance: {
-        lat: 45.523260, lng: -73.593780
-      }
-    },
-    storeFive: {
-      id: 5,
-      distance: {
-        lat: 45.518920, lng: -73.594740
-      }
-    },
-  }
-
-  const distanceOne = haversine(defaultCenter, stores.storeOne.distance);
-  const distanceTwo = haversine(defaultCenter, stores.storeTwo.distance);
-  const distanceThree = haversine(defaultCenter, stores.storeThree.distance);
-  const distanceFour = haversine(defaultCenter, stores.storeFour.distance);
-  const distanceFive = haversine(defaultCenter, stores.storeFive.distance);
-
-  if (distanceOne <= 1000) {
-    console.log('store 1 in range')
-
-  }
-  if (distanceTwo <= 1000) {
-    console.log('store 2 in range')
-  }
-  if (distanceThree <= 1000) {
-    console.log('store 3 in range')
-  }
-  if (distanceFour <= 1000) {
-    console.log('store 4 in range')
-  }
-  if (distanceFive <= 1000) {
-    console.log('store 5 in range')
-  }
 
   const list = (anchor) => (
 
