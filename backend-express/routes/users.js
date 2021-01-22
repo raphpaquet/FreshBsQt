@@ -12,7 +12,8 @@ module.exports = ({
     getUsers,
     getUserByEmail,
     addUser, 
-    userLogin
+    userLogin,
+    getUserById
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
@@ -40,14 +41,12 @@ module.exports = ({
             email, 
             password
     } = req.body;
-        console.log(`login info: ${email} ${password}`)
         userLogin(email, password)
             .then(user => {
                if (user) {
-                   console.log("user found")
+                console.log("logging in user", user.id)
                 req.session.user_id = user.id
                 res.json(user)
-                res.send('This user is in the DB')
             } else {
                 console.log("no user")
                 res.send('No user with this login information')
@@ -57,9 +56,8 @@ module.exports = ({
 
     router.post('/logout', (req, res) => {
         console.log("logging out", req.session.user_id )
-        console.log(req.session.user_id)
-        // delete req.session.user_id
-        res.clearCookie("session"); /// res.cookies can erase a cooking by refering only to it's name
+        delete req.session.user_id
+        // res.clearCookie("session"); /// res.cookies can erase a cooking by refering only to it's name
         console.log(req.session.user_id)
         res.send("ok");  
     })
@@ -106,7 +104,13 @@ module.exports = ({
 
 
 
- 
+    router.post('/auth', (req, res) => {
+        if(req.sessions.user_id) {
+            return getUserById(req.sessions.user_id)
+        } else {
+            return null
+        } 
+    });
 
    
     return router;

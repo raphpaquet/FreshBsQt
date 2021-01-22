@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import NavMenu from './NavMenu'
+
+import BottomNav from './BottomNav'
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Map from './Map'
 import {Animated} from "react-animated-css";
@@ -8,6 +11,14 @@ import {Animated} from "react-animated-css";
 
 
 export default function Home (props) {
+  const user = props.user
+  const getCookie = () => {
+    axios.get('/')
+    .then((response) => {
+      console.log(response.data)
+    })
+  };
+  getCookie()
 
   const history = useHistory();
   const [state, setState] = useState({
@@ -21,7 +32,9 @@ export default function Home (props) {
         <div className="home-nav">
           <img className="logo" src="./images/basket.svg" style={{ 'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
           <div className="dropdown-bars">
-            <NavMenu />
+            <NavMenu 
+             user = {user}
+            />
           </div>
         </div>
         <video autoPlay loop muted id="background-video">

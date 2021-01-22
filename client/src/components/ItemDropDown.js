@@ -190,7 +190,7 @@ export default function ItemDropDown () {
 
   // Axios call to get the products
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/products`)
+    axios.get(`/api/products`)
       .then(res => {
         setProducts(res.data)
         setLoadingProducts(false)

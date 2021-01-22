@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Map (props) {
+  const user = props.user
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
