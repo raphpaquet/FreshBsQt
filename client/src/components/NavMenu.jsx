@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles'
@@ -8,7 +9,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link, 
+  useHistory
 } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -28,6 +30,7 @@ export default function NavMenu () {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const history = useHistory()
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,6 +39,18 @@ export default function NavMenu () {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
+  const handleLogout = () => {
+    axios.post('/api/users/logout')
+    .then(function (response) {
+      if(response.status === 200) {
+        history.push('/')
+      }
+      else {
+        handleClose()
+      }
+    })
+  }
 
   return (
     <div>
@@ -55,7 +70,7 @@ export default function NavMenu () {
           <MenuItem><Link to="/login" className={classes.list} onClick={handleClose}>Login</Link></MenuItem>
           <MenuItem><Link to="/register" className={classes.list} onClick={handleClose}>Register</Link></MenuItem>
           <MenuItem><Link to="/checkout" className={classes.list} onClick={handleClose}>Checkout Cart</Link></MenuItem>
-          <MenuItem><Link to="/logout" className={classes.list} onClick={handleClose}>Logout</Link></MenuItem>
+          <MenuItem><Link to="/logout" className={classes.list} onClick={handleLogout}>Logout</Link></MenuItem>
           <MenuItem><Link to="/shop" className={classes.list} onClick={handleClose}>Market</Link></MenuItem>
         </div>
       </Menu>

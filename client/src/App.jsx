@@ -6,6 +6,7 @@ import ItemDropDown from './components/ItemDropDown';
 import Home from './components/Home';
 import Register from './components/Register';
 import Login from './components/Login';
+// import logout from './components/logout';
 import Map from './components/Map';
 import ProductList from './components/ProductList';
 import { products } from './components/products';
@@ -32,6 +33,8 @@ const history = createBrowserHistory();
 export default function App () {
 
   const [selectedProduct, setSelectedProduct] = useState(null)
+  // might permit to set the cookeis as global states
+  const [userCookie, setUserCookie] = useState(null)
 
 
   return (
@@ -42,7 +45,7 @@ export default function App () {
         <Switch>
           <Route path="/shop">
             <Shop 
-              
+              // userCookie = {userCookie}
             />
           </Route>
           <Route path="/map">
@@ -54,6 +57,9 @@ export default function App () {
           <Route path="/register">
             <Register />
           </Route>
+          {/* <Route path="/logout">
+            <Logout />
+          </Route> */}
           <Route path="/checkout">
             <Checkout
               selectedProduct={selectedProduct}

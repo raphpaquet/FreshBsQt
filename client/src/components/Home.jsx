@@ -7,6 +7,7 @@ import Map from './Map'
 
 
 export default function Home (props) {
+  console.log("this is props:", props)
   // const [zipcode, setZipcode] = useState("");
   const history = useHistory();
   const [state, setState] = useState({
