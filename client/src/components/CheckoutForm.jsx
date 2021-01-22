@@ -15,6 +15,10 @@ const CheckoutForm = ({ selectedProduct, stripe, history }) => {
 
   const [receiptUrl, setReceiptUrl] = useState('')
 
+   // session Storage to get the price
+   const userPrice = JSON.parse(sessionStorage.getItem('total_price'))
+   const totalPrice = userPrice['totalPrice']
+
   const handleSubmit = async event => {
     event.preventDefault()
 
@@ -23,7 +27,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history }) => {
     console.log(selectedProduct)
 
     const order = await axios.post('http://localhost:3001/api/stripe/charge', {
-      amount: 499,
+      amount: 992,
       source: token.id,
       receipt_email: 'customer@example.com'
     })
@@ -40,10 +44,13 @@ const CheckoutForm = ({ selectedProduct, stripe, history }) => {
       </div>
     )
   }
+
+ 
+
   return (
   <div className="checkout-page">
     <div className="checkout-form">
-      <p>Amount: ${4.99}</p>
+      <p>Amount: ${totalPrice}</p>
       <form onSubmit={handleSubmit}>
       <label>
           Full Name
