@@ -240,7 +240,7 @@ export default function ItemDropDown (props) {
 
   };
 
-  // This calculates the distance and makes sure it is under 1000m
+  // This calculates the distance and makes sure it is under 1001m
   const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
 
   const latitudeLocation = userLocation['latitude']
