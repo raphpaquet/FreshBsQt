@@ -22,7 +22,7 @@ import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import BottomNav from './BottomNav'
 import {Animated} from 'react-animated-css';
-import Taxes from './ProductList';
+
 
 
 const useStyles = makeStyles({
@@ -155,6 +155,8 @@ export default function ItemDropDown () {
     setQst(taxes.details[0]['rate'])
     setGst(taxes.details[1]['rate'])
   }).catch(e => console.log(e)) 
+
+  getTaxes();
 
   const getTotal = () => {
     const gstTax = (cartTotal * gst)
