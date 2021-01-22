@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   GoogleMap,
   LoadScript,
@@ -12,7 +12,7 @@ import { getToLocalStorage } from '../hooks/useLocalStorage'
 
 
 
-const MapContainer = (props) => {
+const MapContainer = () => {
 
 
   const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
@@ -224,10 +224,6 @@ const MapContainer = (props) => {
     },
   }
 
-  const findDistance = (a, b) => {
-    haversine(a, b)
-  }
-
 
   return (
 
@@ -240,6 +236,7 @@ const MapContainer = (props) => {
         options={{
           styles: mapTheme,
         }}
+
 
       >
         <Circle
@@ -261,7 +258,11 @@ const MapContainer = (props) => {
         <Marker
           name='Store Location'
           position={stores.storeOne}
-
+          options={{
+            fillColor: '#FFFF',
+            fillOpacity: '0.2',
+            strokeWeight: '0.2',
+          }}
         />
 
         <Marker

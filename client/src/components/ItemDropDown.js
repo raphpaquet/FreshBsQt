@@ -10,6 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import './ItemDropDown.css'
 import MapContainer from './GoogleMap'
 import DeleteIcon from '@material-ui/icons/Delete';
+import haversine from 'haversine-distance';
 
 // For the swipeable drawer that has all the items
 import clsx from 'clsx';
@@ -57,7 +58,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-export default function ItemDropDown () {
+export default function ItemDropDown (props) {
   const [showAll, setShowAll] = useState(true);
   const [showEggs, setShowEggs] = useState(false);
   const [showBread, setShowBread] = useState(false);
@@ -78,6 +79,8 @@ export default function ItemDropDown () {
   // For the axios call to render the products. Needs to be loaded to work. 
   const [products, setProducts] = useState('');
   const [loadingProducts, setLoadingProducts] = useState(true);
+  // For the distances from user location to store 
+  const [count, setCount] = useState(0);
 
   // CART IMPLEMENTATION // 
   const [cart, setCart] = useState([]);
@@ -85,24 +88,24 @@ export default function ItemDropDown () {
 
   // currentCart === 'prev'
   const addToCart = (product) => setCart((currentCart) => [...currentCart, product]);
-  
+
   const removeFromCart = (product) => {
     setCart((currentCart) => {
       const indexOfProductToRemove = currentCart.findIndex((cartProduct) => cartProduct.id === product.id);
-      
-      if(indexOfProductToRemove === -1) {
+
+      if (indexOfProductToRemove === -1) {
         return currentCart;
       }
-      
+
       return [
         ...currentCart.slice(0, indexOfProductToRemove),
         ...currentCart.slice(indexOfProductToRemove + 1),
-      ]; 
+      ];
     });
   };
-  
+
   const amountOfProducts = (id) => cart.filter((product) => product.id === id).length;
-  
+
   const listProductsToBuy = () => products.map((product) => (
     <div className="product-wrapper">
       <div key={product.id} className="product-image-section">
@@ -115,22 +118,22 @@ export default function ItemDropDown () {
       </div>
     </div>
   ));
-  
-  const listProductsInCart = () => cart.map((product) => 
-      (
-    <div className="cart">
-      <div className="cart-product" key={product.id}>
-      <button className="garbage" style={{backgroundColor:"transparent", border:"none"}}type="submit" onClick={() => removeFromCart(product)}><DeleteIcon /></button>
-        <img src={"./images/citrus.jpeg"} alt="citrus" style={{width:"40px", height:"40px"}} />
-        <div className="cart-product-amount">
-          <span className="cart-name">{`${product.name}`}</span>
-          <span className="cart-price">{amountOfProducts(product.id)} x ${product.price} </span>
+
+  const listProductsInCart = () => cart.map((product) =>
+    (
+      <div className="cart">
+        <div className="cart-product" key={product.id}>
+          <button className="garbage" style={{ backgroundColor: "transparent", border: "none" }} type="submit" onClick={() => removeFromCart(product)}><DeleteIcon /></button>
+          <img src={"./images/citrus.jpeg"} alt="citrus" style={{ width: "40px", height: "40px" }} />
+          <div className="cart-product-amount">
+            <span className="cart-name">{`${product.name}`}</span>
+            <span className="cart-price">{amountOfProducts(product.id)} x ${product.price} </span>
+          </div>
         </div>
       </div>
-    </div>
-      )
+    )
   );
-  
+
 
 
   // Axios call to get the products
@@ -237,6 +240,57 @@ export default function ItemDropDown () {
 
   };
 
+  // This calculates the distance and makes sure it is under 1000m
+  const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
+
+  const latitudeLocation = userLocation['latitude']
+  const longitudeLocation = userLocation['longitude']
+
+  const defaultCenter = {
+    lat: latitudeLocation, lng: longitudeLocation
+  }
+
+  const stores = {
+    storeOne: {
+      lat: 45.570940, lng: -73.608520
+    },
+    storeTwo: {
+      lat: 45.522420, lng: -73.595520
+    },
+    storeThree: {
+      lat: 45.522880, lng: -73.595200
+    },
+    storeFour: {
+      lat: 45.523260, lng: -73.593780
+    },
+    storeFive: {
+      lat: 45.518920, lng: -73.594740
+    },
+  }
+
+  const distanceOne = haversine(defaultCenter, stores.storeOne);
+  const distanceTwo = haversine(defaultCenter, stores.storeTwo);
+  const distanceThree = haversine(defaultCenter, stores.storeThree);
+  const distanceFour = haversine(defaultCenter, stores.storeFour);
+  const distanceFive = haversine(defaultCenter, stores.storeFive);
+
+  if (distanceOne <= 1000) {
+    console.log('true')
+  }
+  if (distanceTwo <= 1000) {
+    console.log('true')
+  }
+  if (distanceThree <= 1000) {
+    console.log('true')
+  }
+  if (distanceFour <= 1000) {
+    console.log('true')
+  }
+  if (distanceFive <= 1000) {
+    console.log('true')
+  }
+
+  // For the bottom drawer that holds the products
   const list = (anchor) => (
 
     <div
@@ -295,12 +349,12 @@ export default function ItemDropDown () {
           </header>
 
           {showCart === true ? (
-              <div className="cart-drawer">
+            <div className="cart-drawer">
 
-                <h1 className="cart-title">YOUR CART</h1>
-                 <div>{listProductsInCart()}</div>
-                 <div className='cart-total'>Total: {cartTotal}</div>
-              </div> 
+              <h1 className="cart-title">YOUR CART</h1>
+              <div>{listProductsInCart()}</div>
+              <div className='cart-total'>Total: {cartTotal}</div>
+            </div>
           ) : null}
 
 
@@ -323,8 +377,8 @@ export default function ItemDropDown () {
 
             </section>
 
-          
-          
+
+
           ) : null}
 
           {showEggs === true ? (
@@ -392,15 +446,15 @@ export default function ItemDropDown () {
     <div style={{ backgroundImage: "url('../images/pinnaple.jpeg')", backgroundSize: "cover", height: '100vh' }}>
 
       <div className="home-nav">
-        <img className="logo" src="./images/basket.svg" style={{'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
+        <img className="logo" src="./images/basket.svg" style={{ 'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
         <div className="dropdown-bars">
           <NavMenu />
         </div>
       </div>
 
       <section className="map-section">
-        <MapContainer
-        />
+        <MapContainer />
+        <p>{count}</p>
       </section>
 
       <div className="open-items-menu">
