@@ -10,6 +10,7 @@ export default function AlertComponent(props) {
     const closeModal = () => {
         toggleDisplay('none'); 
         props.hideError(null);
+        toggleDisplay('hide')
     }
     useEffect(() => {
         if(props.errorMessage !== null) {
@@ -28,10 +29,7 @@ export default function AlertComponent(props) {
             style={{ display: 'flex' }}
         >
             <div className="d-flex alertMessage">
-                <span>{props.errorMessage}</span>
-                <button type="button" className="close" aria-label="Close" onClick={() => closeModal()}>
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <span onClick={() => closeModal()}>{props.errorMessage}</span>
             </div>
             
         </div>

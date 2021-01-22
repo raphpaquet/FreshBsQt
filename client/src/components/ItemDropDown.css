@@ -25,6 +25,30 @@
   width: 100%;
 }
 
+.pop-up-menu .cart-category {
+  display: flex;
+  align-items: center;
+  background-color: rgb(226, 250, 226);
+}
+
+.cart-category .cart-num {
+  font-size: 6px;
+  font-weight: bold;
+  align-items: center;
+  color: darkgreen;
+  margin-left: 5px;
+}
+
+.food-item-list .cat-title {
+  font-family: none;
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.5em;
+  font-weight: lighter;
+}
+
 .product-wrapper {
   width: 100px;
   height: 200px
@@ -44,25 +68,45 @@
   min-width: 0;
 }
 
+.cart-drawer {
+  margin-top: 30px;
+}
+.cart {
+  border-bottom: 1px solid rgb(194, 194, 194)
+}
+
 .cart-title {
   font-family: none;
   font-size: 16px;
   margin:20px;
-}
-.cart-product {
+  font-weight: lighter;
   display: flex;
-  justify-content: space-between;
-  margin: 40px;
+  justify-content: center;
+  padding:20px;
+  border: 1px solid rgb(194, 194, 194)
 }
 
+.cart-product {
+  display: flex;
+  margin: 20px;
+  align-items: center;
+}
+
+.cart-image {
+  width:50px;
+  height: 50px;
+  margin-right:10px
+}
 .cart-product-amount {
   font-family: none;
   align-self: center;
+  display: flex;
+  align-items: center;
 }
 
 .cart-name {
   font-size: 16px;
-  margin-right: 20px;
+  margin-right: 60px;
 }
 
 .cart-price {
@@ -73,6 +117,42 @@
 .cart-total {
   display: flex;
   justify-content: flex-end;
-  margin-right: 30px
+  margin-right: 50px;
+  margin-top: 30px;
+  font-family: none;
 }
 
+.icon {
+  background-color: transparent;
+  border:none;
+  transform: scale(0.6);
+  opacity: 0.5;
+}
+
+.icon:hover {
+  opacity: 1;
+}
+
+.number-item {
+  font-size: 10px;
+}
+
+.taxes {
+  font-family: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top:30px;
+  margin-right: 50px;
+  align-items: flex-end;
+  line-height: 25px;;
+  font-size: 12px;
+}
+
+.btn-to-checkout {
+  float: right;
+}
+
+.price-container {
+  background-color: blue;
+}

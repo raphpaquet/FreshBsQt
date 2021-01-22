@@ -5,6 +5,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import './BottomNav.css'
 import {
   BrowserRouter as Router,
@@ -31,13 +32,12 @@ export default function SimpleBottomNavigation() {
       onChange={(event, newValue) => {
         setValue(newValue);
       }}
-      style={{height:"48px", width:"100%"}}
+      style={{height:"48px", width:"100%", borderTop:"1px solid lightgray"}}
       showLabels
       className={classes.root}
     >
-      <BottomNavigationAction label="Login" icon={<AccountCircleIcon />}/>
-      <BottomNavigationAction label="Cart" icon={<FavoriteIcon />} />
       <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Basket" icon={<ShoppingBasketIcon />} />
     </BottomNavigation>
   );
 }

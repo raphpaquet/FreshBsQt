@@ -8,12 +8,11 @@ import Register from './components/Register';
 import Login from './components/Login';
 // import logout from './components/logout';
 import Map from './components/Map';
-import ProductList from './components/ProductList';
 import { products } from './components/products';
-import Product from './components/Product'
-import { createBrowserHistory } from 'history'
-import Checkout from './components/Checkout'
-import { useLocalStorage } from './hooks/useLocalStorage'
+import Product from './components/Product';
+import { createBrowserHistory } from 'history';
+import Checkout from './components/Checkout';
+import AlertComponent from './components/AlertComponent';
 import './components/Register.css';
 import './components/Home.css';
 import './components/NavBar.css';
@@ -33,6 +32,8 @@ const history = createBrowserHistory();
 export default function App () {
 
   const [selectedProduct, setSelectedProduct] = useState(null)
+        const [errorMessage, upadteErrorMessage] = useState(null)
+
   
   //stores user state
   const [user, setUser] = useState(null)
@@ -46,6 +47,7 @@ export default function App () {
       })
   }, [])
 
+
   return (
     <Router history={history}>
       <div>
@@ -53,6 +55,7 @@ export default function App () {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/shop">
+
             <Shop 
               user = {user}
             />
@@ -63,10 +66,12 @@ export default function App () {
           <Route path="/login">
             <Login 
             setUser = {setUser}
+             showError={upadteErrorMessage}
             />
+
           </Route>
           <Route path="/register">
-            <Register />
+            <Register showError={upadteErrorMessage}/>
           </Route>
           {/* <Route path="/logout">
             <Logout />
@@ -90,6 +95,7 @@ export default function App () {
             />
           </Route>
         </Switch>
+        <AlertComponent errorMessage={errorMessage} hideError={upadteErrorMessage} />
       </div>
     </Router>
   );
