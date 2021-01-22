@@ -21,7 +21,8 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import BottomNav from './BottomNav'
-import {Animated} from 'react-animated-css';
+import { Animated } from 'react-animated-css';
+import haversine from 'haversine-distance';
 
 
 
@@ -80,6 +81,13 @@ export default function ItemDropDown () {
   const [showCart, setShowCart] = useState(false);
   const [gst, setGst] = useState('');
   const [qst, setQst] = useState('');
+  const [range, setRange] = useState({
+    storeOne: false,
+    storeTwo: false,
+    storeThree: false,
+    storeFour: false,
+    storeFive: false,
+  })
   // For the bottom drawer that holds the items
   const classes = useStyles();
   const [state, setState] = useState({
@@ -90,52 +98,53 @@ export default function ItemDropDown () {
   const [products, setProducts] = useState('');
   const [loadingProducts, setLoadingProducts] = useState(true);
 
+
   // CART IMPLEMENTATION // 
   const [cart, setCart] = useState([]);
   const cartTotal = (cart.reduce((total, { price = 0 }) => total + price, 0))
-  
+
   const amountOfProducts = (id) => cart.filter((product) => product.id === id).length;
-  
+
   // currentCart === 'prev'
   const addToCart = (product) => setCart((currentCart) => ([...currentCart, product]));
 
   const removeFromCart = (product) => {
     setCart((currentCart) => {
       const indexOfProductToRemove = currentCart.findIndex((cartProduct) => cartProduct.id === product.id);
-      
-      if(indexOfProductToRemove === -1) {
+
+      if (indexOfProductToRemove === -1) {
         return currentCart;
       }
-      
+
       return [
         ...currentCart.slice(0, indexOfProductToRemove),
         ...currentCart.slice(indexOfProductToRemove + 1),
-      ]; 
+      ];
     });
   };
 
   //Render ALL products
   const listProductsToBuy = () => products.map((product) => (
     <div className="product-wrapper">
-      <Animated  animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
-      <div key={product.id} className="product-image-section">
-        <img src="./images/citrus.jpeg" alt="citrus" />
-      </div>
-      <h3>{product.name}</h3>
-      <h5>From {product.store}</h5>
-      <div className="price-and-add">
-        <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
-      </div>
+      <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
+        <div key={product.id} className="product-image-section">
+          <img src="./images/citrus.jpeg" alt="citrus" />
+        </div>
+        <h3>{product.name}</h3>
+        <h5>From {product.store}</h5>
+        <div className="price-and-add">
+          <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
+        </div>
       </Animated>
     </div>
   ));
 
   // Render products in the cart
-  const listProductsInCart = () => cart.map((product) => 
+  const listProductsInCart = () => cart.map((product) =>
     (
       <div className="cart">
         <div className="cart-product" key={product.id}>
-        <button className="icon clear" type="submit" onClick={() => removeFromCart(product)}><ClearIcon /></button>
+          <button className="icon clear" type="submit" onClick={() => removeFromCart(product)}><ClearIcon /></button>
           <img className="cart-image" src={"./images/citrus.jpeg"} alt="citrus" />
           <div className="cart-product-amount">
             <span className="cart-name">{`${product.name}`}</span>
@@ -151,22 +160,22 @@ export default function ItemDropDown () {
 
   //calculate the taxes
   const getTaxes = (amount) => SalesTax.getSalesTax("CA", "QC", amount)
-  .then((taxes) => {
-    setQst(taxes.details[0]['rate'])
-    setGst(taxes.details[1]['rate'])
-  }).catch(e => console.log(e)) 
+    .then((taxes) => {
+      setQst(taxes.details[0]['rate'])
+      setGst(taxes.details[1]['rate'])
+    }).catch(e => console.log(e))
 
   getTaxes();
 
   const getTotal = () => {
     const gstTax = (cartTotal * gst)
     const qstTax = (cartTotal * qst)
-    const total =  cartTotal + qstTax + gstTax
+    const total = cartTotal + qstTax + gstTax
     return total.toFixed(2)
   }
 
   // add total price to sessionStorage
-  const addToSessionStorage = (key,value) => {
+  const addToSessionStorage = (key, value) => {
     let price = {
       'totalPrice': value.price
     }
@@ -177,13 +186,13 @@ export default function ItemDropDown () {
     return sessionStorage.getItem(key)
   }
 
-    addToSessionStorage('total_price', {
-      price: cartTotal
-    })
+  addToSessionStorage('total_price', {
+    price: cartTotal
+  })
 
-    let user_price = getToSessionStorage('total_price');
+  let user_price = getToSessionStorage('total_price');
 
-    console.log('user_price', JSON.parse(user_price))
+  console.log('user_price', JSON.parse(user_price))
 
   // Axios call to get the products
   useEffect(() => {
@@ -202,7 +211,7 @@ export default function ItemDropDown () {
   if (loadingProducts) {
     return <section className="grid">Loading...
     <div>
-        {<CircularProgress color="white" size={40} className={classes.buttonProgress} /> }
+        {<CircularProgress color="white" size={40} className={classes.buttonProgress} />}
       </div>
     </section>
   }
@@ -215,19 +224,19 @@ export default function ItemDropDown () {
     setState({ ...state, [anchor]: open });
   };
 
-   // Render products by categories
-   const listCategoryToBuy = (cat) => products.filter(product => product.category === cat).map((product) => 
-   (
+  // Render products by categories
+  const listCategoryToBuy = (cat) => products.filter(product => product.category === cat).map((product) =>
+    (
       <div className="product-wrapper">
-        <Animated  animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
-        <div key={product.id} className="product-image-section">
-          <img src="./images/citrus.jpeg" alt="citrus" />
-        </div>
-        <h3>{product.name}</h3>
-        <h5>From {product.store}</h5>
-        <div className="price-and-add">
-          <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
-        </div>
+        <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
+          <div key={product.id} className="product-image-section">
+            <img src="./images/citrus.jpeg" alt="citrus" />
+          </div>
+          <h3>{product.name}</h3>
+          <h5>From {product.store}</h5>
+          <div className="price-and-add">
+            <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
+          </div>
         </Animated>
       </div>
     ));
@@ -308,6 +317,72 @@ export default function ItemDropDown () {
 
   };
 
+  // This calculates the distance and makes sure it is under 1001m
+  const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
+
+  const latitudeLocation = userLocation['latitude']
+  const longitudeLocation = userLocation['longitude']
+
+  const defaultCenter = {
+    lat: latitudeLocation, lng: longitudeLocation
+  }
+
+  const stores = {
+    storeOne: {
+      id: 1,
+      distance: {
+        lat: 45.570940, lng: -73.608520
+      }
+    },
+    storeTwo: {
+      id: 2,
+      distance: {
+        lat: 45.522420, lng: -73.595520
+      }
+    },
+    storeThree: {
+      id: 3,
+      distance: {
+        lat: 45.522880, lng: -73.595200
+      }
+    },
+    storeFour: {
+      id: 4,
+      distance: {
+        lat: 45.523260, lng: -73.593780
+      }
+    },
+    storeFive: {
+      id: 5,
+      distance: {
+        lat: 45.518920, lng: -73.594740
+      }
+    },
+  }
+
+  const distanceOne = haversine(defaultCenter, stores.storeOne.distance);
+  const distanceTwo = haversine(defaultCenter, stores.storeTwo.distance);
+  const distanceThree = haversine(defaultCenter, stores.storeThree.distance);
+  const distanceFour = haversine(defaultCenter, stores.storeFour.distance);
+  const distanceFive = haversine(defaultCenter, stores.storeFive.distance);
+
+  if (distanceOne <= 1000) {
+    console.log('store 1 in range')
+
+  }
+  if (distanceTwo <= 1000) {
+    console.log('store 2 in range')
+  }
+  if (distanceThree <= 1000) {
+    console.log('store 3 in range')
+  }
+  if (distanceFour <= 1000) {
+    console.log('store 4 in range')
+  }
+  if (distanceFive <= 1000) {
+    console.log('store 5 in range')
+  }
+
   const list = (anchor) => (
 
     <div
@@ -320,7 +395,7 @@ export default function ItemDropDown () {
       <section className="pop-up-menu">
         <div className="food-categories">
           <StyledMenuItem onClick={() => getCategory('Cart')} >
-            <ListItemText primary="Basket" style={{textTransform:"uppercase", letterSpacing:"0,2em", color:"darkgreen", display:"flex", alignContent:"center"}}/>
+            <ListItemText primary="Basket" style={{ textTransform: "uppercase", letterSpacing: "0,2em", color: "darkgreen", display: "flex", alignContent: "center" }} />
             <ShoppingBasketIcon />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('All')} >
@@ -367,18 +442,18 @@ export default function ItemDropDown () {
           </header>
 
           {showCart === true ? (
-              <div className="cart-drawer">
+            <div className="cart-drawer">
 
-                <h1 className="cart-title">YOUR BASKET</h1>
-                 <div>{listProductsInCart()}</div>
-                <div className="taxes">
-                  <span className="subtotal">Subtotal: {cartTotal.toFixed(2)}</span>
-                  <span className="gst">Qst: {(cartTotal * qst).toFixed(2)}  </span>
-                  <span className="qst">Gst: {(cartTotal * gst).toFixed(2)}</span>
-                </div>
-                 <div className='cart-total'>Total: ${getTotal()}</div>
-                 <button className="submit-button btn-to-checkout" style={{marginRight:"50px"}} onClick={()=> history.push('/checkout')}>Checkout</button>
-              </div> 
+              <h1 className="cart-title">YOUR BASKET</h1>
+              <div>{listProductsInCart()}</div>
+              <div className="taxes">
+                <span className="subtotal">Subtotal: {cartTotal.toFixed(2)}</span>
+                <span className="gst">Qst: {(cartTotal * qst).toFixed(2)}  </span>
+                <span className="qst">Gst: {(cartTotal * gst).toFixed(2)}</span>
+              </div>
+              <div className='cart-total'>Total: ${getTotal()}</div>
+              <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => history.push('/checkout')}>Checkout</button>
+            </div>
           ) : null}
 
 
@@ -397,56 +472,56 @@ export default function ItemDropDown () {
 
           {showBread === true ? (
             <section className="grid">
-            {listCategoryToBuy('bread')}
-          </section>
+              {listCategoryToBuy('bread')}
+            </section>
           ) : null}
 
           {showCheese === true ? (
             <section className="grid">
-            {listCategoryToBuy('cheese')}
-          </section>
+              {listCategoryToBuy('cheese')}
+            </section>
           ) : null}
 
           {showFruit === true ? (
             <section className="grid">
-            {listCategoryToBuy('fruits')}
-          </section>
+              {listCategoryToBuy('fruits')}
+            </section>
           ) : null}
 
           {showVegetables === true ? (
             <section className="grid">
-            {listCategoryToBuy('Vegetables')}
-          </section>
+              {listCategoryToBuy('Vegetables')}
+            </section>
           ) : null}
 
           {showMeat === true ? (
             <section className="grid">
-            {listCategoryToBuy('meat')}
-          </section>
+              {listCategoryToBuy('meat')}
+            </section>
           ) : null}
 
           {showDrinks === true ? (
             <section className="grid">
-            {listCategoryToBuy('drinks')}
-          </section>
+              {listCategoryToBuy('drinks')}
+            </section>
           ) : null}
 
           {showSnacks === true ? (
             <section className="grid">
-            {listCategoryToBuy('snacks')}
-          </section>
+              {listCategoryToBuy('snacks')}
+            </section>
           ) : null}
 
           {showDesserts === true ? (
-           <section className="grid">
-           {listCategoryToBuy('desserts')}
-         </section>
+            <section className="grid">
+              {listCategoryToBuy('desserts')}
+            </section>
           ) : null}
 
           {showOther === true ? (
             <section className="grid">
-            {listCategoryToBuy('others')}
-          </section>
+              {listCategoryToBuy('others')}
+            </section>
           ) : null}
 
         </section>
@@ -458,7 +533,7 @@ export default function ItemDropDown () {
     <div style={{ backgroundImage: "url('../images/pinnaple.jpeg')", backgroundSize: "cover", height: '100vh' }}>
 
       <div className="home-nav">
-        <img className="logo" src="./images/basket.svg" style={{'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
+        <img className="logo" src="./images/basket.svg" style={{ 'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
         <div className="dropdown-bars">
           <NavMenu />
         </div>
