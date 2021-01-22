@@ -10,10 +10,16 @@ import CloseIcon from '@material-ui/icons/Close';
 import './ItemDropDown.css'
 import MapContainer from './GoogleMap'
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useHistory } from 'react-router-dom'
 
 // For the swipeable drawer that has all the items
 import clsx from 'clsx';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import CircularProgress from './Map'
+import ClearIcon from '@material-ui/icons/Clear';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 
 
@@ -75,6 +81,8 @@ export default function ItemDropDown () {
   const [state, setState] = useState({
     bottom: false,
   });
+
+  const history = useHistory();
   // For the axios call to render the products. Needs to be loaded to work. 
   const [products, setProducts] = useState('');
   const [loadingProducts, setLoadingProducts] = useState(true);
@@ -85,6 +93,9 @@ export default function ItemDropDown () {
 
   // currentCart === 'prev'
   const addToCart = (product) => setCart((currentCart) => [...currentCart, product]);
+
+  // const addQuantity = (id) => { cart.map(product => product.id === id ? product.quantity += 1 : product)}
+
   
   const removeFromCart = (product) => {
     setCart((currentCart) => {
@@ -120,18 +131,39 @@ export default function ItemDropDown () {
       (
     <div className="cart">
       <div className="cart-product" key={product.id}>
-      <button className="garbage" style={{backgroundColor:"transparent", border:"none"}}type="submit" onClick={() => removeFromCart(product)}><DeleteIcon /></button>
-        <img src={"./images/citrus.jpeg"} alt="citrus" style={{width:"40px", height:"40px"}} />
+      <button className="icon clear" type="submit" onClick={() => removeFromCart(product)}><ClearIcon /></button>
+        <img className="cart-image" src={"./images/citrus.jpeg"} alt="citrus" />
         <div className="cart-product-amount">
           <span className="cart-name">{`${product.name}`}</span>
-          <span className="cart-price">{amountOfProducts(product.id)} x ${product.price} </span>
+          <span className="cart-price">${product.price} </span>
+          <button className="icon remove" onClick={() => removeFromCart(product)}><RemoveCircleOutlineIcon /></button>
+          <span className="number-item">{amountOfProducts(product.id)}</span>
+          <button className="icon add" onClick={() => addToCart(product)}><AddCircleOutlineIcon /></button>
         </div>
       </div>
     </div>
       )
   );
-  
 
+  // add total price to sessionStorage
+  const addToSessionStorage = (key,value) => {
+    let price = {
+      'totalPrice': value.price
+    }
+    sessionStorage.setItem(key, JSON.stringify(price))
+  }
+
+  const getToSessionStorage = (key) => {
+    return sessionStorage.getItem(key)
+  }
+
+    addToSessionStorage('total_price', {
+      price: cartTotal
+    })
+
+    let user_price = getToSessionStorage('total_price');
+
+    console.log('user_price', JSON.parse(user_price))
 
   // Axios call to get the products
   useEffect(() => {
@@ -148,7 +180,11 @@ export default function ItemDropDown () {
   console.log(products)
   // Makes sure that the products do not load before the axios call. 
   if (loadingProducts) {
-    return <section className="grid">Loading...</section>
+    return <section className="grid">Loading...
+    <div>
+        {<CircularProgress color="white" size={40} className={classes.buttonProgress} /> }
+      </div>
+    </section>
   }
 
 
@@ -249,7 +285,8 @@ export default function ItemDropDown () {
       <section className="pop-up-menu">
         <div className="food-categories">
           <StyledMenuItem onClick={() => getCategory('Cart')} >
-            <ListItemText primary="CART" />
+            <ListItemText primary="Basket" style={{textTransform:"uppercase", letterSpacing:"0,2em", color:"darkgreen", display:"flex", alignContent:"center"}}/>
+            <ShoppingBasketIcon />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('All')} >
             <ListItemText primary="All" />
@@ -299,7 +336,8 @@ export default function ItemDropDown () {
 
                 <h1 className="cart-title">YOUR CART</h1>
                  <div>{listProductsInCart()}</div>
-                 <div className='cart-total'>Total: {cartTotal}</div>
+                 <div className='cart-total'>Total: ${cartTotal}</div>
+                 <button className="submit-button btn-to-checkout" style={{marginRight:"50px"}} onClick={()=> history.push('/checkout')}>Checkout</button>
               </div> 
           ) : null}
 
