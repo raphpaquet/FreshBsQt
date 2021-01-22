@@ -10,7 +10,6 @@ import NavMenu from './NavMenu'
 export default function Login(props) {
 
   const history = useHistory();
-  const [error, setError] = useState("");
   const [state , setState] = useState({
     email : "",
     password : "",
@@ -31,7 +30,7 @@ export default function Login(props) {
       "password": state.password
     }
     if (!userData.email || !userData.password) {
-      setError("Please enter your email and password")
+      props.showError("Please enter your email and password")
     } else {
       axios.post('/api/users/login', userData)
         .then(function (response) {
@@ -41,13 +40,13 @@ export default function Login(props) {
               'successMessage' : 'Login successful. Redirecting to home page'
             }))
             redirectToHome();
-            setError("")
+            props.showError("")
           }
           else if (response.code === 204) {
-            setError("Email and password don't match");
+            props.showError("Email and password don't match");
           }
           else {
-            setError("Email doesn't exist");
+            props.showError("Email doesn't exist");
           }
         })
       .catch(function (error) {

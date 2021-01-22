@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import NavMenu from './NavMenu'
-import BottomNav from './BottomNav'
 import { useHistory } from 'react-router-dom';
 import Map from './Map'
+import {Animated} from "react-animated-css";
+
 
 
 
 export default function Home (props) {
-  // const [zipcode, setZipcode] = useState("");
+
   const history = useHistory();
   const [state, setState] = useState({
     latitude: null,
@@ -30,30 +31,11 @@ export default function Home (props) {
         <div className="header-content">
           <h1 className="ml10">
             <span className="text-wrapper">
+            <Animated animationIn="flipInX" animationOut="fadeOut" isVisible={true}>
               <span className="letters">Support local stores in your neigborhood</span>
+            </Animated>
             </span>
           </h1>
-          {/* <h1 id="title-animation" className="h1">Support local stores in your neigborhood</h1> */}
-          {/* <p id="subtitle-animation" className="paragraph">Enter your postal code</p> */}
-          <form className="postal">
-            {/* <input 
-              id="zip" 
-              name="zip" 
-              type="text" 
-              placeholder="eg. H1X 4F5" 
-              pattern="^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$"
-              onChange={event => {
-                console.log(zipcode)
-                const { value } = event.target;
-                setZipcode(value)
-              }}
-            /> */}
-            {/* <button 
-              type="submit" 
-              className="submit-button"
-              // onClick={setZipcode}
-              >Submit</button> */}
-          </form>
           <Map />
           <p className="paragraph-2">Get your fresh local products basket in couple clicks</p>
         </div>

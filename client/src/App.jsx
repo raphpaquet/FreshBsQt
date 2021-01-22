@@ -7,11 +7,11 @@ import Home from './components/Home';
 import Register from './components/Register';
 import Login from './components/Login';
 import Map from './components/Map';
-import ProductList from './components/ProductList';
 import { products } from './components/products';
-import Product from './components/Product'
-import { createBrowserHistory } from 'history'
-import Checkout from './components/Checkout'
+import Product from './components/Product';
+import { createBrowserHistory } from 'history';
+import Checkout from './components/Checkout';
+import AlertComponent from './components/AlertComponent';
 import './components/Register.css';
 import './components/Home.css';
 import './components/NavBar.css';
@@ -30,7 +30,8 @@ const history = createBrowserHistory();
 
 export default function App () {
 
-  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [errorMessage, upadteErrorMessage] = useState(null)
 
 
 
@@ -41,18 +42,16 @@ export default function App () {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/shop">
-            <Shop 
-              
-            />
+            <Shop  />
           </Route>
           <Route path="/map">
             <Map />
           </Route>
           <Route path="/login">
-            <Login />
+            <Login showError={upadteErrorMessage}/>
           </Route>
           <Route path="/register">
-            <Register />
+            <Register showError={upadteErrorMessage}/>
           </Route>
           <Route path="/checkout">
             <Checkout
@@ -71,6 +70,7 @@ export default function App () {
             <Home />
           </Route>
         </Switch>
+        <AlertComponent errorMessage={errorMessage} hideError={upadteErrorMessage} />
       </div>
     </Router>
   );

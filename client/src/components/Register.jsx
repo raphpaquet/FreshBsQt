@@ -14,7 +14,6 @@ export default function Register(props) {
     city: "",
   }) 
 
-  const [error, setError] = useState("");
   const history = useHistory();
 
   // hook used to handle values entered by the user
@@ -40,7 +39,7 @@ export default function Register(props) {
   // function to make a backend API request
   const sendDetailsToServer = () => {
     if (!userData.first_name || !userData.last_name || !userData.email || !userData.password || !userData.address || !userData.phone_number || !userData.city ) {
-        setError("Please fill all the forms")
+        props.showError("Please fill all the forms")
     } else {
       axios.post('/api/users/register', userData)
       .then(function (response) {
@@ -49,10 +48,10 @@ export default function Register(props) {
             ...prevState,
             'successMessage' : 'Registration successful. Redirecting to Home page...'
           }))
-          setError(null)
+          props.showError(null)
           redirectToHome();
         } else {
-          setError('Some error occured')
+          props.showError('Some error occured')
         }
       })
       .catch(function (error) {
