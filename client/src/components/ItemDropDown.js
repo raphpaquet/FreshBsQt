@@ -1,28 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import './ItemDropDown.css'
+
+// useful API
+import SalesTax from 'sales-tax';
+import {Animated} from 'react-animated-css';
+
+// components
+import MapContainer from './GoogleMap'
+import NavMenu from './NavMenu';
+import BottomNav from './BottomNav'
+import CircularProgress from './Map'
+
+// For the swipeable drawer that has all the items
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import clsx from 'clsx';
+
+// Material-UI 
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import NavMenu from './NavMenu';
 import CloseIcon from '@material-ui/icons/Close';
-import './ItemDropDown.css'
-import MapContainer from './GoogleMap'
-import { useHistory } from 'react-router-dom';
-import SalesTax from 'sales-tax';
-
-// For the swipeable drawer that has all the items
-import clsx from 'clsx';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import CircularProgress from './Map'
 import ClearIcon from '@material-ui/icons/Clear';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+
 import BottomNav from './BottomNav'
 import { Animated } from 'react-animated-css';
 import haversine from 'haversine-distance';
+
 
 
 
@@ -68,6 +78,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
+
 export default function ItemDropDown () {
   const [showAll, setShowAll] = useState(true);
   const [showEggs, setShowEggs] = useState(false);
@@ -83,18 +94,28 @@ export default function ItemDropDown () {
   const [showCart, setShowCart] = useState(false);
   const [gst, setGst] = useState('');
   const [qst, setQst] = useState('');
+
   const [rangeS1, setRangeS1] = useState(false);
   const [rangeS2, setRangeS2] = useState(false);
   const [rangeS3, setRangeS3] = useState(false);
   const [rangeS4, setRangeS4] = useState(false);
   const [rangeS5, setRangeS5] = useState(false);
   const [totalProduct, setTotalProduct] = useState(0);
+
   // For the bottom drawer that holds the items
   const classes = useStyles();
   const [state, setState] = useState({
     bottom: false,
   });
   const history = useHistory();
+
+  // For checkout form 
+  // const handlePurchase = prod => () => {
+  //   setSelectProduct(prod);
+  //   console.log('select prod: ' , prod)
+  //   history.push('/checkout')
+  //   console.log(selectedProduct)
+  // }
   // For the axios call to render the products. Needs to be loaded to work. 
   const [products, setProducts] = useState('');
   const [loadingProducts, setLoadingProducts] = useState(true);
@@ -198,6 +219,10 @@ export default function ItemDropDown () {
   // This calculates the distance and makes sure it is under 1001m
   const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
 
+
+    let user_price = getToSessionStorage('total_price');
+    console.log('user_price', JSON.parse(user_price))
+
   const latitudeLocation = userLocation['latitude']
   const longitudeLocation = userLocation['longitude']
 
@@ -267,6 +292,7 @@ export default function ItemDropDown () {
     }
   }, []);
 
+
   // Axios call to get the products
   useEffect(() => {
     axios.get(`/api/products`)
@@ -280,6 +306,7 @@ export default function ItemDropDown () {
   }, []);
 
   console.log(products)
+
   // Makes sure that the products do not load before the axios call. 
   if (loadingProducts) {
     return <section className="grid">Loading...
@@ -445,6 +472,7 @@ export default function ItemDropDown () {
         </div>
 
 
+
         {showCart === true ? (
           <div className="cart-drawer">
             <h1 className="cart-title">YOUR BASKET</h1>
@@ -460,6 +488,7 @@ export default function ItemDropDown () {
             <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => history.push('/checkout')}>Checkout</button>
           </div>
         ) : null}
+
 
 
         <section className="food-item-list">
