@@ -45,6 +45,7 @@ export default function App () {
   useEffect(()=>{
     axios.post('/api/users/auth')
       .then((res) => {
+        console.log(res.data)
         setUser(res.data)
       })
   }, [])
