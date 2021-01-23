@@ -5,8 +5,8 @@ import './ItemDropDown.css'
 
 // useful API
 import SalesTax from 'sales-tax';
-import {Animated} from 'react-animated-css';
-import haversine from 'haversine';
+import { Animated } from 'react-animated-css';
+import haversine from 'haversine-distance';
 
 // components
 import MapContainer from './GoogleMap'
@@ -327,7 +327,7 @@ export default function ItemDropDown () {
       <div className="product-wrapper">
         <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
           <div key={product.id} className="product-image-section">
-            <img src={product.image}/>
+            <img src={product.image} />
           </div>
           <h3>{product.name}</h3>
           <h5>From {product.store}</h5>
