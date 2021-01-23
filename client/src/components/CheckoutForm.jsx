@@ -11,6 +11,8 @@ import './CheckoutForm.css'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import HomeIcon from '@material-ui/icons/Home';
+import ReceiptIcon from '@material-ui/icons/Receipt';
 
 
 const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
@@ -69,7 +71,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
     console.log(selectedProduct)
 
     const order = await axios.post('/api/stripe/charge', {
-      amount: 992,
+      amount: 5222,
       source: token.id,
       receipt_email: 'customer@example.com'
     })
@@ -80,18 +82,21 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
   if (receiptUrl) {
     return (
       <div className="success">
-        <h2>Payment Successful!</h2>
-        <a href={receiptUrl}>View Receipt</a>
-        <Link to="/">Home</Link>
+        <video autoPlay loop muted id="background-video">
+          <source src="/video/shoplocal.mp4" type="video/mp4" />
+        </video>
+        <h2>payment successful!</h2>
+        <a href={receiptUrl}>View Receipt<ReceiptIcon></ReceiptIcon></a>
+        <Link to="/">Home<HomeIcon></HomeIcon></Link>
       </div>
     )
   }
 
   return (
-  <div className="checkout-page">
-    <video autoPlay loop muted id="background-video">
+  <div className="checkout-page" style={{ backgroundImage: "url('../images/pinnaple.jpeg')", backgroundSize: "cover", height: '100vh' }}>
+    {/* <video autoPlay loop muted id="background-video">
           <source src="/video/pie.mp4" type="video/mp4" />
-        </video>
+        </video> */}
     <button className="back-to-shop">
       <ArrowBackIcon onClick={backToShop}/>
     </button>
@@ -100,14 +105,14 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
         <ShoppingBasketIcon />
     </div>
     <div className="checkout-info">
-      <div className="summary">
+      {/* <div className="summary">
         <span className="summary-title">list of products</span>
         <ul style={{listStyle:"none", display:"flex", flexDirection:"column", padding:"8px"}}>
           <li>Rasberries 5.99</li>
           <li>Rasberries 5.99</li>
           <li>Rasberries 5.99</li>
         </ul>
-      </div>
+      </div> */}
 
       <div className="delivery">
         <span className="facturation-title">Delivery</span>

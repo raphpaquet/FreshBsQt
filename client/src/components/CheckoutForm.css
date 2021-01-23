@@ -38,7 +38,7 @@
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5em;
-  background-color: rgb(207, 226, 245);
+  background-color: rgb(225, 255, 232);
   padding: 30px 10px 0px 10px;
   display: flex;
   flex-direction: column;
@@ -52,7 +52,7 @@
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5em;
-  background-color: rgb(118, 149, 180);
+  background-color: rgb(181, 211, 164);
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -94,13 +94,23 @@
 
 
 .success {
+  margin-top: 30px;
   text-align: center;
+  font-family: none;
+  color: white;
+  letter-spacing: 0.2em;
+  font-size: 18px;
 }
-.success h2 {
-  color: seagreen;
-}
+
 .success a {
-  display: block;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  outline: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 40px;
 }
 
 .checkout-page {
