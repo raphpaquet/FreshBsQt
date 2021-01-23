@@ -11,10 +11,10 @@ import './CheckoutForm.css'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-// import { defaultLoadScriptProps } from '@react-google-maps/api/dist/LoadScript'
 
 
 const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
+  //to handle whether the checkbox is toggled or not
   const [toggled, setToggled] = useState(false)
   const [state, setState] = useState({
     first_name:"",
@@ -23,14 +23,16 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
     city:"",
   })
 
+  //handles the conditionals associated to the toggled state 
+
   useEffect(()=>{
     if(toggled) {
-      setState((previousState)=>{
-        return {...previousState, address: user.address, city: user.city}
+      setState((prevState)=>{
+        return {...prevState, first_name: user.first_name, last_name: user.last_name, address: user.address, city: user.city}
       })
     } else {
-      setState((previousState)=>{
-        return {...previousState, address: "", city: ""}
+      setState((prevState)=>{
+        return {...prevState, first_name: "", last_name: "", address: "", city: ""}
       })
     }
   }, [toggled])
@@ -145,7 +147,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
               }}
               name="defaultAddress">
             </input>
-            <label for="defaultAddress" style={{letterSpacing:"0em", textTransform:"lowercase", margin:"0"}}>Use my default address</label>
+            <label for="defaultAddress" style={{letterSpacing:"0em", textTransform:"lowercase", margin:"0"}}>Use my default information</label>
           </span>
             <label for="address"></label>
             <input 
