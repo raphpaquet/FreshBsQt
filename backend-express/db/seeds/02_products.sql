@@ -78,3 +78,42 @@ INSERT INTO products (name, description, quantity, image, price, category, store
 VALUES ('Pont-Mousseau', 'This is an unripened soft white cheese. Its silky texture can compare to a mix of a mousse and cream cheese', 10, './docs/pontmousseau.jpg', 12.99, 'cheese', 1);
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
 VALUES ('Black horse of the island', 'Mild, with lactic notes, this semi-firm paste cheese is covered with a thin coat of vegetable ash and a bloomy rind.', 6, './docs/blackhorse.jpg', 24.99, 'cheese', 2);
+
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Sirloin steak AAA 16OZ', 'A thick, round steak, offering a more robust beefy flavour, cut from naturally AAA ', 5, './docs/sirloin.jpeg', 32.00, 'meat', 2);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Beef Filet mignon 8OZ', 'Mild, with ', 6, './docs/filtetmignon.jpg', 25.99, 'meat', 2);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Beef tenderloin WAGYU 200gr', 'Mild, with ', 6, './docs/wagyu.png', 100.00, 'meat', 2);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Chicken breast boneless', 'Mild, with ', 6, './docs/chicken.gif', 18.99, 'meat', 2);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Smoked Salmon', 'prepared fresh on site in our smoking room by our chef with top quality fish ', 6, './docs/smokesalmon.jpg', 22.99, 'meat', 2);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Wild sockeye Salmon', 'High in essential Omega 3 oil, antioxidants and low in saturated fats', 6, './docs/salmon.jpg', 19.99, 'meat', 2);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Mild italian sausages', 'If you like all the flavour of Italian sausage, but prefer a sweeter touch, you will love our gluten free mild Italian sausage! ', 6, './docs/sausage.jpg', 14.99, 'meat', 2);
+
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Rise Kombucha', 'Bluberry&Maple, Litchi&Jasmin, Kiwi&Pinnaple', 6, './docs/rise.jpg', 4.29, 'drinks', 1);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Mateina 12packs', 'Organic Yerba Mate ', 6, './docs/mateina.png', 39.99, 'drinks', 4);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Loop juice', 'tasty cold-pressed juices out of reject fruit and vegetables ', 6, './docs/loop.png', 4.69, 'drinks', 4);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Non-alcoholic IPA ', 'a non-alcoholic beer that has some panache! Very hoppy and dry. ', 6, './docs/ipa.png', 5.99, 'drinks', 2);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Non-alcoholic Berliner', 'a non-alcoholic beer that has some panache! Very hoppy and dry.', 6, './docs/berliner.png', 5.99, 'drinks', 2);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Non-alcoholic Stout', 'a non-alcoholic beer that has some panache! Very hoppy and dry.', 6, './docs/stout.png', 5.99, 'drinks', 2);
+
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('St-Viateur T-shirt', 'White Unisex Short-Sleeve T-Shirt with our logo printed on the front.', 6, './docs/shirt.jpg', 20.00, 'other', 3);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('St-Viateur tote bag', 'Robust and reusable shopping bag.', 6, './docs/tote.jpg', 9.99, 'other', 3);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Shop local tote bag', 'Robust and reusable shopping bag ', 6, './docs/shoplocal.jpeg', 8.99, 'other', 2);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Eucalyptus Bundle with Lavender', 'lavender, green baby eucalyptus, dried eucalyptus, dried lavender', 6, './docs/eucalyptus.jpg', 22.99, 'other', 2);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Yerba Mate Silicone Gourd', 'Mild, with ', 6, './docs/gourd.png', 22.99, 'other', 2);
