@@ -424,9 +424,6 @@ export default function ItemDropDown () {
           <StyledMenuItem onClick={() => getCategory('All')} >
             <ListItemText primary="All" />
           </StyledMenuItem>
-          <StyledMenuItem onClick={() => getCategory('Eggs')}>
-            <ListItemText primary="Eggs" />
-          </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Bread')}>
             <ListItemText primary="Bread" />
           </StyledMenuItem>
@@ -444,9 +441,6 @@ export default function ItemDropDown () {
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Drinks')}>
             <ListItemText primary="Drinks" />
-          </StyledMenuItem>
-          <StyledMenuItem onClick={() => getCategory('Snacks')}>
-            <ListItemText primary="Snacks" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Desserts')}>
             <ListItemText primary="Desserts" />
