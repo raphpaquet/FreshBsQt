@@ -6,7 +6,7 @@ import './ItemDropDown.css'
 // useful API
 import SalesTax from 'sales-tax';
 import {Animated} from 'react-animated-css';
-import haversine from 'haversine';
+import haversine from 'haversine-distance';
 
 // components
 import MapContainer from './GoogleMap'
