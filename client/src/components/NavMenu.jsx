@@ -69,15 +69,13 @@ export default function NavMenu (props) {
           <MenuItem><Link to="/" className={classes.list} onClick={handleClose}>Home</Link></MenuItem>
           <MenuItem><Link to="/login" className={classes.list} onClick={handleClose}>Login</Link></MenuItem>
           <MenuItem><Link to="/register" className={classes.list} onClick={handleClose}>Register</Link></MenuItem>
-          <MenuItem><Link to="/checkout" className={classes.list} onClick={handleClose}>Checkout Cart</Link></MenuItem>
-          <MenuItem><Link to="/shop" className={classes.list} onClick={handleClose}>Market</Link></MenuItem>
       </div>)
     }
   }
 
   return (
-    <div>
-      <p className="userInfo">{user ? "Logged in as: " + user.first_name : "Welcome!" }</p>
+    <div className="NavMenu">
+      <span className="userInfo">{user ? "Welcome " + user.first_name : "Welcome Stranger" }</span>
       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
         Menu
         </Button>

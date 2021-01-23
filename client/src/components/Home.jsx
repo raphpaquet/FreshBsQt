@@ -46,7 +46,7 @@ export default function Home (props) {
         <div className="header-content">
           <h1 className="ml10">
             <span className="text-wrapper">
-            <Animated animationIn="flipInX" animationOut="fadeOut" isVisible={true}>
+            <Animated animationIn="fadeInDownBig" animationOut="fadeOut" isVisible={true}>
               <span className="letters">Support local stores in your neigborhood</span>
             </Animated>
             </span>

@@ -4,7 +4,8 @@
   border:none;
   display: inline-block;
   margin:8px;
-  padding: 8px;
+  padding: 12px;
+  border-radius: 4px;
   color: #fff;
   text-transform: uppercase;
   font-size: 10px;
@@ -13,6 +14,7 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
+  font-weight: bold;
 }
 .location-btn:after {
   outline: none;
@@ -33,12 +35,14 @@
   left: 0;
   width: 0%;
   height: 100%;
-  background-color: darkgreen;
+  background-color: white;
   transition: all 0.3s;
+  color:#518056;
   z-index: -1;
 }
 .location-btn:hover {
-  color: #fff;
+  background-color: white;
+  color:#518056;
 }
 .location-btn:hover:before {
   width: 100%;
