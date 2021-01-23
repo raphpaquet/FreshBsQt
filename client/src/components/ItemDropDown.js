@@ -21,7 +21,8 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import BottomNav from './BottomNav'
-import {Animated} from 'react-animated-css';
+import { Animated } from 'react-animated-css';
+import haversine from 'haversine-distance';
 
 
 
@@ -82,6 +83,11 @@ export default function ItemDropDown () {
   const [showCart, setShowCart] = useState(false);
   const [gst, setGst] = useState('');
   const [qst, setQst] = useState('');
+  const [rangeS1, setRangeS1] = useState(false);
+  const [rangeS2, setRangeS2] = useState(false);
+  const [rangeS3, setRangeS3] = useState(false);
+  const [rangeS4, setRangeS4] = useState(false);
+  const [rangeS5, setRangeS5] = useState(false);
   const [totalProduct, setTotalProduct] = useState(0);
   // For the bottom drawer that holds the items
   const classes = useStyles();
@@ -93,52 +99,53 @@ export default function ItemDropDown () {
   const [products, setProducts] = useState('');
   const [loadingProducts, setLoadingProducts] = useState(true);
 
+
   // CART IMPLEMENTATION // 
   const [cart, setCart] = useState([]);
   const cartTotal = (cart.reduce((total, { price = 0 }) => total + price, 0))
-  
+
   const amountOfProducts = (id) => cart.filter((product) => product.id === id).length;
-  
+
   // currentCart === 'prev'
   const addToCart = (product) => setCart((currentCart) => ([...currentCart, product]));
 
   const removeFromCart = (product) => {
     setCart((currentCart) => {
       const indexOfProductToRemove = currentCart.findIndex((cartProduct) => cartProduct.id === product.id);
-      
-      if(indexOfProductToRemove === -1) {
+
+      if (indexOfProductToRemove === -1) {
         return currentCart;
       }
-      
+
       return [
         ...currentCart.slice(0, indexOfProductToRemove),
         ...currentCart.slice(indexOfProductToRemove + 1),
-      ]; 
+      ];
     });
   };
 
   //Render ALL products
   const listProductsToBuy = () => products.map((product) => (
     <div className="product-wrapper">
-      <Animated  animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
-      <div key={product.id} className="product-image-section">
-        <img src="./images/citrus.jpeg" alt="citrus" />
-      </div>
-      <h3>{product.name}</h3>
-      <h5>From {product.store}</h5>
-      <div className="price-and-add">
-        <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
-      </div>
+      <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
+        <div key={product.id} className="product-image-section">
+          <img src="./images/citrus.jpeg" alt="citrus" />
+        </div>
+        <h3>{product.name}</h3>
+        <h5>From {product.store}</h5>
+        <div className="price-and-add">
+          <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
+        </div>
       </Animated>
     </div>
   ));
 
   // Render products in the cart
-  const listProductsInCart = () => (cart.filter((v, i) => cart.indexOf(v) === i).map((product) => 
+  const listProductsInCart = () => (cart.filter((v, i) => cart.indexOf(v) === i).map((product) =>
     (
       <div className="cart">
         <div className="cart-product" key={product.id}>
-        <button className="icon clear" type="submit" onClick={() => removeFromCart(product)}><ClearIcon /></button>
+          <button className="icon clear" type="submit" onClick={() => removeFromCart(product)}><ClearIcon /></button>
           <img className="cart-image" src={"./images/citrus.jpeg"} alt="citrus" />
           <div className="cart-product-amount">
             <span className="cart-name">{`${product.name}`}</span>
@@ -154,22 +161,22 @@ export default function ItemDropDown () {
 
   //calculate the taxes
   const getTaxes = (amount) => SalesTax.getSalesTax("CA", "QC", amount)
-  .then((taxes) => {
-    setQst(taxes.details[0]['rate'])
-    setGst(taxes.details[1]['rate'])
-  }).catch(e => console.log(e)) 
+    .then((taxes) => {
+      setQst(taxes.details[0]['rate'])
+      setGst(taxes.details[1]['rate'])
+    }).catch(e => console.log(e))
 
   getTaxes();
 
   const getTotal = () => {
     const gstTax = (cartTotal * gst)
     const qstTax = (cartTotal * qst)
-    const total =  cartTotal + qstTax + gstTax
+    const total = cartTotal + qstTax + gstTax
     return total.toFixed(2)
   }
 
   // add total price to sessionStorage
-  const addToSessionStorage = (key,value) => {
+  const addToSessionStorage = (key, value) => {
     let price = {
       'totalPrice': value.price
     }
@@ -180,13 +187,85 @@ export default function ItemDropDown () {
     return sessionStorage.getItem(key)
   }
 
-    addToSessionStorage('total_price', {
-      price: cartTotal
-    })
+  addToSessionStorage('total_price', {
+    price: cartTotal
+  })
 
-    let user_price = getToSessionStorage('total_price');
+  let user_price = getToSessionStorage('total_price');
 
-    console.log('user_price', JSON.parse(user_price))
+  console.log('user_price', JSON.parse(user_price))
+
+  // This calculates the distance and makes sure it is under 1001m
+  const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
+
+  const latitudeLocation = userLocation['latitude']
+  const longitudeLocation = userLocation['longitude']
+
+  const defaultCenter = {
+    lat: latitudeLocation, lng: longitudeLocation
+  }
+
+  const stores = {
+    storeOne: {
+      id: 1,
+      distance: {
+        lat: 45.570940, lng: -73.608520
+      }
+    },
+    storeTwo: {
+      id: 2,
+      distance: {
+        lat: 45.522420, lng: -73.595520
+      }
+    },
+    storeThree: {
+      id: 3,
+      distance: {
+        lat: 45.522880, lng: -73.595200
+      }
+    },
+    storeFour: {
+      id: 4,
+      distance: {
+        lat: 45.523260, lng: -73.593780
+      }
+    },
+    storeFive: {
+      id: 5,
+      distance: {
+        lat: 45.518920, lng: -73.594740
+      }
+    },
+  }
+
+  const distanceOne = haversine(defaultCenter, stores.storeOne.distance);
+  const distanceTwo = haversine(defaultCenter, stores.storeTwo.distance);
+  const distanceThree = haversine(defaultCenter, stores.storeThree.distance);
+  const distanceFour = haversine(defaultCenter, stores.storeFour.distance);
+  const distanceFive = haversine(defaultCenter, stores.storeFive.distance);
+
+  useEffect(() => {
+    if (distanceOne <= 1000) {
+      console.log('store 1 in range')
+      setRangeS1(true);
+    }
+    if (distanceTwo <= 1000) {
+      console.log('store 2 in range')
+      setRangeS2(true);
+    }
+    if (distanceThree <= 1000) {
+      console.log('store 3 in range')
+      setRangeS3(true);
+    }
+    if (distanceFour <= 1000) {
+      console.log('store 4 in range')
+      setRangeS4(true);
+    }
+    if (distanceFive <= 1000) {
+      console.log('store 5 in range')
+      setRangeS5(true);
+    }
+  }, []);
 
   // Axios call to get the products
   useEffect(() => {
@@ -205,7 +284,7 @@ export default function ItemDropDown () {
   if (loadingProducts) {
     return <section className="grid">Loading...
     <div>
-        {<CircularProgress color="white" size={40} className={classes.buttonProgress} /> }
+        {<CircularProgress color="white" size={40} className={classes.buttonProgress} />}
       </div>
     </section>
   }
@@ -218,19 +297,19 @@ export default function ItemDropDown () {
     setState({ ...state, [anchor]: open });
   };
 
-   // Render products by categories
-   const listCategoryToBuy = (cat) => products.filter(product => product.category === cat).map((product) => 
-   (
+  // Render products by categories
+  const listCategoryToBuy = (cat) => products.filter(product => product.category === cat).map((product) =>
+    (
       <div className="product-wrapper">
-        <Animated  animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
-        <div key={product.id} className="product-image-section">
-          <img src="./images/citrus.jpeg" alt="citrus" />
-        </div>
-        <h3>{product.name}</h3>
-        <h5>From {product.store}</h5>
-        <div className="price-and-add">
-          <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
-        </div>
+        <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
+          <div key={product.id} className="product-image-section">
+            <img src="./images/citrus.jpeg" alt="citrus" />
+          </div>
+          <h3>{product.name}</h3>
+          <h5>From {product.store}</h5>
+          <div className="price-and-add">
+            <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
+          </div>
         </Animated>
       </div>
     ));
@@ -311,6 +390,8 @@ export default function ItemDropDown () {
 
   };
 
+
+
   const list = (anchor) => (
 
     <div
@@ -322,11 +403,11 @@ export default function ItemDropDown () {
     >
       <section className="pop-up-menu">
         <div className="food-categories">
-          <div className="cart-category" style={{justifyContent:"center"}}>
-          <StyledMenuItem onClick={() => getCategory('Cart')} style={{display:"flex", alignItems:"normal", justifyContent:"center"}} >
-            <ShoppingBasketIcon />
-            <ListItemText className="cart-num">{cart.length}</ListItemText>
-          </StyledMenuItem>
+          <div className="cart-category" style={{ justifyContent: "center" }}>
+            <StyledMenuItem onClick={() => getCategory('Cart')} style={{ display: "flex", alignItems: "normal", justifyContent: "center" }} >
+              <ShoppingBasketIcon />
+              <ListItemText className="cart-num">{cart.length}</ListItemText>
+            </StyledMenuItem>
           </div>
           <StyledMenuItem onClick={() => getCategory('All')} >
             <ListItemText primary="All" />
@@ -364,21 +445,21 @@ export default function ItemDropDown () {
         </div>
 
 
-          {showCart === true ? (
-              <div className="cart-drawer">
-                <h1 className="cart-title">YOUR BASKET</h1>
-                 <div>{listProductsInCart()}</div>
-                <container className="price-container">
-                  <div className="taxes">
-                    <span className="subtotal">Subtotal: {cartTotal.toFixed(2)}</span>
-                    <span className="gst">Qst: {(cartTotal * qst).toFixed(2)}  </span>
-                    <span className="qst">Gst: {(cartTotal * gst).toFixed(2)}</span>
-                  </div>
-                </container>
-                  <div className='cart-total'>Total: ${getTotal()}</div>
-                  <button className="submit-button btn-to-checkout" style={{marginRight:"50px"}} onClick={()=> history.push('/checkout')}>Checkout</button>
-              </div> 
-          ) : null}
+        {showCart === true ? (
+          <div className="cart-drawer">
+            <h1 className="cart-title">YOUR BASKET</h1>
+            <div>{listProductsInCart()}</div>
+            <container className="price-container">
+              <div className="taxes">
+                <span className="subtotal">Subtotal: {cartTotal.toFixed(2)}</span>
+                <span className="gst">Qst: {(cartTotal * qst).toFixed(2)}  </span>
+                <span className="qst">Gst: {(cartTotal * gst).toFixed(2)}</span>
+              </div>
+            </container>
+            <div className='cart-total'>Total: ${getTotal()}</div>
+            <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => history.push('/checkout')}>Checkout</button>
+          </div>
+        ) : null}
 
 
         <section className="food-item-list">
@@ -389,114 +470,113 @@ export default function ItemDropDown () {
           </header>
 
 
-
           {showAll === true ? (
             <div className="all">
               <h1 className="cat-title">All products</h1>
-            <section className="grid">
-              {listProductsToBuy()}
-            </section>
+              <section className="grid">
+                {listProductsToBuy()}
+              </section>
             </div>
           ) : null}
 
           {showEggs === true ? (
             <div className="Eggs">
               <h1 className="cat-title">Eggs</h1>
-            <section className="grid">
-              {listCategoryToBuy('eggs')}
-            </section>
+              <section className="grid">
+                {listCategoryToBuy('eggs')}
+              </section>
             </div>
-              
+
           ) : null}
 
           {showBread === true ? (
             <div className="Bread">
               <h1 className="cat-title">Bakery</h1>
-            <section className="grid">
-            {listCategoryToBuy('bread')}
-          </section>
+              <section className="grid">
+                {listCategoryToBuy('bread')}
+              </section>
             </div>
           ) : null}
 
           {showCheese === true ? (
             <div className="cheese">
-            <h1 className="cat-title">Our cheese</h1>
-            <section className="grid">
-            {listCategoryToBuy('cheese')}
-          </section>
+              <h1 className="cat-title">Our cheese</h1>
+              <section className="grid">
+                {listCategoryToBuy('cheese')}
+              </section>
             </div>
           ) : null}
 
           {showFruit === true ? (
             <div className="fruits">
-            <h1 className="cat-title">Fresh fruits</h1>
-            <section className="grid">
-            {listCategoryToBuy('fruits')}
-          </section>
+              <h1 className="cat-title">Fresh fruits</h1>
+              <section className="grid">
+                {listCategoryToBuy('fruits')}
+              </section>
             </div>
           ) : null}
 
           {showVegetables === true ? (
             <div className="vegetables">
-            <h1 className="cat-title">Fresh vegetables</h1>
-            <section className="grid">
-            {listCategoryToBuy('Vegetables')}
-          </section>
+              <h1 className="cat-title">Fresh vegetables</h1>
+              <section className="grid">
+                {listCategoryToBuy('Vegetables')}
+              </section>
             </div>
           ) : null}
 
           {showMeat === true ? (
             <div className="butcher">
-            <h1 className="cat-title">Butcher</h1>
-            <section className="grid">
-            {listCategoryToBuy('meat')}
-          </section>
+              <h1 className="cat-title">Butcher</h1>
+              <section className="grid">
+                {listCategoryToBuy('meat')}
+              </section>
             </div>
           ) : null}
 
           {showDrinks === true ? (
             <div className="drinks">
-            <h1 className="cat-title">Drinks</h1>
-            <section className="grid">
-            {listCategoryToBuy('drinks')}
-          </section>
+              <h1 className="cat-title">Drinks</h1>
+              <section className="grid">
+                {listCategoryToBuy('drinks')}
+              </section>
             </div>
           ) : null}
 
           {showSnacks === true ? (
             <div className="snacks">
-            <h1 className="cat-title">Feeling snacky ?</h1>
-            <section className="grid">
-            {listCategoryToBuy('snacks')}
-          </section>
+              <h1 className="cat-title">Feeling snacky ?</h1>
+              <section className="grid">
+                {listCategoryToBuy('snacks')}
+              </section>
             </div>
           ) : null}
 
           {showDesserts === true ? (
             <div className="title">
-            <h1 className="cat-title">Feeling sweet ?</h1>
-           <section className="grid">
-           {listCategoryToBuy('desserts')}
-         </section>
+              <h1 className="cat-title">Feeling sweet ?</h1>
+              <section className="grid">
+                {listCategoryToBuy('desserts')}
+              </section>
             </div>
           ) : null}
 
           {showOther === true ? (
             <section className="grid">
-            {listCategoryToBuy('others')}
-          </section>
+              {listCategoryToBuy('others')}
+            </section>
           ) : null}
 
         </section>
       </section>
-    </div>
+    </div >
   );
 
   return (
     <div style={{ backgroundImage: "url('../images/pinnaple.jpeg')", backgroundSize: "cover", height: '100vh' }}>
 
       <div className="home-nav">
-        <img className="logo" src="./images/basket.svg" style={{'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
+        <img className="logo" src="./images/basket.svg" style={{ 'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
         <div className="dropdown-bars">
           <NavMenu />
         </div>
