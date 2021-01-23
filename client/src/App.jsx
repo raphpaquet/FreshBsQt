@@ -73,7 +73,9 @@ export default function App () {
 
           </Route>
           <Route path="/register">
-            <Register showError={upadteErrorMessage}/>
+            <Register 
+            setUser = {setUser}
+            showError={upadteErrorMessage}/>
           </Route>
           {/* <Route path="/logout">
             <Logout />
