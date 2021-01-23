@@ -30,8 +30,9 @@ const history = createBrowserHistory();
 
 export default function App () {
 
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState([]);
   const [errorMessage, upadteErrorMessage] = useState(null)
+
 
 
 
@@ -42,7 +43,10 @@ export default function App () {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/shop">
-            <Shop  />
+            <ItemDropDown 
+              selectProduct={setSelectedProduct}
+              history={history}
+            />
           </Route>
           <Route path="/map">
             <Map />
@@ -62,8 +66,8 @@ export default function App () {
           <Route path="/products">
             <Product
               products={products}
-              selectProduct={setSelectedProduct}
-              history={history}
+              // selectProduct={setSelectedProduct}
+              // history={history}
             />
           </Route>
           <Route path="/" exact>
@@ -77,13 +81,14 @@ export default function App () {
 }
 
 
-function Shop () {
-  return (
-    <ItemDropDown 
-    />
+// function Shop () {
+//   return (
+//     <ItemDropDown 
+//       selectProduct={setSelectedProduct}
+//     />
 
-  )
-}
+//   )
+// }
 
 
 

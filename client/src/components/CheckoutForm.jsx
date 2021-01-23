@@ -13,6 +13,7 @@ import './CheckoutForm.css'
 const CheckoutForm = ({ selectedProduct, stripe, history }) => {
   if (selectedProduct === null) history.push('/')
 
+ 
   const [receiptUrl, setReceiptUrl] = useState('')
 
    // session Storage to get the price
@@ -47,6 +48,73 @@ const CheckoutForm = ({ selectedProduct, stripe, history }) => {
 
   return (
   <div className="checkout-page">
+    <div className="summary">
+      <h1>Order Summary</h1>
+      <span>list of products</span>
+    </div>
+
+    <div className="delivery">
+    {/* <form className="delivery-form" action="/checkout" method="POST">
+        <h1 className="facturation-title">Delivery</h1>
+        <span>
+          <label for="first_name"></label>
+          <input 
+            id="first_name"
+            name="first_name" 
+            type="text"  
+            placeholder="First Name"
+            value={state.first_name}
+            onChange={handleChange}
+            required
+          />
+        </span>
+        <span>
+          <label for="last_name"></label>
+          <input 
+            id="last_name"
+            name="last_name" 
+            type="text"  
+            placeholder="Last Name"
+            value={state.last_name}
+            onChange={handleChange}
+            required
+          />
+        </span>
+        <span>
+          <label for="address"></label>
+          <input 
+            id="address"
+            name="address" 
+            type="text"  
+            placeholder="Address"
+            value={state.address}
+            onChange={handleChange}
+            required
+          />
+        </span>
+        <span>
+          <label for="city"></label>
+          <input 
+            id="city"
+            name="city" 
+            type="text"  
+            placeholder="City"
+            value={state.city}
+            onChange={handleChange}
+            required
+          />
+        </span>
+        <div className="button-register">
+          <button 
+            type="submit" 
+            class="submit-button" 
+            onClick={handleSubmitClick}>
+              Submit
+          </button>
+        </div>
+      </form> */}
+    </div>
+
     <div className="checkout-form">
       <p>Amount: ${totalPrice}</p>
       <form onSubmit={handleSubmit}>
