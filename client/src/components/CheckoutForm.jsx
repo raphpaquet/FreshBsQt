@@ -14,6 +14,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 
 const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
+  //to handle whether the checkbox is toggled or not
   const [toggled, setToggled] = useState(false)
   const [state, setState] = useState({
     first_name:"",
@@ -21,6 +22,8 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
     address:"",
     city:"",
   })
+
+  //handles the conditionals associated to the toggled state 
 
   useEffect(()=>{
     if(toggled) {
