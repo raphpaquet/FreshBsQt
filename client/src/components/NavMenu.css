@@ -27,3 +27,17 @@
   background-color: transparent;
 }
 
+.NavMenu {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.userInfo {
+  letter-spacing: 0.5em;
+  color: rgb(50, 99, 50);
+  font-family: none;
+  margin: 10px 40px 0px 40px;
+  font-size: 16px;
+}
+

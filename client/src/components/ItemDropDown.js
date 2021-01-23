@@ -424,15 +424,12 @@ export default function ItemDropDown () {
           <StyledMenuItem onClick={() => getCategory('All')} >
             <ListItemText primary="All" />
           </StyledMenuItem>
-
           <StyledMenuItem onClick={() => getCategory('Fruit')}>
             <ListItemText primary="Fruit" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Vegetables')}>
             <ListItemText primary="Vegetables" />
           </StyledMenuItem>
-
-
           <StyledMenuItem onClick={() => getCategory('Bread')}>
             <ListItemText primary="Bread" />
           </StyledMenuItem>
@@ -440,7 +437,7 @@ export default function ItemDropDown () {
             <ListItemText primary="Cheese" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Meat')}>
-            <ListItemText primary="Meat/Fish" />
+            <ListItemText primary="Meat & Fish" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Drinks')}>
             <ListItemText primary="Drinks" />
@@ -501,7 +498,7 @@ export default function ItemDropDown () {
 
           {showCheese === true ? (
             <div className="cheese">
-              <h1 className="cat-title">Our cheese</h1>
+              <h1 className="cat-title">Our cheeses</h1>
               <section className="grid">
                 {listCategoryToBuy('cheese')}
               </section>
@@ -528,7 +525,7 @@ export default function ItemDropDown () {
 
           {showMeat === true ? (
             <div className="butcher">
-              <h1 className="cat-title">Butcher</h1>
+              <h1 className="cat-title">Meat & Fish</h1>
               <section className="grid">
                 {listCategoryToBuy('meat')}
               </section>
@@ -537,7 +534,7 @@ export default function ItemDropDown () {
 
           {showDrinks === true ? (
             <div className="drinks">
-              <h1 className="cat-title">Drinks</h1>
+              <h1 className="cat-title">Thirsty ?</h1>
               <section className="grid">
                 {listCategoryToBuy('drinks')}
               </section>
@@ -554,9 +551,12 @@ export default function ItemDropDown () {
           ) : null}
 
           {showOther === true ? (
+          <div className="title">
+            <h1 className="cat-title">More stuff</h1>
             <section className="grid">
               {listCategoryToBuy('other')}
             </section>
+          </div>
           ) : null}
 
         </section>

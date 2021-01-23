@@ -36,6 +36,11 @@
   display: contents;
 }
 
+.register-form input{
+  border-radius: 4px;
+  box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.15) !important;
+}
+
 .register-title {
   font-size: 24px;
   font-family: none;
@@ -54,6 +59,9 @@ input {
   border-radius: 10%;
   font-family: none;
   text-transform: uppercase;
-  color: white
+  color: white;
+}
 
+#login-reg {
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.15);
 }
