@@ -31,7 +31,7 @@ CREATE TABLE products(
     image VARCHAR(255) NOT NULL, 
     price FLOAT, 
     category VARCHAR(255) NOT NULL,
-    store_id INTEGER REFERENCES stores(id)
+    store_id INTEGER 
 );
 
 
