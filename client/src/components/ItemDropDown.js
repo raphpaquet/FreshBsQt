@@ -147,16 +147,18 @@ export default function ItemDropDown () {
   //Render ALL products
   const listProductsToBuy = () => products.map((product) => (
     <div className="product-wrapper">
-      <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
-        <div key={product.id} className="product-image-section">
-          <img src="./images/citrus.jpeg" alt="citrus" />
-        </div>
-        <h3>{product.name}</h3>
-        <h5>From {product.store}</h5>
-        <div className="price-and-add">
-          <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
-        </div>
-      </Animated>
+      {rangeS1 && product.store_id === 1 || rangeS2 && product.store_id === 2 || rangeS3 && product.store_id === 3 || rangeS4 && product.store_id === 4 || rangeS5 && product.store_id === 5 ? (
+        <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
+          <div key={product.id} className="product-image-section">
+            <img src="./images/citrus.jpeg" alt="citrus" />
+          </div>
+          <h3>{product.name}</h3>
+          <h5>From {product.store_id}</h5>
+          <div className="price-and-add">
+            <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
+          </div>
+        </Animated>
+      ) : null}
     </div>
   ));
 
