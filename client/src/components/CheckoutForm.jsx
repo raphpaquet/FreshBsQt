@@ -52,7 +52,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history }) => {
 
     console.log(selectedProduct)
 
-    const order = await axios.post('http://localhost:3001/api/stripe/charge', {
+    const order = await axios.post('/api/stripe/charge', {
       amount: 992,
       source: token.id,
       receipt_email: 'customer@example.com'

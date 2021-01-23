@@ -82,6 +82,7 @@ export default function App () {
           </Route> */}
           <Route path="/checkout">
             <Checkout
+              user = {user}
               selectedProduct={selectedProduct}
               history={history}
             />
