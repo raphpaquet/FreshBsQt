@@ -424,20 +424,23 @@ export default function ItemDropDown () {
           <StyledMenuItem onClick={() => getCategory('All')} >
             <ListItemText primary="All" />
           </StyledMenuItem>
-          <StyledMenuItem onClick={() => getCategory('Bread')}>
-            <ListItemText primary="Bread" />
-          </StyledMenuItem>
-          <StyledMenuItem onClick={() => getCategory('Cheese')}>
-            <ListItemText primary="Cheese" />
-          </StyledMenuItem>
+
           <StyledMenuItem onClick={() => getCategory('Fruit')}>
             <ListItemText primary="Fruit" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Vegetables')}>
             <ListItemText primary="Vegetables" />
           </StyledMenuItem>
+
+
+          <StyledMenuItem onClick={() => getCategory('Bread')}>
+            <ListItemText primary="Bread" />
+          </StyledMenuItem>
+          <StyledMenuItem onClick={() => getCategory('Cheese')}>
+            <ListItemText primary="Cheese" />
+          </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Meat')}>
-            <ListItemText primary="Meat" />
+            <ListItemText primary="Meat/Fish" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Drinks')}>
             <ListItemText primary="Drinks" />
@@ -552,7 +555,7 @@ export default function ItemDropDown () {
 
           {showOther === true ? (
             <section className="grid">
-              {listCategoryToBuy('others')}
+              {listCategoryToBuy('other')}
             </section>
           ) : null}
 
