@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   CardNumberElement,
@@ -13,13 +13,29 @@ import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 
-const CheckoutForm = ({ selectedProduct, stripe, history }) => {
+const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
+  //to handle whether the checkbox is toggled or not
+  const [toggled, setToggled] = useState(false)
   const [state, setState] = useState({
     first_name:"",
     last_name:"",
     address:"",
     city:"",
   })
+
+  //handles the conditionals associated to the toggled state 
+
+  useEffect(()=>{
+    if(toggled) {
+      setState((prevState)=>{
+        return {...prevState, first_name: user.first_name, last_name: user.last_name, address: user.address, city: user.city}
+      })
+    } else {
+      setState((prevState)=>{
+        return {...prevState, first_name: "", last_name: "", address: "", city: ""}
+      })
+    }
+  }, [toggled])
 
   const handleChange = (e) => {
     const { id, value } = e.target
@@ -125,9 +141,13 @@ const CheckoutForm = ({ selectedProduct, stripe, history }) => {
             <input 
               type="checkbox" 
               id="defaultAddress"
+              value={toggled}
+              onChange={(event)=> {
+                setToggled(event.target.checked)
+              }}
               name="defaultAddress">
             </input>
-            <label for="defaultAddress" style={{letterSpacing:"0em", textTransform:"lowercase", margin:"0"}}>Use my default address</label>
+            <label for="defaultAddress" style={{letterSpacing:"0em", textTransform:"lowercase", margin:"0"}}>Use my default information</label>
           </span>
             <label for="address"></label>
             <input 

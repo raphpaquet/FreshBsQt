@@ -45,6 +45,7 @@ export default function App () {
   useEffect(()=>{
     axios.post('/api/users/auth')
       .then((res) => {
+        console.log(res.data)
         setUser(res.data)
       })
   }, [])
@@ -73,13 +74,16 @@ export default function App () {
 
           </Route>
           <Route path="/register">
-            <Register showError={upadteErrorMessage}/>
+            <Register 
+            setUser = {setUser}
+            showError={upadteErrorMessage}/>
           </Route>
           {/* <Route path="/logout">
             <Logout />
           </Route> */}
           <Route path="/checkout">
             <Checkout
+              user = {user}
               selectedProduct={selectedProduct}
               history={history}
             />

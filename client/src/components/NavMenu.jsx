@@ -77,7 +77,7 @@ export default function NavMenu (props) {
 
   return (
     <div>
-      <p>{user ? "Logged in as: " + user.first_name : "Welcome!" }</p>
+      <p className="userInfo">{user ? "Logged in as: " + user.first_name : "Welcome!" }</p>
       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
         Menu
         </Button>

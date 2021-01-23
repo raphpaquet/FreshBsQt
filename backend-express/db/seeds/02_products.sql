@@ -117,3 +117,4 @@ INSERT INTO products (name, description, quantity, image, price, category, store
 VALUES ('Eucalyptus Bundle with Lavender', 'lavender, green baby eucalyptus, dried eucalyptus, dried lavender', 6, './docs/eucalyptus.jpg', 22.99, 'other', 2);
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
 VALUES ('Yerba Mate Silicone Gourd', 'Mild, with ', 6, './docs/gourd.png', 22.99, 'other', 2);
+
