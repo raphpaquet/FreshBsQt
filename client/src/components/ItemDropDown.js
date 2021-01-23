@@ -6,7 +6,7 @@ import './ItemDropDown.css'
 // useful API
 import SalesTax from 'sales-tax';
 import {Animated} from 'react-animated-css';
-import haversine from 'haversine';
+import haversine from 'haversine-distance';
 
 // components
 import MapContainer from './GoogleMap'
@@ -150,7 +150,7 @@ export default function ItemDropDown () {
       {rangeS1 && product.store_id === 1 || rangeS2 && product.store_id === 2 || rangeS3 && product.store_id === 3 || rangeS4 && product.store_id === 4 || rangeS5 && product.store_id === 5 ? (
         <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
           <div key={product.id} className="product-image-section">
-            <img src="./images/citrus.jpeg" alt="citrus" />
+            <img src={product.image} alt="citrus" />
           </div>
           <h3>{product.name}</h3>
           <h5>From {product.store_id}</h5>
@@ -168,7 +168,7 @@ export default function ItemDropDown () {
       <div className="cart">
         <div className="cart-product" key={product.id}>
           <button className="icon clear" type="submit" onClick={() => removeFromCart(product)}><ClearIcon /></button>
-          <img className="cart-image" src={"./images/citrus.jpeg"} alt="citrus" />
+          <img className="cart-image" src={product.image} />
           <div className="cart-product-amount">
             <span className="cart-name">{`${product.name}`}</span>
             <span className="cart-price">${(product.price).toFixed(2)} </span>
@@ -352,12 +352,6 @@ export default function ItemDropDown () {
       setShowAll(false)
     }
 
-    if (category === 'Eggs') {
-      setShowEggs(true);
-    } else if (category !== 'Eggs') {
-      setShowEggs(false);
-    }
-
     if (category === 'Bread') {
       setShowBread(true)
     } else if (category !== 'Bread') {
@@ -392,12 +386,6 @@ export default function ItemDropDown () {
       setShowDrinks(true)
     } else if (category !== 'Drinks') {
       setShowDrinks(false)
-    }
-
-    if (category === 'Snacks') {
-      setShowSnacks(true)
-    } else if (category !== 'Snacks') {
-      setShowSnacks(false)
     }
 
     if (category === 'Desserts') {
@@ -436,12 +424,15 @@ export default function ItemDropDown () {
           <StyledMenuItem onClick={() => getCategory('All')} >
             <ListItemText primary="All" />
           </StyledMenuItem>
+
           <StyledMenuItem onClick={() => getCategory('Fruit')}>
             <ListItemText primary="Fruit" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Vegetables')}>
             <ListItemText primary="Vegetables" />
           </StyledMenuItem>
+
+
           <StyledMenuItem onClick={() => getCategory('Bread')}>
             <ListItemText primary="Bread" />
           </StyledMenuItem>
