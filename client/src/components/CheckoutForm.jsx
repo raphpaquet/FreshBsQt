@@ -24,12 +24,12 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
 
   useEffect(()=>{
     if(toggled) {
-      setState((previousState)=>{
-        return {...previousState, first_name: user.first_name, last_name: user.last_name, address: user.address, city: user.city}
+      setState((prevState)=>{
+        return {...prevState, first_name: user.first_name, last_name: user.last_name, address: user.address, city: user.city}
       })
     } else {
-      setState((previousState)=>{
-        return {...previousState, first_name: "", last_name: "", address: "", city: ""}
+      setState((prevState)=>{
+        return {...prevState, first_name: "", last_name: "", address: "", city: ""}
       })
     }
   }, [toggled])
