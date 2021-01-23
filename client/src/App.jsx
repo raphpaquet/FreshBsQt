@@ -6,6 +6,7 @@ import ItemDropDown from './components/ItemDropDown';
 import Home from './components/Home';
 import Register from './components/Register';
 import Login from './components/Login';
+// import logout from './components/logout';
 import Map from './components/Map';
 import { products } from './components/products';
 import Product from './components/Product';
@@ -30,9 +31,23 @@ const history = createBrowserHistory();
 
 export default function App () {
 
-  const [selectedProduct, setSelectedProduct] = useState([]);
+
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const [errorMessage, upadteErrorMessage] = useState(null)
 
+
+  
+  //stores user state
+  const [user, setUser] = useState(null)
+
+  // axios request to users authetification which verifies 
+  //if the session is present and returns a user object when it is
+  useEffect(()=>{
+    axios.post('/api/users/auth')
+      .then((res) => {
+        setUser(res.data)
+      })
+  }, [])
 
 
 
@@ -43,20 +58,26 @@ export default function App () {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/shop">
-            <ItemDropDown 
-              selectProduct={setSelectedProduct}
-              history={history}
+            <Shop 
+              user = {user}
             />
           </Route>
           <Route path="/map">
             <Map />
           </Route>
           <Route path="/login">
-            <Login showError={upadteErrorMessage}/>
+            <Login 
+            setUser = {setUser}
+             showError={upadteErrorMessage}
+            />
+
           </Route>
           <Route path="/register">
             <Register showError={upadteErrorMessage}/>
           </Route>
+          {/* <Route path="/logout">
+            <Logout />
+          </Route> */}
           <Route path="/checkout">
             <Checkout
               selectedProduct={selectedProduct}
@@ -71,7 +92,10 @@ export default function App () {
             />
           </Route>
           <Route path="/" exact>
-            <Home />
+            <Home 
+            user = {user}
+            setUser = {setUser}
+            />
           </Route>
         </Switch>
         <AlertComponent errorMessage={errorMessage} hideError={upadteErrorMessage} />
@@ -81,14 +105,14 @@ export default function App () {
 }
 
 
-// function Shop () {
-//   return (
-//     <ItemDropDown 
-//       selectProduct={setSelectedProduct}
-//     />
+function Shop () {
+  
+  return (
+    <ItemDropDown/>
 
-//   )
-// }
+
+   )
+ }
 
 
 
