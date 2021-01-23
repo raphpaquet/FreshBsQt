@@ -1,5 +1,5 @@
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
-VALUES ('Artichokes', 'Fresh delicious artichokes', 10, './docs/artichoke.jpeg', 3.99, 'Vegetables', 2);
+VALUES ('Radishes', 'Radishes', 9, './docs/raddish.jpeg', 3.99, 'Vegetables', 3);
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
 VALUES ('Asparagus', 'Asparagus', 10, './docs/asparagus.jpeg', 2.99, 'Vegetables', 2);
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
@@ -7,11 +7,11 @@ VALUES ('Cabbage', 'individual Cabbage', 8, './docs/cabbage.jpeg', 2.99, 'Vegeta
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
 VALUES ('Eggplant', 'individual Eggplant', 8, './docs/eggplant.jpeg', 1.99, 'Vegetables', 3);
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
+VALUES ('Artichokes', 'Fresh delicious artichokes', 10, './docs/artichoke.jpeg', 3.99, 'Vegetables', 2);
+INSERT INTO products (name, description, quantity, image, price, category, store_id)
 VALUES ('Onions', 'Bag og onions', 12, './docs/onion .jpeg', 3.99, 'Vegetables', 3);
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
 VALUES ('Pasnip', 'parsnips', 12, './docs/parsnip.jpeg', 0.99, 'Vegetables', 3);
-INSERT INTO products (name, description, quantity, image, price, category, store_id)
-VALUES ('Radishes', 'Radishes', 9, './docs/raddish.jpeg', 3.99, 'Vegetables', 3);
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
 VALUES ('Tomatoes', 'box of fresh tomatoes', 14, './docs/tomato.jpeg', 2.99, 'Vegetables', 4);
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
