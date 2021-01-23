@@ -49,6 +49,7 @@ export default function Register(props) {
             'successMessage' : 'Registration successful. Redirecting to Home page...'
           }))
           props.showError(null)
+          props.setUser(response.data)
           redirectToHome();
         } else {
           props.showError('Some error occured')
