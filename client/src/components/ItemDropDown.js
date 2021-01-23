@@ -6,7 +6,7 @@ import './ItemDropDown.css'
 // useful API
 import SalesTax from 'sales-tax';
 import {Animated} from 'react-animated-css';
-import haversine from 'haversine-distance';
+import haversine from 'haversine';
 
 // components
 import MapContainer from './GoogleMap'
@@ -155,7 +155,7 @@ export default function ItemDropDown () {
           <h3>{product.name}</h3>
           <h5>From {product.store_id}</h5>
           <div className="price-and-add">
-            <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
+            <span>${(product.price).toFixed(2)}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
           </div>
         </Animated>
       ) : null}
@@ -171,7 +171,7 @@ export default function ItemDropDown () {
           <img className="cart-image" src={"./images/citrus.jpeg"} alt="citrus" />
           <div className="cart-product-amount">
             <span className="cart-name">{`${product.name}`}</span>
-            <span className="cart-price">${product.price} </span>
+            <span className="cart-price">${(product.price).toFixed(2)} </span>
             <button className="icon remove" onClick={() => removeFromCart(product)}><RemoveCircleOutlineIcon /></button>
             <span className="number-item">{amountOfProducts(product.id)}</span>
             <button className="icon add" onClick={() => addToCart(product)}><AddCircleOutlineIcon /></button>
@@ -327,12 +327,12 @@ export default function ItemDropDown () {
       <div className="product-wrapper">
         <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
           <div key={product.id} className="product-image-section">
-            <img src="./images/citrus.jpeg" alt="citrus" />
+            <img src={product.image}/>
           </div>
           <h3>{product.name}</h3>
           <h5>From {product.store}</h5>
           <div className="price-and-add">
-            <span>${product.price}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
+            <span>${(product.price).toFixed(2)}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
           </div>
         </Animated>
       </div>
