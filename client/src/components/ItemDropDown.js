@@ -150,7 +150,7 @@ export default function ItemDropDown () {
       {rangeS1 && product.store_id === 1 || rangeS2 && product.store_id === 2 || rangeS3 && product.store_id === 3 || rangeS4 && product.store_id === 4 || rangeS5 && product.store_id === 5 ? (
         <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
           <div key={product.id} className="product-image-section">
-            <img src="./images/citrus.jpeg" alt="citrus" />
+            <img src={product.image} alt="citrus" />
           </div>
           <h3>{product.name}</h3>
           <h5>From {product.store_id}</h5>
@@ -168,7 +168,7 @@ export default function ItemDropDown () {
       <div className="cart">
         <div className="cart-product" key={product.id}>
           <button className="icon clear" type="submit" onClick={() => removeFromCart(product)}><ClearIcon /></button>
-          <img className="cart-image" src={product.image} alt="citrus" />
+          <img className="cart-image" src={product.image} />
           <div className="cart-product-amount">
             <span className="cart-name">{`${product.name}`}</span>
             <span className="cart-price">${(product.price).toFixed(2)} </span>
@@ -352,12 +352,6 @@ export default function ItemDropDown () {
       setShowAll(false)
     }
 
-    if (category === 'Eggs') {
-      setShowEggs(true);
-    } else if (category !== 'Eggs') {
-      setShowEggs(false);
-    }
-
     if (category === 'Bread') {
       setShowBread(true)
     } else if (category !== 'Bread') {
@@ -392,12 +386,6 @@ export default function ItemDropDown () {
       setShowDrinks(true)
     } else if (category !== 'Drinks') {
       setShowDrinks(false)
-    }
-
-    if (category === 'Snacks') {
-      setShowSnacks(true)
-    } else if (category !== 'Snacks') {
-      setShowSnacks(false)
     }
 
     if (category === 'Desserts') {
@@ -505,16 +493,6 @@ export default function ItemDropDown () {
             </div>
           ) : null}
 
-          {showEggs === true ? (
-            <div className="Eggs">
-              <h1 className="cat-title">Eggs</h1>
-              <section className="grid">
-                {listCategoryToBuy('eggs')}
-              </section>
-            </div>
-
-          ) : null}
-
           {showBread === true ? (
             <div className="Bread">
               <h1 className="cat-title">Bakery</h1>
@@ -565,15 +543,6 @@ export default function ItemDropDown () {
               <h1 className="cat-title">Drinks</h1>
               <section className="grid">
                 {listCategoryToBuy('drinks')}
-              </section>
-            </div>
-          ) : null}
-
-          {showSnacks === true ? (
-            <div className="snacks">
-              <h1 className="cat-title">Feeling snacky ?</h1>
-              <section className="grid">
-                {listCategoryToBuy('snacks')}
               </section>
             </div>
           ) : null}
