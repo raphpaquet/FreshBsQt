@@ -5,7 +5,11 @@ import './ItemDropDown.css'
 
 // useful API
 import SalesTax from 'sales-tax';
+<<<<<<< HEAD
 import { Animated } from 'react-animated-css';
+=======
+import {Animated} from 'react-animated-css';
+>>>>>>> master
 import haversine from 'haversine-distance';
 
 // components
@@ -168,7 +172,7 @@ export default function ItemDropDown () {
       <div className="cart">
         <div className="cart-product" key={product.id}>
           <button className="icon clear" type="submit" onClick={() => removeFromCart(product)}><ClearIcon /></button>
-          <img className="cart-image" src={"./images/citrus.jpeg"} alt="citrus" />
+          <img className="cart-image" src={product.image} alt="citrus" />
           <div className="cart-product-amount">
             <span className="cart-name">{`${product.name}`}</span>
             <span className="cart-price">${(product.price).toFixed(2)} </span>
