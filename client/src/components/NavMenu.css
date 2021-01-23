@@ -3,6 +3,7 @@
   font-size: 18px;
   letter-spacing: 0.5em;
   font-family: none;
+  text-shadow: 1px 1px black;
 }
 
 #simple-menu {
@@ -20,6 +21,7 @@
 }
 
 .userInfo {
+  text-align: center;
   color: white;
   font-size: 15px;
   text-decoration: none;
@@ -30,14 +32,15 @@
 .NavMenu {
   display: flex;
   align-items: flex-end;
-  flex-direction: column;
+  flex-direction: row-reverse;
 }
 
 .userInfo {
+  text-align: center;
   letter-spacing: 0.5em;
   color: rgb(50, 99, 50);
   font-family: none;
-  margin: 10px 40px 0px 40px;
+  margin: 10px 10px 8px 40px;
   font-size: 16px;
 }
 

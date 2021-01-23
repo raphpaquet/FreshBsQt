@@ -53,6 +53,7 @@
   margin-right: 50px;
   margin-top: 50px;
   text-align: center;
+  text-shadow: 1px 1px black;
 }
 
 
@@ -63,6 +64,7 @@
   margin-top: 20px;
   margin-bottom: 10px;
   text-align: center;
+
 }
 
 .ml10 {

@@ -9,7 +9,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link, 
+  Link,
   useHistory
 } from "react-router-dom";
 
@@ -40,18 +40,18 @@ export default function NavMenu (props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
   const handleLogout = () => {
     axios.post('/api/users/logout')
-    .then(function (response) {
-      if(response.status === 200) {
-        setUser(null)
-        history.push('/')
-      }
-      else {
-        handleClose()
-      }
-    })
+      .then(function(response) {
+        if (response.status === 200) {
+          setUser(null)
+          history.push('/')
+        }
+        else {
+          handleClose()
+        }
+      })
   }
 
   const userMenu = (user) => {
@@ -66,20 +66,20 @@ export default function NavMenu (props) {
       )
     } else {
       return (<div className={classes.menu}>
-          <MenuItem><Link to="/" className={classes.list} onClick={handleClose}>Home</Link></MenuItem>
-          <MenuItem><Link to="/login" className={classes.list} onClick={handleClose}>Login</Link></MenuItem>
-          <MenuItem><Link to="/register" className={classes.list} onClick={handleClose}>Register</Link></MenuItem>
+        <MenuItem><Link to="/" className={classes.list} onClick={handleClose}>Home</Link></MenuItem>
+        <MenuItem><Link to="/login" className={classes.list} onClick={handleClose}>Login</Link></MenuItem>
+        <MenuItem><Link to="/register" className={classes.list} onClick={handleClose}>Register</Link></MenuItem>
       </div>)
     }
   }
 
   return (
+
     <div className="NavMenu">
-      <span className="userInfo">{user ? "Welcome " + user.first_name : "Welcome Stranger" }</span>
       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
         Menu
         </Button>
-      
+
       <Menu
         className="menu"
         id="simple-menu"
@@ -90,6 +90,7 @@ export default function NavMenu (props) {
       >
         {userMenu(user)}
       </Menu>
+      <h3 className="userInfo">{user ? "Welcome " + user.first_name : "Welcome!"}</h3>
     </div>
   );
 }
