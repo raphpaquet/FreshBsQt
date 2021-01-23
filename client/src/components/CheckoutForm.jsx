@@ -145,7 +145,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
               }}
               name="defaultAddress">
             </input>
-            <label for="defaultAddress" style={{letterSpacing:"0em", textTransform:"lowercase", margin:"0"}}>Use my default address</label>
+            <label for="defaultAddress" style={{letterSpacing:"0em", textTransform:"lowercase", margin:"0"}}>Use my default information</label>
           </span>
             <label for="address"></label>
             <input 
