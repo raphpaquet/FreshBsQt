@@ -11,7 +11,6 @@ import './CheckoutForm.css'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-// import { defaultLoadScriptProps } from '@react-google-maps/api/dist/LoadScript'
 
 
 const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
