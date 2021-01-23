@@ -36,13 +36,13 @@ export default function App () {
   const [errorMessage, upadteErrorMessage] = useState(null)
 
 
-  
+
   //stores user state
   const [user, setUser] = useState(null)
 
   // axios request to users authetification which verifies 
   //if the session is present and returns a user object when it is
-  useEffect(()=>{
+  useEffect(() => {
     axios.post('/api/users/auth')
       .then((res) => {
         console.log(res.data)
@@ -59,31 +59,31 @@ export default function App () {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/shop">
-            <Shop 
-              user = {user}
+            <Shop
+              user={user}
             />
           </Route>
           <Route path="/map">
             <Map />
           </Route>
           <Route path="/login">
-            <Login 
-            setUser = {setUser}
-             showError={upadteErrorMessage}
+            <Login
+              setUser={setUser}
+              showError={upadteErrorMessage}
             />
 
           </Route>
           <Route path="/register">
-            <Register 
-            setUser = {setUser}
-            showError={upadteErrorMessage}/>
+            <Register
+              setUser={setUser}
+              showError={upadteErrorMessage} />
           </Route>
           {/* <Route path="/logout">
             <Logout />
           </Route> */}
           <Route path="/checkout">
             <Checkout
-              user = {user}
+              user={user}
               selectedProduct={selectedProduct}
               history={history}
             />
@@ -91,14 +91,14 @@ export default function App () {
           <Route path="/products">
             <Product
               products={products}
-              // selectProduct={setSelectedProduct}
-              // history={history}
+            // selectProduct={setSelectedProduct}
+            // history={history}
             />
           </Route>
           <Route path="/" exact>
-            <Home 
-            user = {user}
-            setUser = {setUser}
+            <Home
+              user={user}
+              setUser={setUser}
             />
           </Route>
         </Switch>
@@ -110,13 +110,13 @@ export default function App () {
 
 
 function Shop () {
-  
+
   return (
-    <ItemDropDown/>
+    <ItemDropDown />
 
 
-   )
- }
+  )
+}
 
 
 
