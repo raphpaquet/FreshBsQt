@@ -436,8 +436,11 @@ export default function ItemDropDown () {
           <StyledMenuItem onClick={() => getCategory('All')} >
             <ListItemText primary="All" />
           </StyledMenuItem>
-          <StyledMenuItem onClick={() => getCategory('Eggs')}>
-            <ListItemText primary="Eggs" />
+          <StyledMenuItem onClick={() => getCategory('Fruit')}>
+            <ListItemText primary="Fruit" />
+          </StyledMenuItem>
+          <StyledMenuItem onClick={() => getCategory('Vegetables')}>
+            <ListItemText primary="Vegetables" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Bread')}>
             <ListItemText primary="Bread" />
@@ -445,20 +448,11 @@ export default function ItemDropDown () {
           <StyledMenuItem onClick={() => getCategory('Cheese')}>
             <ListItemText primary="Cheese" />
           </StyledMenuItem>
-          <StyledMenuItem onClick={() => getCategory('Fruit')}>
-            <ListItemText primary="Fruit" />
-          </StyledMenuItem>
-          <StyledMenuItem onClick={() => getCategory('Vegetables')}>
-            <ListItemText primary="Vegetables" />
-          </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Meat')}>
-            <ListItemText primary="Meat" />
+            <ListItemText primary="Meat/Fish" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Drinks')}>
             <ListItemText primary="Drinks" />
-          </StyledMenuItem>
-          <StyledMenuItem onClick={() => getCategory('Snacks')}>
-            <ListItemText primary="Snacks" />
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Desserts')}>
             <ListItemText primary="Desserts" />
@@ -503,16 +497,6 @@ export default function ItemDropDown () {
                 {listProductsToBuy()}
               </section>
             </div>
-          ) : null}
-
-          {showEggs === true ? (
-            <div className="Eggs">
-              <h1 className="cat-title">Eggs</h1>
-              <section className="grid">
-                {listCategoryToBuy('eggs')}
-              </section>
-            </div>
-
           ) : null}
 
           {showBread === true ? (
@@ -569,15 +553,6 @@ export default function ItemDropDown () {
             </div>
           ) : null}
 
-          {showSnacks === true ? (
-            <div className="snacks">
-              <h1 className="cat-title">Feeling snacky ?</h1>
-              <section className="grid">
-                {listCategoryToBuy('snacks')}
-              </section>
-            </div>
-          ) : null}
-
           {showDesserts === true ? (
             <div className="title">
               <h1 className="cat-title">Feeling sweet ?</h1>
@@ -589,7 +564,7 @@ export default function ItemDropDown () {
 
           {showOther === true ? (
             <section className="grid">
-              {listCategoryToBuy('others')}
+              {listCategoryToBuy('other')}
             </section>
           ) : null}
 
