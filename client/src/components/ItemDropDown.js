@@ -6,6 +6,7 @@ import './ItemDropDown.css'
 // useful API
 import SalesTax from 'sales-tax';
 import {Animated} from 'react-animated-css';
+import haversine from 'haversine-distance';
 
 // components
 import MapContainer from './GoogleMap'
@@ -29,9 +30,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
-import BottomNav from './BottomNav'
-import { Animated } from 'react-animated-css';
-import haversine from 'haversine-distance';
+
 
 
 
@@ -218,10 +217,6 @@ export default function ItemDropDown () {
 
   // This calculates the distance and makes sure it is under 1001m
   const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
-
-
-    let user_price = getToSessionStorage('total_price');
-    console.log('user_price', JSON.parse(user_price))
 
   const latitudeLocation = userLocation['latitude']
   const longitudeLocation = userLocation['longitude']
