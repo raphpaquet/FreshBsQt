@@ -119,6 +119,18 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
         <form className="delivery-form" action="/checkout" method="POST">
           <span>
             <label for="first_name"></label>
+          <span>
+            <input 
+              type="checkbox" 
+              id="defaultAddress"
+              value={toggled}
+              onChange={(event)=> {
+                setToggled(event.target.checked)
+              }}
+              name="defaultAddress">
+            </input>
+            <label for="defaultAddress" style={{letterSpacing:"0em", textTransform:"lowercase", margin:"0"}}>Use my default information</label>
+          </span>
             <input 
               id="first_name"
               name="first_name" 
@@ -142,18 +154,6 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
             />
           </span>
           <span>
-          <span>
-            <input 
-              type="checkbox" 
-              id="defaultAddress"
-              value={toggled}
-              onChange={(event)=> {
-                setToggled(event.target.checked)
-              }}
-              name="defaultAddress">
-            </input>
-            <label for="defaultAddress" style={{letterSpacing:"0em", textTransform:"lowercase", margin:"0"}}>Use my default information</label>
-          </span>
             <label for="address"></label>
             <input 
               id="address"
@@ -201,11 +201,11 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
           CVC
           <CardCVCElement />
         </label>
-        <button type="submit" className="pay-btn submit-button">
+        <button type="submit" className="pay-button">
           Pay
         </button>
       </form>
-      <h3>Thanks for shopping local</h3>
+      <h3>Thank you for the support</h3>
     </div>
   </div>
   )
