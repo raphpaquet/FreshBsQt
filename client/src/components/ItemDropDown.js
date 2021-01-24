@@ -33,7 +33,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 
 
-
+let finalCart = []
 
 
 
@@ -516,7 +516,14 @@ export default function ItemDropDown () {
               </div>
             </container>
             <div className='cart-total'>Total: ${getTotal()}</div>
-            <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => history.push('/checkout')}>Checkout</button>
+            <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => {
+              console.log("this is cart", cart)
+              finalCart = cart
+              console.log("FINALCART:",finalCart)
+              history.push('/checkout')}
+            }
+
+            >Checkout</button>
           </div>
         ) : null}
 
@@ -651,5 +658,4 @@ export default function ItemDropDown () {
   );
 }
 
-
-
+export {finalCart}
