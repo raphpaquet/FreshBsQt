@@ -32,7 +32,7 @@ export default function Login(props) {
     if (!userData.email || !userData.password) {
       props.showError("Please enter your email and password")
     } else {
-      axios.post('/api/users/login', userData)
+      axios.post('http://localhost:3003/api/users/login', userData)
         .then(function (response) {
           if(response.status === 200) {
             setState(prevState => ({

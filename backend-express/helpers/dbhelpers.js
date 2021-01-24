@@ -57,6 +57,7 @@ module.exports = (db) => {
                     console.log("email has been found now test password")
                     if(result.rows[0].password === password) {
                         console.log("password is correct - returning user")
+                        console.log(typeof(result.row[0]))
                         return result.row[0]
                     } else {
                     console.log("PasswordError")
@@ -68,7 +69,6 @@ module.exports = (db) => {
                 }
                 })
             .catch((err) => err);
-        console.log(result)
     }
   
     const addUser = (firstName, lastName, email, password, phone_number, address, city) => {
