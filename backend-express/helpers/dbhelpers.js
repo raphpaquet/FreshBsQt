@@ -44,17 +44,31 @@ module.exports = (db) => {
             .catch((err) => err);
     }
 
+
     const userLogin = (email, password) =>{
         const query = {
-            text: `SELECT * FROM users WHERE email = $1 AND password = $2` , 
-            values: [email, password]
+            text: `SELECT * FROM users WHERE email = $1` , 
+            values: [email]
         }
-        return db
+        db
             .query(query)
             .then(result => {
-                return result.rows[0]
+                if (result.rows[0]) {
+                    console.log("email has been found now test password")
+                    if(result.rows[0].password === password) {
+                        console.log("password is correct - returning user")
+                        return result.row[0]
+                    } else {
+                    console.log("PasswordError")
+                    return "PasswordError"
+                    }
+                } else {
+                    console.log("NoEmail")
+                    return "NoEmail"
+                }
                 })
             .catch((err) => err);
+        console.log(result)
     }
   
     const addUser = (firstName, lastName, email, password, phone_number, address, city) => {

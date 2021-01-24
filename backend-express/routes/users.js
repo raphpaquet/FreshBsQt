@@ -43,13 +43,17 @@ module.exports = ({
     } = req.body;
         userLogin(email, password)
             .then(user => {
-               if (user) {
+               if (user === "PasswordError") {
+                console.log("before sending to front-end:", user)
+                res.json("PasswordError")
+            } else if (user === "NoEmail") {
+                console.log("before sending to front-end:", user)
+                res.json("NoEmail")
+            } else {
                 console.log("logging in user", user.id)
                 req.session.user_id = user.id
+                console.log("before sending to front-end:", user)
                 res.json(user)
-            } else {
-                console.log("no user")
-                res.send('No user with this login information')
             }
             })
     })
