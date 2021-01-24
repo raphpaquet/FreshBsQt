@@ -36,27 +36,47 @@ module.exports = ({
     });
 
     // login route
-    router.post('/login', (req, res) =>{
-        const {
-            email, 
-            password
-    } = req.body;
-        userLogin(email, password)
-            .then(user => {
-               if (user === "PasswordError") {
-                console.log("before sending to front-end:", user)
-                res.json("PasswordError")
-            } else if (user === "NoEmail") {
-                console.log("before sending to front-end:", user)
-                res.json("NoEmail")
-            } else {
-                console.log("logging in user", user.id)
-                req.session.user_id = user.id
-                console.log("before sending to front-end:", user)
-                res.json(user)
-            }
-            })
-    })
+    // router.post('/login', (req, res) =>{
+    //     const {
+    //         email, 
+    //         password
+    // } = req.body;
+    //     userLogin(email, password)
+    //         .then(user => {
+    //             console.log("THIS IS THE RESPONSE", user)
+    //            if (user === "PasswordError") {
+    //             console.log("USER WHEN PASSWORD ERROR:", user)
+    //             res.json("PasswordError")
+    //         } else if (user === "NoEmail") {
+    //             console.log("USER WHEN NO EMAIL:", user)
+    //             res.json("NoEmail")
+    //         } else {
+    //             console.log("logging in user", user.id)
+    //             req.session.user_id = user.id
+    //             console.log("USER WHEN CORRECT:", user)
+    //             res.json(user)
+    //         }
+    //         })
+    // })
+
+        // // login route
+        router.post('/login', (req, res) =>{
+            const {
+                email, 
+                password
+        } = req.body;
+            userLogin(email, password)
+                .then(user => {
+                   if (user) {
+                    console.log("logging in user", user.id)
+                    req.session.user_id = user.id
+                    res.json(user)
+                } else {
+                    console.log("no user")
+                    res.send('No user with this login information')
+                }
+                })
+        })
 
     router.post('/logout', (req, res) => {
         console.log("logging out", req.session.user_id )

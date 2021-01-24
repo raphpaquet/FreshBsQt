@@ -45,31 +45,44 @@ module.exports = (db) => {
     }
 
 
+    // const userLogin = (email, password) =>{
+    //     const query = {
+    //         text: `SELECT * FROM users WHERE email = $1` , 
+    //         values: [email]
+    //     }
+    //     return db
+    //         .query(query)
+    //         .then(result => {
+    //             if (result.rows[0]) {
+    //                 console.log("email has been found now test password")
+    //                 if(result.rows[0].password === password) {
+    //                     console.log("password is correct - returning user")
+    //                     return result.row[0]
+    //                 } else {
+    //                 console.log("PasswordError")
+    //                 return "PasswordError"
+    //                 }
+    //             } else {
+    //                 console.log("NoEmail")
+    //                 return "NoEmail"
+    //             }
+    //             })
+    //         .catch((err) => err);
+    // }
+
     const userLogin = (email, password) =>{
         const query = {
-            text: `SELECT * FROM users WHERE email = $1` , 
-            values: [email]
+            text: `SELECT * FROM users WHERE email = $1 AND password = $2` , 
+            values: [email, password]
         }
-        db
+        return db
             .query(query)
             .then(result => {
-                if (result.rows[0]) {
-                    console.log("email has been found now test password")
-                    if(result.rows[0].password === password) {
-                        console.log("password is correct - returning user")
-                        console.log(typeof(result.row[0]))
-                        return result.row[0]
-                    } else {
-                    console.log("PasswordError")
-                    return "PasswordError"
-                    }
-                } else {
-                    console.log("NoEmail")
-                    return "NoEmail"
-                }
+                return result.rows[0]
                 })
             .catch((err) => err);
     }
+  
   
     const addUser = (firstName, lastName, email, password, phone_number, address, city) => {
         const query = {
