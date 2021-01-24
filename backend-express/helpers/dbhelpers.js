@@ -44,6 +44,32 @@ module.exports = (db) => {
             .catch((err) => err);
     }
 
+
+    // const userLogin = (email, password) =>{
+    //     const query = {
+    //         text: `SELECT * FROM users WHERE email = $1` , 
+    //         values: [email]
+    //     }
+    //     return db
+    //         .query(query)
+    //         .then(result => {
+    //             if (result.rows[0]) {
+    //                 console.log("email has been found now test password")
+    //                 if(result.rows[0].password === password) {
+    //                     console.log("password is correct - returning user")
+    //                     return result.row[0]
+    //                 } else {
+    //                 console.log("PasswordError")
+    //                 return "PasswordError"
+    //                 }
+    //             } else {
+    //                 console.log("NoEmail")
+    //                 return "NoEmail"
+    //             }
+    //             })
+    //         .catch((err) => err);
+    // }
+
     const userLogin = (email, password) =>{
         const query = {
             text: `SELECT * FROM users WHERE email = $1 AND password = $2` , 
@@ -56,6 +82,7 @@ module.exports = (db) => {
                 })
             .catch((err) => err);
     }
+  
   
     const addUser = (firstName, lastName, email, password, phone_number, address, city) => {
         const query = {

@@ -34,7 +34,7 @@ export default function Login(props) {
     } else {
       axios.post('/api/users/login', userData)
         .then(function (response) {
-          if(response.status === 200) {
+          if(response.data.email) {
             setState(prevState => ({
               ...prevState,
               'successMessage' : 'Login successful. Redirecting to home page'
@@ -46,12 +46,8 @@ export default function Login(props) {
             // setError("")
             props.showError("")
 
-          }
-          else if (response.code === 204) {
-            props.showError("Email and password don't match");
-          }
-          else {
-            props.showError("Email doesn't exist");
+          } else {
+            props.showError("Email or password incorrect");
           }
         })
       .catch(function (error) {

@@ -229,36 +229,80 @@ export default function ItemDropDown () {
 
   const stores = {
     storeOne: {
+      name: "Sami Fruits",
       id: 1,
       distance: {
         lat: 45.570940, lng: -73.608520
       }
     },
     storeTwo: {
+      name: 'Urbain Market Shop',
       id: 2,
       distance: {
         lat: 45.522420, lng: -73.595520
       }
     },
     storeThree: {
+      name: 'Fairmont Bagel', 
       id: 3,
       distance: {
         lat: 45.522880, lng: -73.595200
       }
     },
     storeFour: {
+      name: 'Guillaume', 
       id: 4,
       distance: {
         lat: 45.523260, lng: -73.593780
       }
     },
     storeFive: {
+      name: 'Farine et Vanille', 
       id: 5,
       distance: {
         lat: 45.518920, lng: -73.594740
       }
     },
   }
+
+  const storesArray = [
+    {
+      name: "Sami Fruits",
+      id: 1,
+      distance: {
+        lat: 45.570940, lng: -73.608520
+      }
+    },
+    {
+      name: 'Urbain Market Shop',
+      id: 2,
+      distance: {
+        lat: 45.522420, lng: -73.595520
+      }
+    },
+    {
+      name: 'Fairmont Bagel', 
+      id: 3,
+      distance: {
+        lat: 45.522880, lng: -73.595200
+      }
+    },
+     {
+      name: 'Guillaume', 
+      id: 4,
+      distance: {
+        lat: 45.523260, lng: -73.593780
+      }
+    },
+     {
+      name: 'Farine et Vanille', 
+      id: 5,
+      distance: {
+        lat: 45.518920, lng: -73.594740
+      }
+    },
+
+  ]
 
   const distanceOne = haversine(defaultCenter, stores.storeOne.distance);
   const distanceTwo = haversine(defaultCenter, stores.storeTwo.distance);
@@ -304,6 +348,13 @@ export default function ItemDropDown () {
 
   console.log(products)
 
+  const productsByStore = (product) => storesArray.map((store) => {
+    console.log(store.id)
+      if (store.id === product.store_id ) {
+        return store.name
+      }
+    })
+
   // Makes sure that the products do not load before the axios call. 
   if (loadingProducts) {
     return <section className="grid">Loading...
@@ -330,7 +381,7 @@ export default function ItemDropDown () {
             <img src={product.image}/>
           </div>
           <h3>{product.name}</h3>
-          <h5>From {product.store}</h5>
+          <h5>From {productsByStore(product)}</h5>
           <div className="price-and-add">
             <span>${(product.price).toFixed(2)}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
           </div>
