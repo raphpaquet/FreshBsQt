@@ -68,10 +68,11 @@ const StyledMenu = withStyles({
 
 const StyledMenuItem = withStyles((theme) => ({
   root: {
+    fontFamily: "Roboto",
     '&:focus': {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: 'rgb(226, 250, 226)',
       '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
+        color: 'darkgreen',
       },
     },
   },
@@ -616,7 +617,7 @@ export default function ItemDropDown () {
   );
 
   return (
-    <div style={{ backgroundImage: "url('../images/pinnaple.jpeg')", backgroundSize: "cover", height: '100vh' }}>
+    <div style={{ backgroundImage: "url('../images/pinnaple.jpeg')", backgroundSize: "cover", backgroundPosition:"top", height: '100vh' }}>
 
       <div className="home-nav">
         <img className="logo" src="./images/basket.svg" style={{ 'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>

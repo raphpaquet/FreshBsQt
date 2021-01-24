@@ -5,7 +5,6 @@
   overflow: scroll !important;
   height:100%
 }
-
 .back-to-shop {
   background-color: transparent;
   border: none;
@@ -14,7 +13,6 @@
   margin: 30px 30px 0px 30px;
   outline: none;
 }
-
 .page-title {
   font-family: none;
   font-size: 12px;
@@ -26,13 +24,10 @@
   margin: 10px 30px 40px;
   color: white;
 }
-
-
 .checkout-info {
   display: flex;
   justify-content: space-around;
 }
-
 .summary {
   font-family: none;
   font-size: 12px;
@@ -45,7 +40,6 @@
   border-radius: 5%;
   box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.15);
 }
-
 .delivery {
   width: 230px;
   font-family: none;
@@ -59,40 +53,31 @@
   border-radius: 5%;
   box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.15);
 }
-
 .delivery-form {
   display: flex;
   flex-direction: column;
   line-height: 30px;
 }
-
 .facturation-title {
   margin-bottom: 20px;
   margin-left: 20px
 }
-
 #first_name {
   box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
   border-radius: 4px;
 }
-
 #last_name {
   box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
   border-radius: 4px;
 }
-
 #address {
   box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
   border-radius: 4px;
 }
-
 #city {
   box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
   border-radius: 4px;
 }
-
-
-
 .success {
   text-align: center;
 }
@@ -102,13 +87,11 @@
 .success a {
   display: block;
 }
-
 .checkout-page {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-
 .checkout-form {
   width: 350px;
   padding: 2em;
@@ -121,7 +104,6 @@
   margin: 50px;
   align-self: center;
 }
-
 .checkout-form p {
   text-align: center;
   font-family: none;
@@ -194,7 +176,6 @@
   font-size: 14px;
   border-radius: 4px;
 }
-
 h3 {
   font-family: none;
   font-weight: lighter;

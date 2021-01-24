@@ -11,8 +11,6 @@ import './CheckoutForm.css'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
-
 const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
   //to handle whether the checkbox is toggled or not
   const [toggled, setToggled] = useState(false)
@@ -22,9 +20,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
     address:"",
     city:"",
   })
-
   //handles the conditionals associated to the toggled state 
-
   useEffect(()=>{
     if(toggled) {
       setState((prevState)=>{
@@ -36,7 +32,6 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
       })
     }
   }, [toggled])
-
   const handleChange = (e) => {
     const { id, value } = e.target
     console.log(e.target.value)
@@ -45,38 +40,24 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
       [id] : value
     }))
   }
-
   if (selectedProduct === null) history.push('/')
-
- 
   const [receiptUrl, setReceiptUrl] = useState('')
-
   // const history = useHistory()
   const backToShop = history.push('/shop')
-
-
    // session Storage to get the price
    const userPrice = JSON.parse(sessionStorage.getItem('total_price'))
    const totalPrice = (userPrice['totalPrice']).toFixed(2)
-
-   
-
   const handleSubmit = async event => {
     event.preventDefault()
-
     const { token } = await stripe.createToken()
-
     console.log(selectedProduct)
-
     const order = await axios.post('/api/stripe/charge', {
       amount: 992,
       source: token.id,
       receipt_email: 'customer@example.com'
     })
-
     setReceiptUrl(order.data.charge.receipt_url)
   }
-
   if (receiptUrl) {
     return (
       <div className="success">
@@ -86,7 +67,6 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
       </div>
     )
   }
-
   return (
   <div className="checkout-page">
     <video autoPlay loop muted id="background-video">
@@ -108,7 +88,6 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
           <li>Rasberries 5.99</li>
         </ul>
       </div>
-
       <div className="delivery">
         <span className="facturation-title">Delivery</span>
         <form className="delivery-form" action="/checkout" method="POST">
@@ -175,7 +154,6 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
         </form>
       </div>
     </div>
-
     <div className="checkout-form">
       <p style={{border:"1px solid lightgray", padding:"2px"}}>Credit Cart Details</p>
       <p>Amount: ${totalPrice}</p>
@@ -205,5 +183,4 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
   </div>
   )
 }
-
 export default injectStripe(CheckoutForm)
