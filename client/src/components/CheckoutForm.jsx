@@ -8,6 +8,7 @@ import {
 } from 'react-stripe-elements'
 import axios from 'axios'
 import './CheckoutForm.css'
+import {finalCart} from './ItemDropDown'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -20,6 +21,13 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
     address:"",
     city:"",
   })
+
+
+  const listProductsInCart = () => (finalCart.filter((v, i) => finalCart.indexOf(v) === i).map((product) =>
+  (
+    <li>{product.name}: {product.price}$</li>
+  )
+));
   //handles the conditionals associated to the toggled state 
   useEffect(()=>{
     if(toggled) {
@@ -82,10 +90,9 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
     <div className="checkout-info">
       <div className="summary">
         <span className="summary-title">list of products</span>
-        <ul style={{listStyle:"none", display:"flex", flexDirection:"column", padding:"8px"}}>
-          <li>Rasberries 5.99</li>
-          <li>Rasberries 5.99</li>
-          <li>Rasberries 5.99</li>
+        <ul style={{listStyle:"none", display:"flex", flexDirection:"column", padding:"8px"}}>{
+          listProductsInCart()
+        }
         </ul>
       </div>
       <div className="delivery">
