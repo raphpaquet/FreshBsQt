@@ -11,10 +11,6 @@ import './CheckoutForm.css'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import HomeIcon from '@material-ui/icons/Home';
-import ReceiptIcon from '@material-ui/icons/Receipt';
-
-
 const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
   //to handle whether the checkbox is toggled or not
   const [toggled, setToggled] = useState(false)
@@ -24,9 +20,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
     address:"",
     city:"",
   })
-
   //handles the conditionals associated to the toggled state 
-
   useEffect(()=>{
     if(toggled) {
       setState((prevState)=>{
@@ -38,7 +32,6 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
       })
     }
   }, [toggled])
-
   const handleChange = (e) => {
     const { id, value } = e.target
     console.log(e.target.value)
@@ -47,56 +40,38 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
       [id] : value
     }))
   }
-
   if (selectedProduct === null) history.push('/')
-
- 
   const [receiptUrl, setReceiptUrl] = useState('')
-
   // const history = useHistory()
   const backToShop = history.push('/shop')
-
-
    // session Storage to get the price
    const userPrice = JSON.parse(sessionStorage.getItem('total_price'))
    const totalPrice = (userPrice['totalPrice']).toFixed(2)
-
-   
-
   const handleSubmit = async event => {
     event.preventDefault()
-
     const { token } = await stripe.createToken()
-
     console.log(selectedProduct)
-
     const order = await axios.post('/api/stripe/charge', {
-      amount: 5222,
+      amount: 992,
       source: token.id,
       receipt_email: 'customer@example.com'
     })
-
     setReceiptUrl(order.data.charge.receipt_url)
   }
-
   if (receiptUrl) {
     return (
       <div className="success">
-        <video autoPlay loop muted id="background-video">
-          <source src="/video/shoplocal.mp4" type="video/mp4" />
-        </video>
-        <h2>payment successful!</h2>
-        <a href={receiptUrl}>View Receipt<ReceiptIcon></ReceiptIcon></a>
-        <Link to="/">Home<HomeIcon></HomeIcon></Link>
+        <h2>Payment Successful!</h2>
+        <a href={receiptUrl}>View Receipt</a>
+        <Link to="/">Home</Link>
       </div>
     )
   }
-
   return (
-  <div className="checkout-page" style={{ backgroundImage: "url('../images/pinnaple.jpeg')", backgroundSize: "cover", height: '100vh' }}>
-    {/* <video autoPlay loop muted id="background-video">
+  <div className="checkout-page">
+    <video autoPlay loop muted id="background-video">
           <source src="/video/pie.mp4" type="video/mp4" />
-        </video> */}
+        </video>
     <button className="back-to-shop">
       <ArrowBackIcon onClick={backToShop}/>
     </button>
@@ -105,32 +80,19 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
         <ShoppingBasketIcon />
     </div>
     <div className="checkout-info">
-      {/* <div className="summary">
+      <div className="summary">
         <span className="summary-title">list of products</span>
         <ul style={{listStyle:"none", display:"flex", flexDirection:"column", padding:"8px"}}>
           <li>Rasberries 5.99</li>
           <li>Rasberries 5.99</li>
           <li>Rasberries 5.99</li>
         </ul>
-      </div> */}
-
+      </div>
       <div className="delivery">
         <span className="facturation-title">Delivery</span>
         <form className="delivery-form" action="/checkout" method="POST">
           <span>
             <label for="first_name"></label>
-          <span>
-            <input 
-              type="checkbox" 
-              id="defaultAddress"
-              value={toggled}
-              onChange={(event)=> {
-                setToggled(event.target.checked)
-              }}
-              name="defaultAddress">
-            </input>
-            <label for="defaultAddress" style={{letterSpacing:"0em", textTransform:"lowercase", margin:"0"}}>Use my default information</label>
-          </span>
             <input 
               id="first_name"
               name="first_name" 
@@ -154,6 +116,18 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
             />
           </span>
           <span>
+          <span>
+            <input 
+              type="checkbox" 
+              id="defaultAddress"
+              value={toggled}
+              onChange={(event)=> {
+                setToggled(event.target.checked)
+              }}
+              name="defaultAddress">
+            </input>
+            <label for="defaultAddress" style={{letterSpacing:"0em", textTransform:"lowercase", margin:"0"}}>Use my default information</label>
+          </span>
             <label for="address"></label>
             <input 
               id="address"
@@ -180,7 +154,6 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
         </form>
       </div>
     </div>
-
     <div className="checkout-form">
       <p style={{border:"1px solid lightgray", padding:"2px"}}>Credit Cart Details</p>
       <p>Amount: ${totalPrice}</p>
@@ -201,14 +174,13 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
           CVC
           <CardCVCElement />
         </label>
-        <button type="submit" className="pay-button">
+        <button type="submit" className="pay-btn submit-button">
           Pay
         </button>
       </form>
-      <h3>Thank you for the support</h3>
+      <h3>Thanks for shopping local</h3>
     </div>
   </div>
   )
 }
-
 export default injectStripe(CheckoutForm)
