@@ -133,7 +133,7 @@ export default function ItemDropDown () {
 
   // Matches the product with the store name
   const productsByStore = (product) => storesArray.map((store) => {
-    console.log(store.id)
+
     if (store.id === product.store_id) {
       return store.name
     }
