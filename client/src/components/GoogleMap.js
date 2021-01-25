@@ -9,6 +9,8 @@ import {
 import './GoogleMap.css'
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
+import HttpIcon from '@material-ui/icons/Http';
+import FacebookIcon from '@material-ui/icons/Facebook';
 
 
 
@@ -218,9 +220,10 @@ const MapContainer = (props) => {
     {
       name: "Sami Fruits",
       address: " 8200 19e Avenue, Montréal, QC H1Z 4J8",
-      phoneNumber: '11',
+      phoneNumber: '(514)223-4322',
       image: './images/applelogo.jpeg',
       web: "http://www.samifruits.com/",
+      facebook: "https://www.facebook.com/samyfruitcompany",
       location: {
         lat: 45.570940,
         lng: -73.608520
@@ -229,9 +232,10 @@ const MapContainer = (props) => {
     {
       name: 'Vito Charcuterie',
       address: "5180 st. Urbain street",
-      phoneNumber: '11',
+      phoneNumber: '(514)113-6320',
       image: './images/vitologo.jpg',
       web: "https://boucherie-chez-vito.business.site/",
+      facebook: "https://www.facebook.com/vitoviande",
       location: {
         lat: 45.522420,
         lng: -73.595520
@@ -243,6 +247,7 @@ const MapContainer = (props) => {
       phoneNumber: '(514)270-2972',
       image: './images/logobagel.png',
       web: "https://www.stviateurbagel.com/",
+      facebook: "https://www.facebook.com/stviateurbagel",
       location: {
         lat: 45.522880,
         lng: -73.595200
@@ -251,9 +256,10 @@ const MapContainer = (props) => {
     {
       name: 'Guillaume',
       address: "5134 Boul St-Laurent, Montréal, QC H2T 1R8",
-      phoneNumber: '11',
+      phoneNumber: '(514)223-4322',
       image: './images/guillaumelogo.jpg',
       web: "https://guillau.me/",
+      facebook: "https://www.facebook.com/boulangerieGUILLAUME",
       location: {
         lat: 45.523260,
         lng: -73.593780
@@ -262,9 +268,10 @@ const MapContainer = (props) => {
     {
       name: 'Farine et Vanille',
       address: "5000 Av du Parc, Montréal, QC H2V 4E8",
-      phoneNumber: '22',
+      phoneNumber: '(438)253-6732',
       image: './images/farinelogo.png',
       web: "https://www.farineetvanille.com/",
+      facebook: "https://www.facebook.com/farineetvanille",
       location: {
         lat: 45.518920,
         lng: -73.594740
@@ -329,11 +336,17 @@ const MapContainer = (props) => {
                   <img className="store-img" src={selected.image}></img>
                   <h2>{selected.name}</h2>
                 </div>
-                <span className="store-des"><LocationOnIcon />{selected.address}</span>
-                <span className="store-des"><PhoneIcon />{selected.phoneNumber}</span>
-                <span>
-                  <a className="website" href={selected.web}>Visit their website</a>
-                </span>
+                <span className="store-des"><LocationOnIcon className="icon-ui"/>{selected.address}</span>
+                <span className="store-des"><PhoneIcon className="icon-ui"/>{selected.phoneNumber}</span>
+                <div className="follow">
+                  <span>
+                    <a href={selected.web} target="_blank" className="site"><HttpIcon className="icon-fo"/></a>
+                  </span>
+                  <span>
+                    <a href={selected.facebook} target="_blank"><FacebookIcon  className="icon-fo"/></a>
+                  </span>
+                </div>
+
               </div>
             </InfoWindow>
           )

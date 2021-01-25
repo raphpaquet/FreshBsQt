@@ -18,7 +18,13 @@
   align-content: center;
   width: 60px;
   height: 60px;
-  
+}
+
+.icon-ui {
+  margin-right: 5px;
+  margin-top: 5px;
+  color: green;
+  transform: scale(0.8);
 }
 
 .store-des {
@@ -26,4 +32,21 @@
   font-size: 14px;
   margin-right:10px;
   width: 90%;
+  align-items: center;
+  display: flex;
+  margin-top: 5px
+}
+
+.icon-fo {
+  color: rgb(41, 41, 133);
+  transform: scale(1);
+}
+
+.follow{
+  display: flex;
+
+}
+
+.site {
+  margin-right: 40px;
 }
