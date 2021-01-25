@@ -11,7 +11,6 @@ import haversine from 'haversine-distance';
 // components
 import MapContainer from './GoogleMap'
 import NavMenu from './NavMenu';
-import BottomNav from './BottomNav'
 import CircularProgress from './Map'
 
 // For the swipeable drawer that has all the items
@@ -29,11 +28,6 @@ import ClearIcon from '@material-ui/icons/Clear';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-
-
-
-
-
 
 
 
@@ -94,13 +88,13 @@ export default function ItemDropDown () {
   const [showCart, setShowCart] = useState(false);
   const [gst, setGst] = useState('');
   const [qst, setQst] = useState('');
-
   const [rangeS1, setRangeS1] = useState(false);
   const [rangeS2, setRangeS2] = useState(false);
   const [rangeS3, setRangeS3] = useState(false);
   const [rangeS4, setRangeS4] = useState(false);
   const [rangeS5, setRangeS5] = useState(false);
   const [totalProduct, setTotalProduct] = useState(0);
+  
 
   // For the bottom drawer that holds the items
   const classes = useStyles();
@@ -109,16 +103,12 @@ export default function ItemDropDown () {
   });
   const history = useHistory();
 
-  // For checkout form 
-  // const handlePurchase = prod => () => {
-  //   setSelectProduct(prod);
-  //   console.log('select prod: ' , prod)
-  //   history.push('/checkout')
-  //   console.log(selectedProduct)
-  // }
   // For the axios call to render the products. Needs to be loaded to work. 
   const [products, setProducts] = useState('');
   const [loadingProducts, setLoadingProducts] = useState(true);
+
+  const [stores, setStores] = useState([])
+  const [loadingStores, setLoadingStores] = useState(true)
 
 
   // CART IMPLEMENTATION // 
@@ -145,6 +135,12 @@ export default function ItemDropDown () {
     });
   };
 
+  const productsByStore = (product) => stores.map((store) => {
+      if (store.id === product.store_id ) {
+        return store.name
+      }
+    })
+
   //Render ALL products
   const listProductsToBuy = () => products.map((product) => (
     <div className="product-wrapper">
@@ -154,7 +150,7 @@ export default function ItemDropDown () {
             <img src={product.image} alt="citrus" />
           </div>
           <h3>{product.name}</h3>
-          <h5>From {product.store_id}</h5>
+          <h5>From {productsByStore(product)}</h5>
           <div className="price-and-add">
             <span>${(product.price).toFixed(2)}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
           </div>
@@ -218,7 +214,7 @@ export default function ItemDropDown () {
 
   console.log('user_price', JSON.parse(user_price))
 
-  // This calculates the distance and makes sure it is under 1001m
+  // get session storage user location 
   const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
 
   const latitudeLocation = userLocation['latitude']
@@ -228,88 +224,39 @@ export default function ItemDropDown () {
     lat: latitudeLocation, lng: longitudeLocation
   }
 
-  const stores = {
-    storeOne: {
-      name: "Sami Fruits",
-      id: 1,
-      distance: {
-        lat: 45.570940, lng: -73.608520
-      }
-    },
-    storeTwo: {
-      name: 'Urbain Market Shop',
-      id: 2,
-      distance: {
-        lat: 45.522420, lng: -73.595520
-      }
-    },
-    storeThree: {
-      name: 'Fairmont Bagel', 
-      id: 3,
-      distance: {
-        lat: 45.522880, lng: -73.595200
-      }
-    },
-    storeFour: {
-      name: 'Guillaume', 
-      id: 4,
-      distance: {
-        lat: 45.523260, lng: -73.593780
-      }
-    },
-    storeFive: {
-      name: 'Farine et Vanille', 
-      id: 5,
-      distance: {
-        lat: 45.518920, lng: -73.594740
-      }
-    },
-  }
+  // axios call to get the Store db 
+  useEffect(() => {
+    axios.get(`/api/stores`)
+      .then(res => {
+        setStores(res.data)
+        setLoadingStores(false)
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  }, []);
 
-  const storesArray = [
-    {
-      name: "Sami Fruits",
-      id: 1,
-      distance: {
-        lat: 45.570940, lng: -73.608520
-      }
-    },
-    {
-      name: 'Urbain Market Shop',
-      id: 2,
-      distance: {
-        lat: 45.522420, lng: -73.595520
-      }
-    },
-    {
-      name: 'Fairmont Bagel', 
-      id: 3,
-      distance: {
-        lat: 45.522880, lng: -73.595200
-      }
-    },
-     {
-      name: 'Guillaume', 
-      id: 4,
-      distance: {
-        lat: 45.523260, lng: -73.593780
-      }
-    },
-     {
-      name: 'Farine et Vanille', 
-      id: 5,
-      distance: {
-        lat: 45.518920, lng: -73.594740
-      }
-    },
 
-  ]
+  // get store location in an object {lat: , lng:} for Haversine
+  const getStoreLocation = (id) => stores.map(store => {
+    if(store.id === id) {
+      const distance = {}
+      let lat = parseFloat(store.lat)
+      let lon = parseFloat(store.lon);
+      distance['lat'] = lat;
+      distance['lng'] = lon;
+      return distance
+    }
+  })
 
-  const distanceOne = haversine(defaultCenter, stores.storeOne.distance);
-  const distanceTwo = haversine(defaultCenter, stores.storeTwo.distance);
-  const distanceThree = haversine(defaultCenter, stores.storeThree.distance);
-  const distanceFour = haversine(defaultCenter, stores.storeFour.distance);
-  const distanceFive = haversine(defaultCenter, stores.storeFive.distance);
+
+  //This calculates the distance and makes sure it is under 1001m
+  const distanceOne = haversine(defaultCenter, getStoreLocation(0));
+  const distanceTwo = haversine(defaultCenter, getStoreLocation(1));
+  const distanceThree = haversine(defaultCenter, getStoreLocation(2));
+  const distanceFour = haversine(defaultCenter, getStoreLocation(3));
+  const distanceFive = haversine(defaultCenter, getStoreLocation(4));
+
 
   useEffect(() => {
     if (distanceOne <= 1000) {
@@ -349,12 +296,15 @@ export default function ItemDropDown () {
 
   console.log(products)
 
-  const productsByStore = (product) => storesArray.map((store) => {
-    console.log(store.id)
-      if (store.id === product.store_id ) {
-        return store.name
-      }
-    })
+  // Makes sure that the products do not load before the axios call. 
+  if (loadingStores) {
+    return <section className="grid">Loading...
+    <div>
+        {<CircularProgress color="white" size={40} className={classes.buttonProgress} />}
+      </div>
+    </section>
+  }
+  
 
   // Makes sure that the products do not load before the axios call. 
   if (loadingProducts) {
@@ -496,7 +446,7 @@ export default function ItemDropDown () {
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Desserts')}>
             <ListItemText primary="Desserts" />
-          </StyledMenuItem>
+          </StyledMenuItem> 
           <StyledMenuItem onClick={() => getCategory('Other')}>
             <ListItemText primary="Other" />
           </StyledMenuItem>
