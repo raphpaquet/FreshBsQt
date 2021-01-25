@@ -2,22 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './ItemDropDown.css'
-
 // useful API
 import SalesTax from 'sales-tax';
 import {Animated} from 'react-animated-css';
 import haversine from 'haversine-distance';
-
 // components
 import MapContainer from './GoogleMap'
 import NavMenu from './NavMenu';
 import BottomNav from './BottomNav'
 import CircularProgress from './Map'
-
 // For the swipeable drawer that has all the items
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import clsx from 'clsx';
-
 // Material-UI 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -29,14 +25,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-
-
-
-
-
-
-
-
+let finalCart = []
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -45,7 +34,6 @@ const useStyles = makeStyles({
     width: 'auto',
   },
 });
-
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
@@ -65,7 +53,6 @@ const StyledMenu = withStyles({
     {...props}
   />
 ));
-
 const StyledMenuItem = withStyles((theme) => ({
   root: {
     fontFamily: "Roboto",
@@ -77,8 +64,6 @@ const StyledMenuItem = withStyles((theme) => ({
     },
   },
 }))(MenuItem);
-
-
 export default function ItemDropDown () {
   const [showAll, setShowAll] = useState(true);
   const [showEggs, setShowEggs] = useState(false);
@@ -94,21 +79,18 @@ export default function ItemDropDown () {
   const [showCart, setShowCart] = useState(false);
   const [gst, setGst] = useState('');
   const [qst, setQst] = useState('');
-
   const [rangeS1, setRangeS1] = useState(false);
   const [rangeS2, setRangeS2] = useState(false);
   const [rangeS3, setRangeS3] = useState(false);
   const [rangeS4, setRangeS4] = useState(false);
   const [rangeS5, setRangeS5] = useState(false);
   const [totalProduct, setTotalProduct] = useState(0);
-
   // For the bottom drawer that holds the items
   const classes = useStyles();
   const [state, setState] = useState({
     bottom: false,
   });
   const history = useHistory();
-
   // For checkout form 
   // const handlePurchase = prod => () => {
   //   setSelectProduct(prod);
@@ -119,32 +101,24 @@ export default function ItemDropDown () {
   // For the axios call to render the products. Needs to be loaded to work. 
   const [products, setProducts] = useState('');
   const [loadingProducts, setLoadingProducts] = useState(true);
-
-
   // CART IMPLEMENTATION // 
   const [cart, setCart] = useState([]);
   const cartTotal = (cart.reduce((total, { price = 0 }) => total + price, 0))
-
   const amountOfProducts = (id) => cart.filter((product) => product.id === id).length;
-
   // currentCart === 'prev'
   const addToCart = (product) => setCart((currentCart) => ([...currentCart, product]));
-
   const removeFromCart = (product) => {
     setCart((currentCart) => {
       const indexOfProductToRemove = currentCart.findIndex((cartProduct) => cartProduct.id === product.id);
-
       if (indexOfProductToRemove === -1) {
         return currentCart;
       }
-
       return [
         ...currentCart.slice(0, indexOfProductToRemove),
         ...currentCart.slice(indexOfProductToRemove + 1),
       ];
     });
   };
-
   //Render ALL products
   const listProductsToBuy = () => products.map((product) => (
     <div className="product-wrapper">
@@ -162,7 +136,6 @@ export default function ItemDropDown () {
       ) : null}
     </div>
   ));
-
   // Render products in the cart
   const listProductsInCart = () => (cart.filter((v, i) => cart.indexOf(v) === i).map((product) =>
     (
@@ -181,23 +154,19 @@ export default function ItemDropDown () {
       </div>
     )
   ));
-
   //calculate the taxes
   const getTaxes = (amount) => SalesTax.getSalesTax("CA", "QC", amount)
     .then((taxes) => {
       setQst(taxes.details[0]['rate'])
       setGst(taxes.details[1]['rate'])
     }).catch(e => console.log(e))
-
   getTaxes();
-
   const getTotal = () => {
     const gstTax = (cartTotal * gst)
     const qstTax = (cartTotal * qst)
     const total = cartTotal + qstTax + gstTax
     return total.toFixed(2)
   }
-
   // add total price to sessionStorage
   const addToSessionStorage = (key, value) => {
     let price = {
@@ -205,29 +174,21 @@ export default function ItemDropDown () {
     }
     sessionStorage.setItem(key, JSON.stringify(price))
   }
-
   const getToSessionStorage = (key) => {
     return sessionStorage.getItem(key)
   }
-
   addToSessionStorage('total_price', {
     price: cartTotal
   })
-
   let user_price = getToSessionStorage('total_price');
-
   console.log('user_price', JSON.parse(user_price))
-
   // This calculates the distance and makes sure it is under 1001m
   const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
-
   const latitudeLocation = userLocation['latitude']
   const longitudeLocation = userLocation['longitude']
-
   const defaultCenter = {
     lat: latitudeLocation, lng: longitudeLocation
   }
-
   const stores = {
     storeOne: {
       name: "Sami Fruits",
@@ -265,7 +226,6 @@ export default function ItemDropDown () {
       }
     },
   }
-
   const storesArray = [
     {
       name: "Sami Fruits",
@@ -302,15 +262,12 @@ export default function ItemDropDown () {
         lat: 45.518920, lng: -73.594740
       }
     },
-
   ]
-
   const distanceOne = haversine(defaultCenter, stores.storeOne.distance);
   const distanceTwo = haversine(defaultCenter, stores.storeTwo.distance);
   const distanceThree = haversine(defaultCenter, stores.storeThree.distance);
   const distanceFour = haversine(defaultCenter, stores.storeFour.distance);
   const distanceFive = haversine(defaultCenter, stores.storeFive.distance);
-
   useEffect(() => {
     if (distanceOne <= 1000) {
       console.log('store 1 in range')
@@ -333,8 +290,6 @@ export default function ItemDropDown () {
       setRangeS5(true);
     }
   }, []);
-
-
   // Axios call to get the products
   useEffect(() => {
     axios.get(`/api/products`)
@@ -346,16 +301,13 @@ export default function ItemDropDown () {
         console.log(error)
       });
   }, []);
-
   console.log(products)
-
   const productsByStore = (product) => storesArray.map((store) => {
     console.log(store.id)
       if (store.id === product.store_id ) {
         return store.name
       }
     })
-
   // Makes sure that the products do not load before the axios call. 
   if (loadingProducts) {
     return <section className="grid">Loading...
@@ -364,12 +316,10 @@ export default function ItemDropDown () {
       </div>
     </section>
   }
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
 
@@ -389,7 +339,6 @@ export default function ItemDropDown () {
         </Animated>
       </div>
     ));
-
   // This helps set the state when choosing a food category. 
   const getCategory = (category) => {
     if (category == 'Cart') {
@@ -397,73 +346,58 @@ export default function ItemDropDown () {
     } else if (category !== 'Cart') {
       setShowCart(false)
     }
-
     if (category == 'All') {
       setShowAll(true)
     } else if (category !== 'All') {
       setShowAll(false)
     }
-
     if (category === 'Bread') {
       setShowBread(true)
     } else if (category !== 'Bread') {
       setShowBread(false)
     }
-
     if (category === 'Cheese') {
       setShowCheese(true)
     } else if (category !== 'Cheese') {
       setShowCheese(false)
     }
-
     if (category === 'Fruit') {
       setShowFruit(true)
     } else if (category !== 'Fruit') {
       setShowFruit(false)
     }
-
     if (category === 'Vegetables') {
       setShowVegetables(true)
     } else if (category !== 'Vegetables') {
       setShowVegetables(false)
     }
-
     if (category === 'Meat') {
       setShowMeat(true)
     } else if (category !== 'Meat') {
       setShowMeat(false)
     }
-
     if (category === 'Drinks') {
       setShowDrinks(true)
     } else if (category !== 'Drinks') {
       setShowDrinks(false)
     }
-
     if (category === 'Desserts') {
       setShowDesserts(true)
     } else if (category !== 'Desserts') {
       setShowDesserts(false)
     }
-
     if (category === 'Other') {
       setShowOther(true)
     } else if (category !== 'Other') {
       setShowOther(false)
     }
-
   };
-
-
-
   const list = (anchor) => (
-
     <div
       className={clsx(classes.list, {
         [classes.fullList]: anchor === 'bottom',
       })}
       role="presentation"
-
     >
       <section className="pop-up-menu">
         <div className="food-categories">
@@ -501,9 +435,6 @@ export default function ItemDropDown () {
             <ListItemText primary="Other" />
           </StyledMenuItem>
         </div>
-
-
-
         {showCart === true ? (
           <div className="cart-drawer">
             <h1 className="cart-title">YOUR BASKET</h1>
@@ -516,20 +447,21 @@ export default function ItemDropDown () {
               </div>
             </container>
             <div className='cart-total'>Total: ${getTotal()}</div>
-            <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => history.push('/checkout')}>Checkout</button>
+            <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => {
+              console.log("this is cart", cart)
+              finalCart = cart
+              console.log("FINALCART:",finalCart)
+              history.push('/checkout')}
+            }
+            >Checkout</button>
           </div>
         ) : null}
-
-
-
         <section className="food-item-list">
           <header>
             <button className="close-products" onClick={toggleDrawer(anchor, false)}>
               <CloseIcon />
             </button>
           </header>
-
-
           {showAll === true ? (
             <div className="all">
               <h1 className="cat-title">All products</h1>
@@ -538,7 +470,6 @@ export default function ItemDropDown () {
               </section>
             </div>
           ) : null}
-
           {showBread === true ? (
             <div className="Bread">
               <h1 className="cat-title">Bakery</h1>
@@ -547,7 +478,6 @@ export default function ItemDropDown () {
               </section>
             </div>
           ) : null}
-
           {showCheese === true ? (
             <div className="cheese">
               <h1 className="cat-title">Our cheeses</h1>
@@ -556,7 +486,6 @@ export default function ItemDropDown () {
               </section>
             </div>
           ) : null}
-
           {showFruit === true ? (
             <div className="fruits">
               <h1 className="cat-title">Fresh fruits</h1>
@@ -565,7 +494,6 @@ export default function ItemDropDown () {
               </section>
             </div>
           ) : null}
-
           {showVegetables === true ? (
             <div className="vegetables">
               <h1 className="cat-title">Fresh vegetables</h1>
@@ -574,7 +502,6 @@ export default function ItemDropDown () {
               </section>
             </div>
           ) : null}
-
           {showMeat === true ? (
             <div className="butcher">
               <h1 className="cat-title">Meat & Fish</h1>
@@ -583,7 +510,6 @@ export default function ItemDropDown () {
               </section>
             </div>
           ) : null}
-
           {showDrinks === true ? (
             <div className="drinks">
               <h1 className="cat-title">Thirsty ?</h1>
@@ -592,7 +518,6 @@ export default function ItemDropDown () {
               </section>
             </div>
           ) : null}
-
           {showDesserts === true ? (
             <div className="title">
               <h1 className="cat-title">Feeling sweet ?</h1>
@@ -601,7 +526,6 @@ export default function ItemDropDown () {
               </section>
             </div>
           ) : null}
-
           {showOther === true ? (
           <div className="title">
             <h1 className="cat-title">More stuff</h1>
@@ -610,27 +534,22 @@ export default function ItemDropDown () {
             </section>
           </div>
           ) : null}
-
         </section>
       </section>
     </div >
   );
-
   return (
     <div style={{ backgroundImage: "url('../images/pinnaple.jpeg')", backgroundSize: "cover", backgroundPosition:"top", height: '100vh' }}>
-
       <div className="home-nav">
         <img className="logo" src="./images/basket.svg" style={{ 'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
         <div className="dropdown-bars">
           <NavMenu />
         </div>
       </div>
-
       <section className="map-section">
         <MapContainer
         />
       </section>
-
       <div className="open-items-menu">
         {['bottom'].map((anchor) => (
           <React.Fragment key={anchor}>
@@ -650,6 +569,4 @@ export default function ItemDropDown () {
     </div>
   );
 }
-
-
-
+export {finalCart}
