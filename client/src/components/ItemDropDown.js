@@ -519,8 +519,11 @@ export default function ItemDropDown () {
         <div className="food-categories">
           <div className="cart-category" style={{ justifyContent: "center" }}>
             <StyledMenuItem onClick={() => getCategory('Cart')} style={{ display: "flex", alignItems: "normal", justifyContent: "center" }} >
-              <ShoppingBasketIcon />
-              <ListItemText className="cart-num">{cart.length}</ListItemText>
+              <div className="shopping-cart-info">
+                  <span className="cart-num">{cart.length}</span>
+                <ShoppingBasketIcon />
+                  <span className="cart-info-price">${(cartTotal).toFixed(2)}</span>
+              </div>
             </StyledMenuItem>
           </div>
           <StyledMenuItem onClick={() => getCategory('All')} >
@@ -557,9 +560,9 @@ export default function ItemDropDown () {
             <div>{listProductsInCart()}</div>
             <container className="price-container">
               <div className="taxes">
-                <span className="subtotal">Subtotal: {cartTotal.toFixed(2)}</span>
-                <span className="gst">Qst: {(cartTotal * qst).toFixed(2)}  </span>
-                <span className="qst">Gst: {(cartTotal * gst).toFixed(2)}</span>
+                <span className="subtotal">Subtotal: ${cartTotal.toFixed(2)}</span>
+                <span className="gst">Qst: ${(cartTotal * qst).toFixed(2)}  </span>
+                <span className="qst">Gst: ${(cartTotal * gst).toFixed(2)}</span>
               </div>
             </container>
             <div className='cart-total'>Total: ${getTotal()}</div>

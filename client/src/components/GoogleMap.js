@@ -225,7 +225,8 @@ const MapContainer = (props) => {
         lat: 45.53282392180832, 
         lng: -73.61462652787904
       },
-      opacity: 0.5
+      opacity: 0.5,
+      message: "SORRY ! OUTSIDE YOUR AREA"
     },
     {
       name: 'Vito Charcuterie',
@@ -316,7 +317,8 @@ const MapContainer = (props) => {
         lat: 45.544142009973285, 
         lng: -73.62159305320061
       },
-      opacity: 0.5 
+      opacity: 0.5, 
+      message: "SORRY ! OUTSIDE YOUR AREA"
     },
   ]
 
@@ -370,6 +372,7 @@ const MapContainer = (props) => {
               onCloseClick={() => setSelected({})}
             >
               <div className="infoWindow" style={{opacity:`${selected.opacity}`}}>
+                <div className="message" style={{fontWeight:"bold"}}>{selected.message}</div>
                 <div className="name-store">
                   <img className="store-img" alt="" src={selected.image}></img>
                   <h2>{selected.name}</h2>

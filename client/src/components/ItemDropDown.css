@@ -32,11 +32,20 @@
 }
 
 .cart-category .cart-num {
-  font-size: 6px;
-  font-weight: bold;
+  font-size: 15px;
   align-items: center;
   color: darkgreen;
-  margin-left: 5px;
+  margin-right: 5px;
+}
+.shopping-cart-info {
+  display: flex;
+  align-items: flex-end;
+}
+
+.cart-category .cart-info-price {
+  font-size: 15px;
+  margin-left: 3px;
+  color: darkgreen;
 }
 
 .food-item-list .cat-title {
