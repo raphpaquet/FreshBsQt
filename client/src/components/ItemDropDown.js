@@ -432,6 +432,9 @@ export default function ItemDropDown () {
         <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
           <div key={product.id} className="product-image-section">
             <img src={product.image} />
+            <div className="product-description">
+              <p>{product.description}</p>
+            </div>
           </div>
           <h3>{product.name}</h3>
           <h5>From {productsByStore(product)}</h5>
