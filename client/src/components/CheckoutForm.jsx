@@ -223,6 +223,7 @@ console.log('user' , user)
         <h3>Thanks for using NAME</h3>
       </div>
     </div>
+    </div>
   )
 }
 export default injectStripe(CheckoutForm)
