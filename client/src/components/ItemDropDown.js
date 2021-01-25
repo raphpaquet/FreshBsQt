@@ -204,6 +204,7 @@ export default function ItemDropDown () {
     const gstTax = (cartTotal * gst)
     const qstTax = (cartTotal * qst)
     const total = cartTotal + qstTax + gstTax
+    sessionStorage.setItem('stripeTotal', total.toFixed(2))
     return total.toFixed(2)
   }
   // add total price to sessionStorage
@@ -221,6 +222,7 @@ export default function ItemDropDown () {
   })
   let user_price = getToSessionStorage('total_price');
   console.log('user_price', JSON.parse(user_price))
+
 
   // This calculates the distance and makes sure it is under 1001m
   const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
@@ -506,8 +508,9 @@ export default function ItemDropDown () {
             <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => {
               console.log("this is cart", cart)
               finalCart = cart
-              console.log("FINALCART:",finalCart)
-              history.push('/checkout')}
+              console.log("FINALCART:", finalCart)
+              history.push('/checkout')
+            }
             }
             >Checkout</button>
           </div>
@@ -626,4 +629,4 @@ export default function ItemDropDown () {
     </div>
   );
 }
-export {finalCart}
+export { finalCart }

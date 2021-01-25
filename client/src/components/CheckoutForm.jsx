@@ -8,7 +8,7 @@ import {
 } from 'react-stripe-elements'
 import axios from 'axios'
 import './CheckoutForm.css'
-import {finalCart} from './ItemDropDown'
+import { finalCart } from './ItemDropDown'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -16,27 +16,27 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
   //to handle whether the checkbox is toggled or not
   const [toggled, setToggled] = useState(false)
   const [state, setState] = useState({
-    first_name:"",
-    last_name:"",
-    address:"",
-    city:"",
+    first_name: "",
+    last_name: "",
+    address: "",
+    city: "",
   })
 
 
   const listProductsInCart = () => (finalCart.filter((v, i) => finalCart.indexOf(v) === i).map((product) =>
-  (
-    <li>{product.name}: {product.price}$</li>
-  )
-));
+    (
+      <li>{product.name}: {product.price}$</li>
+    )
+  ));
   //handles the conditionals associated to the toggled state 
-  useEffect(()=>{
-    if(toggled) {
-      setState((prevState)=>{
-        return {...prevState, first_name: user.first_name, last_name: user.last_name, address: user.address, city: user.city}
+  useEffect(() => {
+    if (toggled) {
+      setState((prevState) => {
+        return { ...prevState, first_name: user.first_name, last_name: user.last_name, address: user.address, city: user.city }
       })
     } else {
-      setState((prevState)=>{
-        return {...prevState, first_name: "", last_name: "", address: "", city: ""}
+      setState((prevState) => {
+        return { ...prevState, first_name: "", last_name: "", address: "", city: "" }
       })
     }
   }, [toggled])
@@ -44,17 +44,18 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
     const { id, value } = e.target
     console.log(e.target.value)
     setState(prevState => ({
-      ...prevState, 
-      [id] : value
+      ...prevState,
+      [id]: value
     }))
   }
   if (selectedProduct === null) history.push('/')
   const [receiptUrl, setReceiptUrl] = useState('')
   // const history = useHistory()
   const backToShop = history.push('/shop')
-   // session Storage to get the price
-   const userPrice = JSON.parse(sessionStorage.getItem('total_price'))
-   const totalPrice = (userPrice['totalPrice']).toFixed(2)
+  // session Storage to get the price
+  const userPrice = JSON.parse(sessionStorage.getItem('total_price'))
+  const totalPrice = (userPrice['totalPrice']).toFixed(2)
+  const stripeTotal = sessionStorage.getItem('stripeTotal')
   const handleSubmit = async event => {
     event.preventDefault()
     const { token } = await stripe.createToken()
@@ -76,118 +77,118 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
     )
   }
   return (
-  <div className="checkout-page">
-    <video autoPlay loop muted id="background-video">
-          <source src="/video/pie.mp4" type="video/mp4" />
-        </video>
-    <button className="back-to-shop">
-      <ArrowBackIcon onClick={backToShop}/>
-    </button>
-    <div className="page-title">
+    <div className="checkout-page">
+      <video autoPlay loop muted id="background-video">
+        <source src="/video/pie.mp4" type="video/mp4" />
+      </video>
+      <button className="back-to-shop">
+        <ArrowBackIcon onClick={backToShop} />
+      </button>
+      <div className="page-title">
         <h1>Summary</h1>
         <ShoppingBasketIcon />
-    </div>
-    <div className="checkout-info">
-      <div className="summary">
-        <span className="summary-title">list of products</span>
-        <ul style={{listStyle:"none", display:"flex", flexDirection:"column", padding:"8px"}}>{
-          listProductsInCart()
-        }
-        </ul>
       </div>
-      <div className="delivery">
-        <span className="facturation-title">Delivery</span>
-        <form className="delivery-form" action="/checkout" method="POST">
-          <span>
-            <label for="first_name"></label>
-            <input 
-              id="first_name"
-              name="first_name" 
-              type="text"  
-              placeholder="First Name"
-              value={state.first_name}
-              onChange={handleChange}
-              required
-            />
-          </span>
-          <span>
-            <label for="last_name"></label>
-            <input 
-              id="last_name"
-              name="last_name" 
-              type="text"  
-              placeholder="Last Name"
-              value={state.last_name}
-              onChange={handleChange}
-              required
-            />
-          </span>
-          <span>
-          <span>
-            <input 
-              type="checkbox" 
-              id="defaultAddress"
-              value={toggled}
-              onChange={(event)=> {
-                setToggled(event.target.checked)
-              }}
-              name="defaultAddress">
-            </input>
-            <label for="defaultAddress" style={{letterSpacing:"0em", textTransform:"lowercase", margin:"0"}}>Use my default information</label>
-          </span>
-            <label for="address"></label>
-            <input 
-              id="address"
-              name="address" 
-              type="text"  
-              placeholder="Address"
-              value={state.address}
-              onChange={handleChange}
-              required
-            />
-          </span>
-          <span>
-            <label for="city"></label>
-            <input 
-              id="city"
-              name="city" 
-              type="text"  
-              placeholder="City"
-              value={state.city}
-              onChange={handleChange}
-              required
-            />
-          </span>
-        </form>
+      <div className="checkout-info">
+        <div className="summary">
+          <span className="summary-title">list of products</span>
+          <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", padding: "8px" }}>{
+            listProductsInCart()
+          }
+          </ul>
+        </div>
+        <div className="delivery">
+          <span className="facturation-title">Delivery</span>
+          <form className="delivery-form" action="/checkout" method="POST">
+            <span>
+              <label for="first_name"></label>
+              <input
+                id="first_name"
+                name="first_name"
+                type="text"
+                placeholder="First Name"
+                value={state.first_name}
+                onChange={handleChange}
+                required
+              />
+            </span>
+            <span>
+              <label for="last_name"></label>
+              <input
+                id="last_name"
+                name="last_name"
+                type="text"
+                placeholder="Last Name"
+                value={state.last_name}
+                onChange={handleChange}
+                required
+              />
+            </span>
+            <span>
+              <span>
+                <input
+                  type="checkbox"
+                  id="defaultAddress"
+                  value={toggled}
+                  onChange={(event) => {
+                    setToggled(event.target.checked)
+                  }}
+                  name="defaultAddress">
+                </input>
+                <label for="defaultAddress" style={{ letterSpacing: "0em", textTransform: "lowercase", margin: "0" }}>Use my default information</label>
+              </span>
+              <label for="address"></label>
+              <input
+                id="address"
+                name="address"
+                type="text"
+                placeholder="Address"
+                value={state.address}
+                onChange={handleChange}
+                required
+              />
+            </span>
+            <span>
+              <label for="city"></label>
+              <input
+                id="city"
+                name="city"
+                type="text"
+                placeholder="City"
+                value={state.city}
+                onChange={handleChange}
+                required
+              />
+            </span>
+          </form>
+        </div>
       </div>
-    </div>
-    <div className="checkout-form">
-      <p style={{border:"1px solid lightgray", padding:"2px"}}>Credit Cart Details</p>
-      <p>Amount: ${totalPrice}</p>
-      <form onSubmit={handleSubmit}>
-      <label>
-          Full Name
+      <div className="checkout-form">
+        <p style={{ border: "1px solid lightgray", padding: "2px" }}>Credit Cart Details</p>
+        <p>Amount: ${stripeTotal}</p>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Full Name
           <input name="name" type="text"></input>
-        </label>
-        <label>
-          Card details
+          </label>
+          <label>
+            Card details
           <CardNumberElement />
-        </label>
-        <label>
-          Expiration date
+          </label>
+          <label>
+            Expiration date
           <CardExpiryElement />
-        </label>
-        <label>
-          CVC
+          </label>
+          <label>
+            CVC
           <CardCVCElement />
-        </label>
-        <button type="submit" className="pay-btn submit-button">
-          Pay
+          </label>
+          <button type="submit" className="pay-btn submit-button">
+            Pay
         </button>
-      </form>
-      <h3>Thanks for shopping local</h3>
+        </form>
+        <h3>Thanks for shopping local</h3>
+      </div>
     </div>
-  </div>
   )
 }
 export default injectStripe(CheckoutForm)
