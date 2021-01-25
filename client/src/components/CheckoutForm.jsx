@@ -8,7 +8,7 @@ import {
 } from 'react-stripe-elements'
 import axios from 'axios'
 import './CheckoutForm.css'
-import {finalCart} from './ItemDropDown'
+import { finalCart } from './ItemDropDown'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -57,19 +57,20 @@ console.log('user' , user)
     const { id, value } = e.target
     console.log(e.target.value)
     setState(prevState => ({
-      ...prevState, 
-      [id] : value
+      ...prevState,
+      [id]: value
     }))
   }
   if (selectedProduct === null) history.push('/')
   const [receiptUrl, setReceiptUrl] = useState('')
+
   const backToShop = history.push('/')
 
-   // session Storage to get the price
+  // session Storage to get the price
   const userPrice = JSON.parse(sessionStorage.getItem('total_price'))
   const totalPrice = (userPrice['totalPrice']).toFixed(2)
-  
-   const handleSubmit = async event => {
+  const stripeTotal = sessionStorage.getItem('stripeTotal')
+  const handleSubmit = async event => {
     event.preventDefault()
     const { token } = await stripe.createToken()
     console.log(selectedProduct)
@@ -222,7 +223,6 @@ console.log('user' , user)
         <h3>Thanks for using NAME</h3>
       </div>
     </div>
-  </div>
   )
 }
 export default injectStripe(CheckoutForm)
