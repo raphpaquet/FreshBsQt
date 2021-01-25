@@ -6,10 +6,7 @@ import ItemDropDown from './components/ItemDropDown';
 import Home from './components/Home';
 import Register from './components/Register';
 import Login from './components/Login';
-// import logout from './components/logout';
 import Map from './components/Map';
-import { products } from './components/products';
-import Product from './components/Product';
 import { createBrowserHistory } from 'history';
 import Checkout from './components/Checkout';
 import AlertComponent from './components/AlertComponent';
@@ -21,7 +18,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 
@@ -61,6 +57,7 @@ export default function App () {
           <Route path="/shop">
             <Shop
               user={user}
+              showError={upadteErrorMessage}
             />
           </Route>
           <Route path="/map">
@@ -71,28 +68,18 @@ export default function App () {
               setUser={setUser}
               showError={upadteErrorMessage}
             />
-
           </Route>
           <Route path="/register">
             <Register
               setUser={setUser}
               showError={upadteErrorMessage} />
           </Route>
-          {/* <Route path="/logout">
-            <Logout />
-          </Route> */}
           <Route path="/checkout">
             <Checkout
               user={user}
               selectedProduct={selectedProduct}
               history={history}
-            />
-          </Route>
-          <Route path="/products">
-            <Product
-              products={products}
-            // selectProduct={setSelectedProduct}
-            // history={history}
+              showError={upadteErrorMessage}
             />
           </Route>
           <Route path="/" exact>

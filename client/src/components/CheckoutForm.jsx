@@ -10,12 +10,12 @@ import axios from 'axios'
 import './CheckoutForm.css'
 import { finalCart } from './ItemDropDown'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SimpleSelect from './SelectModal';
 
-const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
+const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
   //to handle whether the checkbox is toggled or not
+  const [error, setError] = useState('')
   const [toggled, setToggled] = useState(false)
   const [state, setState] = useState({
     first_name: "",
@@ -27,7 +27,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
 
   const listProductsInCart = () => (finalCart.filter((v, i) => finalCart.indexOf(v) === i).map((product) =>
     (<tr className="summary-product">
-      <img className="summary-image" src={product.image} style={{ width: "30px", height: "30px" }}></img>
+      <img className="summary-image" alt="" src={product.image} style={{ width: "30px", height: "30px" }}></img>
       <span className="summary-name">{product.name}</span>
       <span className="summary-price">{(product.price).toFixed(2)}$</span>
     </tr>
@@ -70,15 +70,22 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
 
   const handleSubmit = async event => {
     event.preventDefault()
-    const { token } = await stripe.createToken()
-    console.log(selectedProduct)
-    const order = await axios.post('/api/stripe/charge', {
-      amount: 992,
-      source: token.id,
-      receipt_email: 'customer@example.com'
-    })
-    setReceiptUrl(order.data.charge.receipt_url)
-  }
+      if (!state.first_name || !state.last_name || !state.email || !state.address || !state.city) {
+        console.log("NOOOOO")
+          setError('Please fill all the forms')
+          console.log(error)
+      } else {
+        setError('')
+        const { token } = await stripe.createToken()
+        console.log(selectedProduct)
+        const order = await axios.post('/api/stripe/charge', {
+          amount: 992,
+          source: token.id,
+          receipt_email: 'customer@example.com'
+        })
+        setReceiptUrl(order.data.charge.receipt_url)
+      }
+    }
 
   if (receiptUrl) {
     return (
@@ -87,7 +94,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
           <source src="/video/shoplocal.mp4" type="video/mp4" style={{ right: "8px" }} />
         </video>}
         <h2>Payment Successful!</h2>
-        <h3 className="success-email">A confirmation email has been sent to {user.email}</h3>
+        <div className="success-email">A confirmation email has been sent to {state.email}</div>
         <a href={receiptUrl}>View Receipt</a>
         <Link to="/">Home</Link>
       </div>
@@ -226,7 +233,8 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
               Pay
           </button>
           </form>
-          <h3>Thanks for using NAME</h3>
+          <h3 style={{color:"rgb(104, 22, 22)"}}>{error}</h3>
+          <h3>Thanks for using FreshBasket</h3>
         </div>
       </div>
     </div>

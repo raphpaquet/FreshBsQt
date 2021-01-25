@@ -5,8 +5,6 @@ import { useHistory, withRouter } from "react-router-dom";
 import NavMenu from './NavMenu'
 
 
-// will need to setUser to response.data // 
-
 export default function Login (props) {
 
   const history = useHistory();
@@ -43,7 +41,6 @@ export default function Login (props) {
 
             console.log("THIS IS THE RESPONSE IN LOGIN.JSX", response.data)
             props.setUser(response.data)
-            // setError("")
             props.showError("")
 
           } else {

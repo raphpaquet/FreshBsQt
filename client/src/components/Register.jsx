@@ -69,11 +69,9 @@ export default function Register (props) {
     }
   }
 
-
   const redirectToHome = () => {
     history.push('/')
   }
-
 
   return (
     <div className="register-page">

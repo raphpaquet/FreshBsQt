@@ -7,8 +7,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import './NavMenu.css'
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
   useHistory
 } from "react-router-dom";

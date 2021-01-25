@@ -14,19 +14,16 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 
 
 
-
-
 const MapContainer = (props) => {
 
+  // for infoWindow 
   const [selected, setSelected] = useState({});
-
   const onSelect = store => {
     setSelected(store);
   }
 
-
+  // To get the user location set in sessionStorage
   const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
-
   const latitudeLocation = userLocation['latitude']
   const longitudeLocation = userLocation['longitude']
   console.log(latitudeLocation, longitudeLocation)
@@ -228,7 +225,8 @@ const MapContainer = (props) => {
         lat: 45.53282392180832, 
         lng: -73.61462652787904
       },
-      opacity: 0.5
+      opacity: 0.5,
+      message: "SORRY ! OUTSIDE YOUR AREA"
     },
     {
       name: 'Vito Charcuterie',
@@ -319,7 +317,8 @@ const MapContainer = (props) => {
         lat: 45.544142009973285, 
         lng: -73.62159305320061
       },
-      opacity: 0.5 
+      opacity: 0.5, 
+      message: "SORRY ! OUTSIDE YOUR AREA"
     },
   ]
 
@@ -337,9 +336,7 @@ const MapContainer = (props) => {
           styles: mapTheme,
           scrollwheel: true,
         }}
-
       >
-
         <Circle
           center={defaultCenter}
           radius={2000}
@@ -349,14 +346,12 @@ const MapContainer = (props) => {
             strokeWeight: '0.2',
           }}
         />
-
         <Marker
           label='You Are Here'
           name='Customer Location'
           position={defaultCenter}
           
         />
-
         {
           stores.map(store => {
             return (
@@ -368,7 +363,6 @@ const MapContainer = (props) => {
             )
           })
         }
-
         {
           selected.location &&
           (
@@ -378,26 +372,25 @@ const MapContainer = (props) => {
               onCloseClick={() => setSelected({})}
             >
               <div className="infoWindow" style={{opacity:`${selected.opacity}`}}>
+                <div className="message" style={{fontWeight:"bold"}}>{selected.message}</div>
                 <div className="name-store">
-                  <img className="store-img" src={selected.image}></img>
+                  <img className="store-img" alt="" src={selected.image}></img>
                   <h2>{selected.name}</h2>
                 </div>
                 <span className="store-des"><LocationOnIcon className="icon-ui"/>{selected.address}</span>
                 <span className="store-des"><PhoneIcon className="icon-ui"/>{selected.phoneNumber}</span>
                 <div className="follow">
                   <span>
-                    <a href={selected.web} target="_blank" className="site"><HttpIcon className="icon-fo"/></a>
+                    <a href={selected.web} target="_blank" rel="noreferrer" className="site"><HttpIcon className="icon-fo"/></a>
                   </span>
                   <span>
-                    <a href={selected.facebook} target="_blank"><FacebookIcon  className="icon-fo"/></a>
+                    <a href={selected.facebook} target="_blank" rel="noreferrer" ><FacebookIcon  className="icon-fo"/></a>
                   </span>
                 </div>
-
               </div>
             </InfoWindow>
           )
         }
-
       </GoogleMap>
     </LoadScript>
   )
