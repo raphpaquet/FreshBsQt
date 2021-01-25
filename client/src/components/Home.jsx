@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-import NavMenu from './NavMenu'
-
-import BottomNav from './BottomNav'
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import NavMenu from './NavMenu'
+import axios from 'axios';
 import Map from './Map'
-import {Animated} from "react-animated-css";
-
-
+import { Animated } from "react-animated-css";
 
 
 export default function Home (props) {
@@ -31,7 +27,7 @@ export default function Home (props) {
     <>
       <div className="home">
         <div className="home-nav">
-          <img className="logo" src="./images/basket.svg" style={{ 'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
+          <img className="logo" src="./images/basket.svg" alt="" style={{ 'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
           <div className="dropdown-bars">
             <NavMenu 
              user = {user}

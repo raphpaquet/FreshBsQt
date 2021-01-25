@@ -9,7 +9,6 @@ import haversine from 'haversine-distance';
 // components
 import MapContainer from './GoogleMap'
 import NavMenu from './NavMenu';
-import BottomNav from './BottomNav'
 import CircularProgress from './Map'
 // For the swipeable drawer that has all the items
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -72,21 +71,21 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 export default function ItemDropDown () {
+  // food category drawer
   const [showAll, setShowAll] = useState(true);
-  const [showEggs, setShowEggs] = useState(false);
   const [showBread, setShowBread] = useState(false);
   const [showCheese, setShowCheese] = useState(false);
   const [showFruit, setShowFruit] = useState(false);
   const [showVegetables, setShowVegetables] = useState(false);
   const [showMeat, setShowMeat] = useState(false);
   const [showDrinks, setShowDrinks] = useState(false);
-  const [showSnacks, setShowSnacks] = useState(false);
   const [showDesserts, setShowDesserts] = useState(false);
   const [showOther, setShowOther] = useState(false);
   const [showCart, setShowCart] = useState(false);
+  // set taxes
   const [gst, setGst] = useState('');
   const [qst, setQst] = useState('');
-
+  // radius on google map api
   const [rangeS1, setRangeS1] = useState(false);
   const [rangeS2, setRangeS2] = useState(false);
   const [rangeS3, setRangeS3] = useState(false);
@@ -95,21 +94,12 @@ export default function ItemDropDown () {
   const [rangeS6, setRangeS6] = useState(false);
   const [rangeS7, setRangeS7] = useState(false);
   const [rangeS8, setRangeS8] = useState(false);
-  const [totalProduct, setTotalProduct] = useState(0);
   // For the bottom drawer that holds the items
   const classes = useStyles();
   const [state, setState] = useState({
     bottom: false,
   });
   const history = useHistory();
-
-  // For checkout form 
-  // const handlePurchase = prod => () => {
-  //   setSelectProduct(prod);
-  //   console.log('select prod: ' , prod)
-  //   history.push('/checkout')
-  //   console.log(selectedProduct)
-  // }
   // For the axios call to render the products. Needs to be loaded to work. 
   const [products, setProducts] = useState('');
   const [loadingProducts, setLoadingProducts] = useState(true);
@@ -117,9 +107,12 @@ export default function ItemDropDown () {
 
   // CART IMPLEMENTATION // 
   const [cart, setCart] = useState([]);
+
   const cartTotal = (cart.reduce((total, { price = 0 }) => total + price, 0))
+
   const amountOfProducts = (id) => cart.filter((product) => product.id === id).length;
-  // currentCart === 'prev'
+
+  // cart action + / -
   const addToCart = (product) => setCart((currentCart) => ([...currentCart, product]));
   const removeFromCart = (product) => {
     setCart((currentCart) => {
@@ -226,8 +219,7 @@ export default function ItemDropDown () {
   let user_price = getToSessionStorage('total_price');
   console.log('user_price', JSON.parse(user_price))
 
-
-  // This calculates the distance and makes sure it is under 1001m
+  // get user location store in sessionStorage
   const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
   const latitudeLocation = userLocation['latitude']
   const longitudeLocation = userLocation['longitude']
@@ -353,6 +345,7 @@ export default function ItemDropDown () {
     }, 
   ]
 
+    // This calculates the distance and makes sure it is under 2001m
   const distanceOne = haversine(defaultCenter, stores.storeOne.distance);
   const distanceTwo = haversine(defaultCenter, stores.storeTwo.distance);
   const distanceThree = haversine(defaultCenter, stores.storeThree.distance);
