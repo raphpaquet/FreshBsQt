@@ -12,71 +12,43 @@ import { finalCart } from './ItemDropDown'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import Select from './SelectModal';
-
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontWeight: 300,
-  },
-  paper: {
-    backgroundColor: '#f2fff6',
-    textAlign: 'center',
-    fontWeight: 300,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    outline: 0,
-    height: '22rem',
-    width: '45rem',
-  },
-  prompt: {
-    fontFamily: 'Roboto',
-    fontWeight: 300,
-  },
-}));
+import SimpleSelect from './SelectModal';
 
 const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
-  // Modal state
-  const classes = useStyles();
-  const [open, setOpen] = useState(true);
   //to handle whether the checkbox is toggled or not
   const [toggled, setToggled] = useState(false)
   const [state, setState] = useState({
     first_name: "",
     last_name: "",
+    email: "",
     address: "",
     city: "",
   })
 
-  // Modal close handler
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-
   const listProductsInCart = () => (finalCart.filter((v, i) => finalCart.indexOf(v) === i).map((product) =>
-    (
-      <li>{product.name}: {product.price}$</li>
+    (<tr className="summary-product">
+      <img className="summary-image" src={product.image} style={{ width: "30px", height: "30px" }}></img>
+      <span className="summary-name">{product.name}</span>
+      <span className="summary-price">{(product.price).toFixed(2)}$</span>
+    </tr>
     )
   ));
+
   //handles the conditionals associated to the toggled state 
   useEffect(() => {
     if (toggled) {
       setState((prevState) => {
-        return { ...prevState, first_name: user.first_name, last_name: user.last_name, address: user.address, city: user.city }
+        return { ...prevState, first_name: user.first_name, last_name: user.last_name, email: user.email, address: user.address, city: user.city }
       })
     } else {
       setState((prevState) => {
-        return { ...prevState, first_name: "", last_name: "", address: "", city: "" }
+        return { ...prevState, first_name: "", last_name: "", email: "", address: "", city: "" }
       })
     }
   }, [toggled])
+
+
+
   const handleChange = (e) => {
     const { id, value } = e.target
     console.log(e.target.value)
@@ -87,12 +59,15 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
   }
   if (selectedProduct === null) history.push('/')
   const [receiptUrl, setReceiptUrl] = useState('')
-  // const history = useHistory()
-  const backToShop = history.push('/shop')
+
+  const backToShop = history.push('/')
+
   // session Storage to get the price
   const userPrice = JSON.parse(sessionStorage.getItem('total_price'))
   const totalPrice = (userPrice['totalPrice']).toFixed(2)
   const stripeTotal = sessionStorage.getItem('stripeTotal')
+  const isLoggedIn = sessionStorage.getItem('loggedIn')
+
   const handleSubmit = async event => {
     event.preventDefault()
     const { token } = await stripe.createToken()
@@ -104,45 +79,29 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
     })
     setReceiptUrl(order.data.charge.receipt_url)
   }
+
   if (receiptUrl) {
     return (
       <div className="success">
+        {<video autoPlay muted id="background-video">
+          <source src="/video/shoplocal.mp4" type="video/mp4" style={{ right: "8px" }} />
+        </video>}
         <h2>Payment Successful!</h2>
+        <h3 className="success-email">A confirmation email has been sent to {user.email}</h3>
         <a href={receiptUrl}>View Receipt</a>
         <Link to="/">Home</Link>
       </div>
     )
   }
   return (
-    <div className="checkout-page">
-      {/* Modal JSX */}
-      <div>
-        <Modal
-          disableBackdropClick
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          className={classes.modal}
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 800,
-          }}
-        >
-          <Fade in={open}>
-            <div className={classes.paper}>
-              <h2 className={classes.prompt}>Checkout Options:</h2>
-              <Select /> {/* This lets the user select "guest", "login", or "register" */}
-              <button className="continue-btn">Continue</button>
-            </div>
-          </Fade>
-        </Modal>
-      </div>
-      {/* End of Modal JSX */}
-      <video autoPlay loop muted id="background-video">
-        <source src="/video/pie.mp4" type="video/mp4" />
-      </video>
+    <div className="checkout-page" style={{ backgroundImage: "url('../images/lemon.jpg')" }}>
+
+      {!isLoggedIn ? (
+        <div>
+          <SimpleSelect />
+        </div>
+      ) : null}
+
       <button className="back-to-shop">
         <ArrowBackIcon onClick={backToShop} />
       </button>
@@ -150,107 +109,128 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
         <h1>Summary</h1>
         <ShoppingBasketIcon />
       </div>
-      <div className="checkout-info">
-        <div className="summary">
-          <span className="summary-title">list of products</span>
-          <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", padding: "8px" }}>{
-            listProductsInCart()
-          }
-          </ul>
-        </div>
-        <div className="delivery">
-          <span className="facturation-title">Delivery</span>
-          <form className="delivery-form" action="/checkout" method="POST">
-            <span>
-              <label for="first_name"></label>
-              <input
-                id="first_name"
-                name="first_name"
-                type="text"
-                placeholder="First Name"
-                value={state.first_name}
-                onChange={handleChange}
-                required
-              />
-            </span>
-            <span>
-              <label for="last_name"></label>
-              <input
-                id="last_name"
-                name="last_name"
-                type="text"
-                placeholder="Last Name"
-                value={state.last_name}
-                onChange={handleChange}
-                required
-              />
-            </span>
-            <span>
+      <div className="containers">
+        <div className="checkout-info">
+          <div className="summary">
+            <span className="summary-title">list of products</span>
+            <table className="summary-list">{
+              listProductsInCart()
+            }
+            </table>
+          </div>
+          <div className="delivery">
+            <span className="facturation-title">Delivery</span>
+            <form className="delivery-form" action="/checkout" method="POST">
               <span>
                 <input
                   type="checkbox"
                   id="defaultAddress"
+                  className={user ? 'shown' : 'hidden'}
                   value={toggled}
                   onChange={(event) => {
                     setToggled(event.target.checked)
                   }}
                   name="defaultAddress">
                 </input>
-                <label for="defaultAddress" style={{ letterSpacing: "0em", textTransform: "lowercase", margin: "0" }}>Use my default information</label>
+                <label className={user ? 'shown' : 'hidden'} for="defaultAddress" style={{ letterSpacing: "0em", textTransform: "lowercase", margin: "0" }}>Use my default information</label>
               </span>
-              <label for="address"></label>
-              <input
-                id="address"
-                name="address"
-                type="text"
-                placeholder="Address"
-                value={state.address}
-                onChange={handleChange}
-                required
-              />
-            </span>
-            <span>
-              <label for="city"></label>
-              <input
-                id="city"
-                name="city"
-                type="text"
-                placeholder="City"
-                value={state.city}
-                onChange={handleChange}
-                required
-              />
-            </span>
-          </form>
+              <span>
+                <label for="first_name"></label>
+                <input
+                  id="first_name"
+                  name="first_name"
+                  type="text"
+                  placeholder="First Name"
+                  value={state.first_name}
+                  onChange={handleChange}
+                  required
+                  style={{ width: '300px' }}
+                />
+              </span>
+              <span>
+                <label for="last_name"></label>
+                <input
+                  id="last_name"
+                  name="last_name"
+                  type="text"
+                  placeholder="Last Name"
+                  value={state.last_name}
+                  onChange={handleChange}
+                  required
+                  style={{ width: '300px' }}
+                />
+              </span>
+              <span>
+                <label for="email"></label>
+                <input
+                  id="email"
+                  name="email"
+                  type="text"
+                  placeholder="Email"
+                  value={state.email}
+                  onChange={handleChange}
+                  required
+                  style={{ width: '300px' }}
+                />
+              </span>
+              <span>
+                <label for="address"></label>
+                <input
+                  id="address"
+                  name="address"
+                  type="text"
+                  placeholder="Address"
+                  value={state.address}
+                  onChange={handleChange}
+                  required
+                  style={{ width: '300px' }}
+                />
+              </span>
+              <span>
+                <label for="city"></label>
+                <input
+                  id="city"
+                  name="city"
+                  type="text"
+                  placeholder="City"
+                  value={state.city}
+                  onChange={handleChange}
+                  required
+                  style={{ width: '300px' }}
+                />
+              </span>
+            </form>
+          </div>
         </div>
-      </div>
-      <div className="checkout-form">
-        <p style={{ border: "1px solid lightgray", padding: "2px" }}>Credit Cart Details</p>
-        <p>Amount: ${stripeTotal}</p>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Full Name
-          <input name="name" type="text"></input>
-          </label>
-          <label>
-            Card details
-          <CardNumberElement />
-          </label>
-          <label>
-            Expiration date
-          <CardExpiryElement />
-          </label>
-          <label>
-            CVC
-          <CardCVCElement />
-          </label>
-          <button type="submit" className="pay-btn submit-button">
-            Pay
-        </button>
-        </form>
-        <h3>Thanks for shopping local</h3>
+        <div className="checkout-form">
+          <p style={{ border: "1px solid lightgray", padding: "2px" }}>Credit Cart Details</p>
+          <p>Amount: ${stripeTotal}</p>
+          <form onSubmit={handleSubmit}>
+            <label>
+              Full Name
+            <input name="name" type="text"></input>
+            </label>
+            <label>
+              Card details
+            <CardNumberElement />
+            </label>
+            <label>
+              Expiration date
+            <CardExpiryElement />
+            </label>
+            <label>
+              CVC
+            <CardCVCElement />
+            </label>
+            <button type="submit" className="pay-btn submit-button" style={{ marginLeft: "140px" }}>
+              Pay
+          </button>
+          </form>
+          <h3>Thanks for using NAME</h3>
+        </div>
       </div>
     </div>
   )
 }
+
 export default injectStripe(CheckoutForm)

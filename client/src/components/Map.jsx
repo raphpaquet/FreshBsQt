@@ -101,7 +101,7 @@ export default function Map (props) {
 
   return (
     <div className="map">
-      <button className="location-btn" onClick={handleButtonClick} variant="contained" disabled={loading}>Support my neigborhood</button>
+      <button className="location-btn" onClick={handleButtonClick} variant="contained" disabled={loading}>See what's available around me!</button>
       <div>
         {loading && <CircularProgress color="secondary" size={40} className={classes.buttonProgress} /> }
       </div>
