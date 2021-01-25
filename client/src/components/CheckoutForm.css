@@ -1,9 +1,18 @@
 .body {
   overflow: scroll !important;
 }
+
 .checkout-page {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  outline: none;
   overflow: scroll !important;
-  height:100%
+  background-color:#f1f1f1;
+  background-size: 60vh 65vw ;
+  background-position: center 5%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 .back-to-shop {
   background-color: transparent;
@@ -12,6 +21,11 @@
   display: flex;
   margin: 30px 30px 0px 30px;
   outline: none;
+}
+
+.containers {
+  display: flex;
+  flex-direction: column;
 }
 .page-title {
   font-family: none;
@@ -22,54 +36,108 @@
   flex-direction: column;
   align-items: center;
   margin: 10px 30px 40px;
-  color: white;
+  color: lightgray;
+  text-shadow: 1px 1px lightgrey;
 }
 .checkout-info {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+
 }
 .summary {
   font-family: none;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.5em;
-  background-color: rgb(207, 226, 245);
-  padding: 30px 10px 0px 10px;
+  background-color: white;
+  padding: 20px 20px;
+  margin: 20px 10px;
+  width: 70%;
   display: flex;
+  align-self: center;
   flex-direction: column;
-  border-radius: 5%;
   box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.15);
 }
+
+.summary-title {
+  font-size: 12px;
+  align-self: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+}
+
+.summary-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  font-family: 'none';
+  background-color: white;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  overflow: scroll;
+  height:150px;
+}
+
+.summary-product {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px;
+}
+
+
 .delivery {
-  width: 230px;
+  width: 70%;
+  align-self: center;
   font-family: none;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5em;
-  background-color: rgb(118, 149, 180);
-  padding: 30px;
+  background-color: white;
+  padding: 20px 20px;
+  margin: 20px 10px;
   display: flex;
   flex-direction: column;
-  border-radius: 5%;
   box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.15);
 }
 .delivery-form {
   display: flex;
   flex-direction: column;
   line-height: 30px;
+  width: 70%;
+  margin-left: 20px;
 }
+
+.delivery-form input {
+  background-color: #fcffd5;
+  border: 0.5px solid lightyellow;
+}
+
+.hidden {
+  visibility: hidden;
+}
+.shown {
+  visibility: visible;
+}
+
 .facturation-title {
   margin-bottom: 20px;
-  margin-left: 20px
+  margin-left: 20px;
+  align-self: center;
 }
 #first_name {
   box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
   border-radius: 4px;
 }
+
 #last_name {
   box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
   border-radius: 4px;
 }
+
+#email {
+  box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+  border-radius: 4px;
+}
+
 #address {
   box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
   border-radius: 4px;
@@ -82,26 +150,34 @@
   text-align: center;
 }
 .success h2 {
-  color: seagreen;
+  color: white;
+  font-family: none;
+  letter-spacing: 0.2em;
+  font-size: 18px;
+  margin-top:40px
+}
+
+.success-email {
+  text-align: center;
+  color: white;
+  font-family: none;
+  font-size: 18px;
+  margin-top:10px;
 }
 .success a {
   display: block;
+  color: rgb(225, 225, 255);
+  line-height: 30px;
 }
-.checkout-page {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
+
 .checkout-form {
-  width: 350px;
-  padding: 2em;
-  border-radius: 8px;
+  padding: 20px 40px;
+  margin: 20px 10px;
+  width: 70%;
   background-color: #fff;
   box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
-  margin: 50px;
   align-self: center;
 }
 .checkout-form p {
