@@ -1,9 +1,9 @@
 .MuiButton-label {
-  color: #fff;
+  color: white;
   font-size: 18px;
   letter-spacing: 0.5em;
   font-family: none;
-  text-shadow: 1px 1px black;
+  text-shadow: 2px 1px rgb(2, 112, 2);
 }
 
 #simple-menu {

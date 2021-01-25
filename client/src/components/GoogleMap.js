@@ -218,16 +218,17 @@ const MapContainer = (props) => {
 
   const stores = [
     {
-      name: "Sami Fruits",
-      address: " 8200 19e Avenue, Montréal, QC H1Z 4J8",
-      phoneNumber: '(514)223-4322',
-      image: './images/applelogo.jpeg',
-      web: "http://www.samifruits.com/",
-      facebook: "https://www.facebook.com/samyfruitcompany",
+      name: "Fruiterie Milano",
+      address: "6862 Boul St-Laurent, Montréal, QC H2S 3C7",
+      phoneNumber: '(514)273-4322',
+      image: './images/milanologo.png',
+      web: "https://milanofruiterie.ca//",
+      facebook: "https://www.facebook.com/fruiteriemilano",
       location: {
-        lat: 45.570940,
-        lng: -73.608520
-      }
+        lat: 45.53282392180832, 
+        lng: -73.61462652787904
+      },
+      opacity: 0.5
     },
     {
       name: 'Vito Charcuterie',
@@ -237,9 +238,10 @@ const MapContainer = (props) => {
       web: "https://boucherie-chez-vito.business.site/",
       facebook: "https://www.facebook.com/vitoviande",
       location: {
-        lat: 45.522420,
-        lng: -73.595520
-      }
+        lat: 45.5241718283334, 
+        lng: -73.60595205014938
+      },
+      opacity: 1 
     },
     {
       name: 'St-Viateur Bagel',
@@ -251,7 +253,8 @@ const MapContainer = (props) => {
       location: {
         lat: 45.522880,
         lng: -73.595200
-      }
+      },
+      opacity: 1 
     },
     {
       name: 'Guillaume',
@@ -263,7 +266,8 @@ const MapContainer = (props) => {
       location: {
         lat: 45.523260,
         lng: -73.593780
-      }
+      },
+      opacity: 1 
     },
     {
       name: 'Farine et Vanille',
@@ -275,11 +279,52 @@ const MapContainer = (props) => {
       location: {
         lat: 45.518920,
         lng: -73.594740
-      }
+      },
+      opacity: 1 
+    },
+    {
+      name: 'Vrac & Bocaux',
+      address: "1307 Avenue du Mont-Royal E, Montréal, QC H2J 1Y6",
+      phoneNumber: '(438)897-6733',
+      image: './images/vraclogo.png',
+      web: "https://vracetbocaux.ca/en//",
+      facebook: "https://www.facebook.com/vracetbocauxepiceriebio",
+      location: {
+        lat :45.530959303421604,
+        lng: -73.57771951154008
+      },
+      opacity: 1 
+    },
+    {
+      name: 'Le petit coin epicerie',
+      address: "45 Rue Beaubien E, Montréal, QC H2S 1P7",
+      phoneNumber: '(438)999-8989',
+      image: './images/farinelogo.png',
+      web: "https://le-petit-coin-epicerie.business.site/?m=true&fbclid=IwAR33KVRvq8gfn45q8V97DWtffigngOP1cbS2GFk0n9MJuxYZPTljMgcU170/",
+      facebook: "https://www.facebook.com/Lepetitcoinepicerie",
+      location: {
+        lat: 45.53098555,
+        lng: -73.60809765925211
+      },
+      opacity: 1 
+    }, 
+    {
+      name: 'Louise bakery',
+      address: "6835 Boul St-Laurent, Montréal, QC H2S 3C8",
+      phoneNumber: '(438)253-6001',
+      image: './images/farinelogo.png',
+      web: "https://www.boulangerielouise.ca/?fbclid=IwAR1bbcCuG64d2s3OmifsDEbSOlwEeOBy63YUesbUonuBuMgX56VaNm4JKbY",
+      facebook: "https://www.facebook.com/geezlouiseboulangerie/",
+      location: {
+        lat: 45.544142009973285, 
+        lng: -73.62159305320061
+      },
+      opacity: 0.5 
     },
   ]
 
 
+  
   return (
 
     <LoadScript
@@ -297,7 +342,7 @@ const MapContainer = (props) => {
 
         <Circle
           center={defaultCenter}
-          radius={1000}
+          radius={2000}
           options={{
             fillColor: '#32CD32',
             fillOpacity: '0.2',
@@ -309,6 +354,7 @@ const MapContainer = (props) => {
           label='You Are Here'
           name='Customer Location'
           position={defaultCenter}
+          
         />
 
         {
@@ -331,7 +377,7 @@ const MapContainer = (props) => {
               clickable={true}
               onCloseClick={() => setSelected({})}
             >
-              <div className="infoWindow">
+              <div className="infoWindow" style={{opacity:`${selected.opacity}`}}>
                 <div className="name-store">
                   <img className="store-img" src={selected.image}></img>
                   <h2>{selected.name}</h2>

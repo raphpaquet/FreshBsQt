@@ -7,22 +7,22 @@ import NavMenu from './NavMenu'
 
 // will need to setUser to response.data // 
 
-export default function Login(props) {
+export default function Login (props) {
 
   const history = useHistory();
-  const [state , setState] = useState({
-    email : "",
-    password : "",
+  const [state, setState] = useState({
+    email: "",
+    password: "",
     successMessage: null
   })
   const handleChange = (e) => {
-    const { id , value } = e.target   
+    const { id, value } = e.target
     setState(prevState => ({
-        ...prevState,
-        [id] : value
+      ...prevState,
+      [id]: value
     }))
   }
-  
+
   const handleSubmitClick = (e) => {
     e.preventDefault();
     const userData = {
@@ -33,11 +33,11 @@ export default function Login(props) {
       props.showError("Please enter your email and password")
     } else {
       axios.post('/api/users/login', userData)
-        .then(function (response) {
-          if(response.data.email) {
+        .then(function(response) {
+          if (response.data.email) {
             setState(prevState => ({
               ...prevState,
-              'successMessage' : 'Login successful. Redirecting to home page'
+              'successMessage': 'Login successful. Redirecting to home page'
             }))
             redirectToHome();
 
@@ -50,13 +50,14 @@ export default function Login(props) {
             props.showError("Email or password incorrect");
           }
         })
-      .catch(function (error) {
-        console.log(error)
-      });
+        .catch(function(error) {
+          console.log(error)
+        });
     }
   }
 
   const redirectToHome = () => {
+    sessionStorage.setItem('loggedIn', true)
     history.push('/')
   }
 
@@ -66,57 +67,57 @@ export default function Login(props) {
 
 
   return (
-  <div className="login-page">
-    <div className="home-nav">
-        <img className="logo" src="./images/basket.svg" style={{'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
+    <div className="login-page">
+      <div className="home-nav">
+        <img className="logo" src="./images/basket.svg" style={{ 'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
         <div className="dropdown-bars">
           <NavMenu />
         </div>
       </div>
-    <video autoPlay loop muted id="background-video">
+      <video autoPlay loop muted id="background-video">
         <source src="/video/bread.mp4" type="video/mp4" />
       </video>
-    <div className="login">
-      <form className="login-form" action="/login" method="POST">
-        <h1 className="login-title">Login</h1>
-        <span>
-          <label for="firstName"></label>
-          <input 
-            id="email"
-            name="email" 
-            type="email"  
-            placeholder="Email"
-            value={state.email}
-            onChange={handleChange}
-            required
-          />
-        </span>
-        <span>
-          <label for="password"></label>
-          <input 
-            id="password"
-            name="password" 
-            type="password"  
-            placeholder="Password"
-            value={state.password}
-            onChange={handleChange}
-            required
-          />
-        </span>
-        <div className="button-login">
-          <button 
-            type="submit" 
-            class="submit-button" 
-            onClick={handleSubmitClick}>
-            Submit
+      <div className="login">
+        <form className="login-form" action="/login" method="POST">
+          <h1 className="login-title">Login</h1>
+          <span>
+            <label for="firstName"></label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={state.email}
+              onChange={handleChange}
+              required
+            />
+          </span>
+          <span>
+            <label for="password"></label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={state.password}
+              onChange={handleChange}
+              required
+            />
+          </span>
+          <div className="button-login">
+            <button
+              type="submit"
+              class="submit-button"
+              onClick={handleSubmitClick}>
+              Submit
           </button>
+          </div>
+        </form>
+        <div className="questionLogin">
+          <span className="login-login">Don't have an account?</span>
+          <span id="login-log" onClick={() => redirectToRegister()}>Register</span>
         </div>
-      </form>
-      <div className="questionLogin">
-        <span className="login-login">Don't have an account?</span>
-        <span id="login-log" onClick={() => redirectToRegister()}>Register</span>
       </div>
     </div>
-  </div>
   )
 }
