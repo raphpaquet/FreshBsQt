@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   GoogleMap,
   LoadScript,
@@ -16,7 +16,7 @@ import PhoneIcon from '@material-ui/icons/Phone';
 
 const MapContainer = (props) => {
 
-  const [ selected, setSelected ] = useState({});
+  const [selected, setSelected] = useState({});
 
   const onSelect = store => {
     setSelected(store);
@@ -215,62 +215,62 @@ const MapContainer = (props) => {
   }
 
   const stores = [
-  {
-    name: "Sami Fruits",
-    address: " 8200 19e Avenue, Montréal, QC H1Z 4J8",
-    phoneNumber: '11',
-    image: './images/applelogo.jpeg',
-    web: "http://www.samifruits.com/", 
-    location: {
-      lat: 45.570940, 
-      lng: -73.608520
-    }
-  },
-  {   
-    name: 'Vito Charcuterie',
-    address: "5180 st. Urbain street",
-    phoneNumber: '11',
-    image: './images/vitologo.jpg',
-    web: "https://boucherie-chez-vito.business.site/", 
-    location: {
-      lat: 45.522420, 
-      lng: -73.595520
-    }
-  },
-  { 
-    name: 'St-Viateur Bagel',
-    address: "158 Rue Saint- Viateur O, Montréal, QC H2T 2L4",
-    phoneNumber: '(514)270-2972',
-    image: './images/logobagel.png',
-    web: "https://www.stviateurbagel.com/", 
-    location: {
-      lat: 45.522880, 
-      lng: -73.595200
-    }
-  },
-  { 
-    name: 'Guillaume',
-    address: "5134 Boul St-Laurent, Montréal, QC H2T 1R8",
-    phoneNumber: '11',
-    image: './images/guillaumelogo.jpg',
-    web: "https://guillau.me/", 
-    location: {
-      lat: 45.523260, 
-      lng: -73.593780
-    }
-  },
-  { 
-    name: 'Farine et Vanille',
-    address: "5000 Av du Parc, Montréal, QC H2V 4E8",
-    phoneNumber: '22',
-    image:'./images/farinelogo.png',
-    web: "https://www.farineetvanille.com/", 
-    location: {
-      lat: 45.518920, 
-      lng: -73.594740
-    }
-  },
-]
+    {
+      name: "Sami Fruits",
+      address: " 8200 19e Avenue, Montréal, QC H1Z 4J8",
+      phoneNumber: '11',
+      image: './images/applelogo.jpeg',
+      web: "http://www.samifruits.com/",
+      location: {
+        lat: 45.570940,
+        lng: -73.608520
+      }
+    },
+    {
+      name: 'Vito Charcuterie',
+      address: "5180 st. Urbain street",
+      phoneNumber: '11',
+      image: './images/vitologo.jpg',
+      web: "https://boucherie-chez-vito.business.site/",
+      location: {
+        lat: 45.522420,
+        lng: -73.595520
+      }
+    },
+    {
+      name: 'St-Viateur Bagel',
+      address: "158 Rue Saint- Viateur O, Montréal, QC H2T 2L4",
+      phoneNumber: '(514)270-2972',
+      image: './images/logobagel.png',
+      web: "https://www.stviateurbagel.com/",
+      location: {
+        lat: 45.522880,
+        lng: -73.595200
+      }
+    },
+    {
+      name: 'Guillaume',
+      address: "5134 Boul St-Laurent, Montréal, QC H2T 1R8",
+      phoneNumber: '11',
+      image: './images/guillaumelogo.jpg',
+      web: "https://guillau.me/",
+      location: {
+        lat: 45.523260,
+        lng: -73.593780
+      }
+    },
+    {
+      name: 'Farine et Vanille',
+      address: "5000 Av du Parc, Montréal, QC H2V 4E8",
+      phoneNumber: '22',
+      image: './images/farinelogo.png',
+      web: "https://www.farineetvanille.com/",
+      location: {
+        lat: 45.518920,
+        lng: -73.594740
+      }
+    },
+  ]
 
 
   return (
@@ -283,6 +283,7 @@ const MapContainer = (props) => {
         center={defaultCenter}
         options={{
           styles: mapTheme,
+          scrollwheel: true,
         }}
 
       >
@@ -306,86 +307,37 @@ const MapContainer = (props) => {
         {
           stores.map(store => {
             return (
-            <Marker 
-              key={store.name}
-              position={store.location}
-              onClick={() => onSelect(store)}
-            />
+              <Marker
+                key={store.name}
+                position={store.location}
+                onClick={() => onSelect(store)}
+              />
             )
           })
         }
-{/* 
-        <Marker
-          // onClick={() => alert('Sami Fruits 8220 19e avenue, Montreal, QC, H1Z4J8')}
-          // name='Store Location'
-          // position={stores.storeOne}
-          key={stores[0].name}
-          onClick={() => onSelect(stores[0])}
-          name={stores[0].name}
-          position={stores[0].location}
 
-        />
-
-        <Marker
-          // onClick={() => alert('5180 st Urbain st, Montreal, QC, h2t 2w7')}
-          // name='Store Location'
-          // position={stores.storeTwo}
-          key={stores[1].name}
-          onClick={() => onSelect(stores[1])}
-          name={stores[1].name}
-          position={stores[1].location}
-        />
-
-        <Marker
-          key={stores[2].name}
-          onClick={() => onSelect(stores[2])}
-          // onClick={() => alert('Fairmount Bagel - Something something best bagels around')}
-          name={stores[2].name}
-          position={stores[2].location}
-        />
-
-        <Marker
-          // onClick={() => alert('Guillaume - 5134 st-laurent, montreal, quebec, h2t 2m2')}
-          // name='Store Location'
-          // position={stores.storeFour}
-          key={stores[3].name}
-          onClick={() => onSelect(stores[3])}
-          name={stores[3].name}
-          position={stores[3].location}
-        />
-
-        <Marker
-          // onClick={() => alert('Farine et Vanille, - Something something best bakery around')}
-          // name='Store Location'
-          // position={stores.storeFive}
-          key={stores[4].name}
-          onClick={() => onSelect(stores[4])}
-          name={stores[4].name}
-          position={stores[4].location}
-        /> */}
-
-{
-            selected.location && 
-            (
-              <InfoWindow
+        {
+          selected.location &&
+          (
+            <InfoWindow
               position={selected.location}
               clickable={true}
               onCloseClick={() => setSelected({})}
             >
-             <div className="infoWindow">
-               <div className="name-store">
-                <img className="store-img" src={selected.image}></img>
-                <h2>{selected.name}</h2>
-               </div>
+              <div className="infoWindow">
+                <div className="name-store">
+                  <img className="store-img" src={selected.image}></img>
+                  <h2>{selected.name}</h2>
+                </div>
                 <span className="store-des"><LocationOnIcon />{selected.address}</span>
                 <span className="store-des"><PhoneIcon />{selected.phoneNumber}</span>
                 <span>
                   <a className="website" href={selected.web}>Visit their website</a>
                 </span>
-              </div> 
+              </div>
             </InfoWindow>
-            )
-         }
+          )
+        }
 
       </GoogleMap>
     </LoadScript>

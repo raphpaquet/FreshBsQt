@@ -5,7 +5,7 @@ import './ItemDropDown.css'
 
 // useful API
 import SalesTax from 'sales-tax';
-import {Animated} from 'react-animated-css';
+import { Animated } from 'react-animated-css';
 import haversine from 'haversine-distance';
 
 // components
@@ -28,6 +28,13 @@ import ClearIcon from '@material-ui/icons/Clear';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+
+
+
+
+
+let finalCart = []
+
 
 
 
@@ -135,11 +142,13 @@ export default function ItemDropDown () {
     });
   };
 
-  const productsByStore = (product) => stores.map((store) => {
-      if (store.id === product.store_id ) {
-        return store.name
-      }
-    })
+  // Matches the product with the store name
+  const productsByStore = (product) => storesArray.map((store) => {
+    if (store.id === product.store_id) {
+      return store.name
+    }
+  })
+
 
   //Render ALL products
   const listProductsToBuy = () => products.map((product) => (
@@ -148,6 +157,9 @@ export default function ItemDropDown () {
         <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
           <div key={product.id} className="product-image-section">
             <img src={product.image} alt="citrus" />
+            <div className="product-description">
+              <p>{product.description}</p>
+            </div>
           </div>
           <h3>{product.name}</h3>
           <h5>From {productsByStore(product)}</h5>
@@ -155,7 +167,23 @@ export default function ItemDropDown () {
             <span>${(product.price).toFixed(2)}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
           </div>
         </Animated>
-      ) : null}
+      ) : (
+          <div className="na-item">
+            <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
+              <div key={product.id} className="product-image-section">
+                <img src={product.image} alt="citrus" />
+                <div className="sorry-not-available">
+                  <p>Sorry, This Item Is Not Available In Your Area</p>
+                </div>
+              </div>
+              <h3>{product.name}</h3>
+              <h5>From {productsByStore(product)}</h5>
+              <div className="not-available">
+                <span>${(product.price).toFixed(2)}</span><button type="submit">N/A</button>
+              </div>
+            </Animated>
+          </div>
+        )}
     </div>
   ));
 
@@ -223,6 +251,7 @@ export default function ItemDropDown () {
   const defaultCenter = {
     lat: latitudeLocation, lng: longitudeLocation
   }
+
 
   // axios call to get the Store db 
   useEffect(() => {
@@ -296,7 +325,8 @@ export default function ItemDropDown () {
 
   console.log(products)
 
-  // Makes sure that the products do not load before the axios call. 
+
+  // Makes sure that the stores do not load before the axios call. 
   if (loadingStores) {
     return <section className="grid">Loading...
     <div>
@@ -324,12 +354,12 @@ export default function ItemDropDown () {
   };
 
   // Render products by categories
-  const listCategoryToBuy = (cat) => products.filter(product => product.category === cat).map((product) =>
-    (
-      <div className="product-wrapper">
+  const listCategoryToBuy = (cat) => products.filter(product => product.category === cat).map((product) => (
+    <div className="product-wrapper">
+      {rangeS1 && product.store_id === 1 || rangeS2 && product.store_id === 2 || rangeS3 && product.store_id === 3 || rangeS4 && product.store_id === 4 || rangeS5 && product.store_id === 5 ? (
         <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
           <div key={product.id} className="product-image-section">
-            <img src={product.image}/>
+            <img src={product.image} />
           </div>
           <h3>{product.name}</h3>
           <h5>From {productsByStore(product)}</h5>
@@ -337,8 +367,25 @@ export default function ItemDropDown () {
             <span>${(product.price).toFixed(2)}</span><button type="submit" onClick={() => addToCart(product)}>Add</button>
           </div>
         </Animated>
-      </div>
-    ));
+      ) : (
+          <div className="na-item">
+            <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
+              <div key={product.id} className="product-image-section">
+                <img src={product.image} alt="citrus" />
+                <div className="sorry-not-available">
+                  <p>Sorry, This Item Is Not Available In Your Area</p>
+                </div>
+              </div>
+              <h3>{product.name}</h3>
+              <h5>From {productsByStore(product)}</h5>
+              <div className="not-available">
+                <span>${(product.price).toFixed(2)}</span><button type="submit">N/A</button>
+              </div>
+            </Animated>
+          </div>
+        )}
+    </div>
+  ));
 
   // This helps set the state when choosing a food category. 
   const getCategory = (category) => {
@@ -466,7 +513,14 @@ export default function ItemDropDown () {
               </div>
             </container>
             <div className='cart-total'>Total: ${getTotal()}</div>
-            <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => history.push('/checkout')}>Checkout</button>
+            <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => {
+              console.log("this is cart", cart)
+              finalCart = cart
+              console.log("FINALCART:",finalCart)
+              history.push('/checkout')}
+            }
+
+            >Checkout</button>
           </div>
         ) : null}
 
@@ -553,12 +607,12 @@ export default function ItemDropDown () {
           ) : null}
 
           {showOther === true ? (
-          <div className="title">
-            <h1 className="cat-title">More stuff</h1>
-            <section className="grid">
-              {listCategoryToBuy('other')}
-            </section>
-          </div>
+            <div className="title">
+              <h1 className="cat-title">More stuff</h1>
+              <section className="grid">
+                {listCategoryToBuy('other')}
+              </section>
+            </div>
           ) : null}
 
         </section>
@@ -567,7 +621,7 @@ export default function ItemDropDown () {
   );
 
   return (
-    <div style={{ backgroundImage: "url('../images/pinnaple.jpeg')", backgroundSize: "cover", backgroundPosition:"top", height: '100vh' }}>
+    <div style={{ backgroundImage: "url('../images/pinnaple.jpeg')", backgroundSize: "cover", backgroundPosition: "top", height: '100vh' }}>
 
       <div className="home-nav">
         <img className="logo" src="./images/basket.svg" style={{ 'filter': 'brightness(100)', "height": "60px", "width": "60px" }}></img>
@@ -601,5 +655,4 @@ export default function ItemDropDown () {
   );
 }
 
-
-
+export {finalCart}
