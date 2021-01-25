@@ -9,6 +9,7 @@ import haversine from 'haversine-distance';
 // components
 import MapContainer from './GoogleMap'
 import NavMenu from './NavMenu';
+import BottomNav from './BottomNav'
 import CircularProgress from './Map'
 // For the swipeable drawer that has all the items
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -24,7 +25,14 @@ import ClearIcon from '@material-ui/icons/Clear';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+
+
+
+
 let finalCart = []
+
+
+
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -78,6 +86,7 @@ export default function ItemDropDown () {
   const [showCart, setShowCart] = useState(false);
   const [gst, setGst] = useState('');
   const [qst, setQst] = useState('');
+
   const [rangeS1, setRangeS1] = useState(false);
   const [rangeS2, setRangeS2] = useState(false);
   const [rangeS3, setRangeS3] = useState(false);
@@ -91,12 +100,16 @@ export default function ItemDropDown () {
   });
   const history = useHistory();
 
+  // For checkout form 
+  // const handlePurchase = prod => () => {
+  //   setSelectProduct(prod);
+  //   console.log('select prod: ' , prod)
+  //   history.push('/checkout')
+  //   console.log(selectedProduct)
+  // }
   // For the axios call to render the products. Needs to be loaded to work. 
   const [products, setProducts] = useState('');
   const [loadingProducts, setLoadingProducts] = useState(true);
-
-
-  const [loadingStores, setLoadingStores] = useState(true)
 
 
   // CART IMPLEMENTATION // 
@@ -120,11 +133,11 @@ export default function ItemDropDown () {
 
   // Matches the product with the store name
   const productsByStore = (product) => storesArray.map((store) => {
+    console.log(store.id)
     if (store.id === product.store_id) {
       return store.name
     }
   })
-
 
   //Render ALL products
   const listProductsToBuy = () => products.map((product) => (
@@ -209,7 +222,7 @@ export default function ItemDropDown () {
   let user_price = getToSessionStorage('total_price');
   console.log('user_price', JSON.parse(user_price))
 
-  // get session storage user location 
+  // This calculates the distance and makes sure it is under 1001m
   const userLocation = JSON.parse(sessionStorage.getItem('user_location'))
   const latitudeLocation = userLocation['latitude']
   const longitudeLocation = userLocation['longitude']
@@ -233,21 +246,21 @@ export default function ItemDropDown () {
       }
     },
     storeThree: {
-      name: 'Fairmont Bagel', 
+      name: 'Fairmont Bagel',
       id: 3,
       distance: {
         lat: 45.522880, lng: -73.595200
       }
     },
     storeFour: {
-      name: 'Guillaume', 
+      name: 'Guillaume',
       id: 4,
       distance: {
         lat: 45.523260, lng: -73.593780
       }
     },
     storeFive: {
-      name: 'Farine et Vanille', 
+      name: 'Farine et Vanille',
       id: 5,
       distance: {
         lat: 45.518920, lng: -73.594740
@@ -270,27 +283,29 @@ export default function ItemDropDown () {
       }
     },
     {
-      name: 'Fairmont Bagel', 
+      name: 'Fairmont Bagel',
       id: 3,
       distance: {
         lat: 45.522880, lng: -73.595200
       }
     },
-     {
-      name: 'Guillaume', 
+    {
+      name: 'Guillaume',
       id: 4,
       distance: {
         lat: 45.523260, lng: -73.593780
       }
     },
-     {
-      name: 'Farine et Vanille', 
+    {
+      name: 'Farine et Vanille',
       id: 5,
       distance: {
         lat: 45.518920, lng: -73.594740
       }
     },
+
   ]
+
   const distanceOne = haversine(defaultCenter, stores.storeOne.distance);
   const distanceTwo = haversine(defaultCenter, stores.storeTwo.distance);
   const distanceThree = haversine(defaultCenter, stores.storeThree.distance);
@@ -330,17 +345,6 @@ export default function ItemDropDown () {
       });
   }, []);
   console.log(products)
-
-
-  // Makes sure that the stores do not load before the axios call. 
-  if (loadingStores) {
-    return <section className="grid">Loading...
-    <div>
-        {<CircularProgress color="white" size={40} className={classes.buttonProgress} />}
-      </div>
-    </section>
-  }
-  
 
   // Makes sure that the products do not load before the axios call. 
   if (loadingProducts) {
@@ -482,7 +486,7 @@ export default function ItemDropDown () {
           </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Desserts')}>
             <ListItemText primary="Desserts" />
-          </StyledMenuItem> 
+          </StyledMenuItem>
           <StyledMenuItem onClick={() => getCategory('Other')}>
             <ListItemText primary="Other" />
           </StyledMenuItem>

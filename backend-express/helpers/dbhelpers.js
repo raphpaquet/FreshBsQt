@@ -106,17 +106,6 @@ module.exports = (db) => {
             .catch(err => err);
   
     }
-
-    const getStores = () => {
-        const query = {
-            text: `SELECT * FROM stores`
-        }
-  
-        return db.query(query)
-            .then(result => result.rows)
-            .catch(err => err);
-  
-    }
   
     console.log(getUserById(1))
     return {
@@ -125,8 +114,7 @@ module.exports = (db) => {
         addUser,
         userLogin, 
         getProducts,
-        getUserById,
-        getStores
+        getUserById
     };
   };
 
