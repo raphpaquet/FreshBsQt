@@ -4,11 +4,11 @@ const db = require('../db')
 
 
 module.exports = ({
-  getStore
+  getStores
 }) => {
   router.get('/', (req, res) => {
-    getStore()
-    .then((shops) => res.json(shops))
+    getStores()
+    .then((stores) => res.json(stores))
     .catch((err) => res.json({
       error: err.message
     }));
