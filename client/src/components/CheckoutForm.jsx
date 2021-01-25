@@ -12,7 +12,39 @@ import { finalCart } from './ItemDropDown'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import Select from './SelectModal';
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 300,
+  },
+  paper: {
+    backgroundColor: '#f2fff6',
+    textAlign: 'center',
+    fontWeight: 300,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    outline: 0,
+    height: '22rem',
+    width: '45rem',
+  },
+  prompt: {
+    fontFamily: 'Roboto',
+    fontWeight: 300,
+  },
+}));
+
 const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
+  // Modal state
+  const classes = useStyles();
+  const [open, setOpen] = useState(true);
   //to handle whether the checkbox is toggled or not
   const [toggled, setToggled] = useState(false)
   const [state, setState] = useState({
@@ -21,6 +53,11 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
     address: "",
     city: "",
   })
+
+  // Modal close handler
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 
   const listProductsInCart = () => (finalCart.filter((v, i) => finalCart.indexOf(v) === i).map((product) =>
@@ -78,6 +115,31 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user }) => {
   }
   return (
     <div className="checkout-page">
+      {/* Modal JSX */}
+      <div>
+        <Modal
+          disableBackdropClick
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 800,
+          }}
+        >
+          <Fade in={open}>
+            <div className={classes.paper}>
+              <h2 className={classes.prompt}>Checkout Options:</h2>
+              <Select /> {/* This lets the user select "guest", "login", or "register" */}
+              <button className="continue-btn">Continue</button>
+            </div>
+          </Fade>
+        </Modal>
+      </div>
+      {/* End of Modal JSX */}
       <video autoPlay loop muted id="background-video">
         <source src="/video/pie.mp4" type="video/mp4" />
       </video>
