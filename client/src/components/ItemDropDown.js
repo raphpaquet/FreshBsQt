@@ -92,6 +92,9 @@ export default function ItemDropDown () {
   const [rangeS3, setRangeS3] = useState(false);
   const [rangeS4, setRangeS4] = useState(false);
   const [rangeS5, setRangeS5] = useState(false);
+  const [rangeS6, setRangeS6] = useState(false);
+  const [rangeS7, setRangeS7] = useState(false);
+  const [rangeS8, setRangeS8] = useState(false);
   const [totalProduct, setTotalProduct] = useState(0);
   // For the bottom drawer that holds the items
   const classes = useStyles();
@@ -142,7 +145,7 @@ export default function ItemDropDown () {
   //Render ALL products
   const listProductsToBuy = () => products.map((product) => (
     <div className="product-wrapper">
-      {rangeS1 && product.store_id === 1 || rangeS2 && product.store_id === 2 || rangeS3 && product.store_id === 3 || rangeS4 && product.store_id === 4 || rangeS5 && product.store_id === 5 ? (
+      {rangeS1 && product.store_id === 1 || rangeS2 && product.store_id === 2 || rangeS3 && product.store_id === 3 || rangeS4 && product.store_id === 4 || rangeS5 && product.store_id === 5  || rangeS6 && product.store_id === 6 || rangeS7 && product.store_id === 7 || rangeS8 && product.store_id === 8 ? (
         <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
           <div key={product.id} className="product-image-section">
             <img src={product.image} alt="citrus" />
@@ -234,10 +237,10 @@ export default function ItemDropDown () {
 
   const stores = {
     storeOne: {
-      name: "Sami Fruits",
+      name: "Fruiterie Milano",
       id: 1,
       distance: {
-        lat: 45.570940, lng: -73.608520
+        lat: 45.53282392180832, lng: -73.61462652787904
       }
     },
     storeTwo: {
@@ -248,7 +251,7 @@ export default function ItemDropDown () {
       }
     },
     storeThree: {
-      name: 'Fairmont Bagel',
+      name: 'St-Viateur Bagel',
       id: 3,
       distance: {
         lat: 45.522880, lng: -73.595200
@@ -268,13 +271,35 @@ export default function ItemDropDown () {
         lat: 45.518920, lng: -73.594740
       }
     },
+    storeSix: {
+      name: 'Vrac & Bocaux',
+      id: 6,
+      distance: {
+        lat: 45.530959303421604, lng: -73.57771951154008
+      }
+    },   
+    storeSeven: {
+      name: 'Le petit coin epicerie',
+      id: 7,
+      distance: {
+        lat: 45.53098555, lng: -73.60809765925211
+      }
+    },   
+    storeEight: {
+      name: 'Louis Bakery',
+      id: 8,
+      distance: {
+        lat: 45.544142009973285, lng: -73.62159305320061
+      }
+    }, 
   }
+
   const storesArray = [
     {
-      name: "Sami Fruits",
+      name: "Fruiterie Milano",
       id: 1,
       distance: {
-        lat: 45.570940, lng: -73.608520
+        lat: 45.53282392180832, lng: -73.61462652787904
       }
     },
     {
@@ -285,7 +310,7 @@ export default function ItemDropDown () {
       }
     },
     {
-      name: 'Fairmont Bagel',
+      name: 'St-Viateur Bagel',
       id: 3,
       distance: {
         lat: 45.522880, lng: -73.595200
@@ -305,7 +330,27 @@ export default function ItemDropDown () {
         lat: 45.518920, lng: -73.594740
       }
     },
-
+    {
+      name: 'Vrac & Bocaux',
+      id: 6,
+      distance: {
+        lat: 45.530959303421604, lng: -73.57771951154008
+      }
+    },   
+    {
+      name: 'Le petit coin epicerie',
+      id: 7,
+      distance: {
+        lat: 45.53098555, lng: -73.60809765925211
+      }
+    },   
+    {
+      name: 'Louis Bakery',
+      id: 8,
+      distance: {
+        lat: 45.544142009973285, lng: -73.62159305320061
+      }
+    }, 
   ]
 
   const distanceOne = haversine(defaultCenter, stores.storeOne.distance);
@@ -313,28 +358,45 @@ export default function ItemDropDown () {
   const distanceThree = haversine(defaultCenter, stores.storeThree.distance);
   const distanceFour = haversine(defaultCenter, stores.storeFour.distance);
   const distanceFive = haversine(defaultCenter, stores.storeFive.distance);
+  const distanceSix = haversine(defaultCenter, stores.storeSix.distance);
+  const distanceSeven = haversine(defaultCenter, stores.storeSeven.distance);
+  const distanceEight = haversine(defaultCenter, stores.storeEight.distance);
+
   useEffect(() => {
-    if (distanceOne <= 1000) {
+    if (distanceOne <= 2000) {
       console.log('store 1 in range')
       setRangeS1(true);
     }
-    if (distanceTwo <= 1000) {
+    if (distanceTwo <= 2000) {
       console.log('store 2 in range')
       setRangeS2(true);
     }
-    if (distanceThree <= 1000) {
+    if (distanceThree <= 2000) {
       console.log('store 3 in range')
       setRangeS3(true);
     }
-    if (distanceFour <= 1000) {
+    if (distanceFour <= 2000) {
       console.log('store 4 in range')
       setRangeS4(true);
     }
-    if (distanceFive <= 1000) {
+    if (distanceFive <= 2000) {
       console.log('store 5 in range')
       setRangeS5(true);
     }
+    if (distanceSix <= 2000) {
+      console.log('store 6 in range')
+      setRangeS6(true);
+    }
+    if (distanceSeven <= 2000) {
+      console.log('store 7 in range')
+      setRangeS7(true);
+    }
+    if (distanceEight <= 2000) {
+      console.log('store 8 in range')
+      setRangeS8(true);
+    }
   }, []);
+
   // Axios call to get the products
   useEffect(() => {
     axios.get(`/api/products`)
@@ -366,7 +428,7 @@ export default function ItemDropDown () {
   // Render products by categories
   const listCategoryToBuy = (cat) => products.filter(product => product.category === cat).map((product) => (
     <div className="product-wrapper">
-      {rangeS1 && product.store_id === 1 || rangeS2 && product.store_id === 2 || rangeS3 && product.store_id === 3 || rangeS4 && product.store_id === 4 || rangeS5 && product.store_id === 5 ? (
+      {rangeS1 && product.store_id === 1 || rangeS2 && product.store_id === 2 || rangeS3 && product.store_id === 3 || rangeS4 && product.store_id === 4 || rangeS5 && product.store_id === 5 || rangeS6 && product.store_id === 6 || rangeS7 && product.store_id === 7 || rangeS8 && product.store_id === 8 ? (
         <Animated animationIn="fadeInUp" animationOut="backOutDown" isVisible={true}>
           <div key={product.id} className="product-image-section">
             <img src={product.image} />
