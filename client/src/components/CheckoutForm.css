@@ -9,7 +9,7 @@
   outline: none;
   overflow: scroll !important;
   background-color:#f1f1f1;
-  background-size: 60vh 65vw ;
+  background-size: 60vh auto ;
   background-position: center 5%;
   background-repeat: no-repeat;
   background-attachment: fixed;
