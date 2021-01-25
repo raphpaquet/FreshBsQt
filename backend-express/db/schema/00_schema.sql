@@ -20,10 +20,7 @@ CREATE TABLE stores(
     city VARCHAR(255) NOT NULL, 
     email VARCHAR(255) NOT NULL,
     phone_number VARCHAR(255) NOT NULL, 
-    lat DECIMAL(9,6),
-    lon DECIMAL(8,6),
-    website VARCHAR(255) NOT NULL,
-    image VARCHAR(255) NOT NULL
+    coordinates INTEGER
 );
 
 CREATE TABLE products(
