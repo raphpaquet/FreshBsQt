@@ -25,7 +25,6 @@ module.exports = (db) => {
         return db
             .query(query)
             .then(result => {
-                console.log(result.row[0])
                 result.rows[0]
             })
             .catch((err) => err);
@@ -43,32 +42,6 @@ module.exports = (db) => {
             .then(result => result.rows[0])
             .catch((err) => err);
     }
-
-
-    // const userLogin = (email, password) =>{
-    //     const query = {
-    //         text: `SELECT * FROM users WHERE email = $1` , 
-    //         values: [email]
-    //     }
-    //     return db
-    //         .query(query)
-    //         .then(result => {
-    //             if (result.rows[0]) {
-    //                 console.log("email has been found now test password")
-    //                 if(result.rows[0].password === password) {
-    //                     console.log("password is correct - returning user")
-    //                     return result.row[0]
-    //                 } else {
-    //                 console.log("PasswordError")
-    //                 return "PasswordError"
-    //                 }
-    //             } else {
-    //                 console.log("NoEmail")
-    //                 return "NoEmail"
-    //             }
-    //             })
-    //         .catch((err) => err);
-    // }
 
     const userLogin = (email, password) =>{
         const query = {
@@ -107,7 +80,6 @@ module.exports = (db) => {
   
     }
   
-    console.log(getUserById(1))
     return {
         getUsers,
         getUserByEmail,
