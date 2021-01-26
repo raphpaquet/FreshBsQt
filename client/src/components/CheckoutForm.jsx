@@ -151,7 +151,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
                   value={state.first_name}
                   onChange={handleChange}
                   required
-                  style={{ width: '300px' }}
+                  style={{ width: '130%' }}
                 />
               </span>
               <span>
@@ -164,7 +164,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
                   value={state.last_name}
                   onChange={handleChange}
                   required
-                  style={{ width: '300px' }}
+                  style={{ width: '130%' }}
                 />
               </span>
               <span>
@@ -177,7 +177,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
                   value={state.email}
                   onChange={handleChange}
                   required
-                  style={{ width: '300px' }}
+                  style={{ width: '130%' }}
                 />
               </span>
               <span>
@@ -190,7 +190,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
                   value={state.address}
                   onChange={handleChange}
                   required
-                  style={{ width: '300px' }}
+                  style={{ width: '130%' }}
                 />
               </span>
               <span>
@@ -203,14 +203,14 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
                   value={state.city}
                   onChange={handleChange}
                   required
-                  style={{ width: '300px' }}
+                  style={{ width: '130%' }}
                 />
               </span>
             </form>
           </div>
         </div>
         <div className="checkout-form">
-          <p style={{ border: "1px solid lightgray", padding: "2px" }}>Credit Cart Details</p>
+          <p style={{ border: "1px solid lightgray", padding: "2px" }}>Credit Card Details</p>
           <p>Amount: ${stripeTotal}</p>
           <form onSubmit={handleSubmit}>
             <label>
@@ -229,12 +229,12 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
               CVC
             <CardCVCElement />
             </label>
-            <button type="submit" className="pay-btn submit-button" style={{ marginLeft: "140px" }}>
+            <button type="submit" className="pay-btn submit-button" style={{ marginLeft: "50%" }}>
               Pay
           </button>
           </form>
           <h3 style={{color:"rgb(104, 22, 22)"}}>{error}</h3>
-          <h3>Thanks for using FreshBasket</h3>
+          <h3>Thank you for using FreshBasket</h3>
         </div>
       </div>
     </div>
