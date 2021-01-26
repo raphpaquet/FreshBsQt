@@ -39,7 +39,6 @@ export default function Login (props) {
             }))
             redirectToHome();
 
-            console.log("THIS IS THE RESPONSE IN LOGIN.JSX", response.data)
             props.setUser(response.data)
             props.showError("")
 
