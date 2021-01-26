@@ -231,7 +231,9 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
               CVC
             <CardCVCElement />
             </label>
+
             <button type="submit" className="pay-btn submit-button" style={{ marginLeft: "40%" }}>
+
               Pay
           </button>
           </form>
