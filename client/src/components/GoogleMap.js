@@ -372,7 +372,7 @@ const MapContainer = (props) => {
               onCloseClick={() => setSelected({})}
             >
               <div className="infoWindow" style={{opacity:`${selected.opacity}`}}>
-                <div className="message" style={{fontWeight:"bold"}}>{selected.message}</div>
+                <div className="message" style={{fontWeight:"bold", color:"red"}}>{selected.message}</div>
                 <div className="name-store">
                   <img className="store-img" alt="" src={selected.image}></img>
                   <h2>{selected.name}</h2>
