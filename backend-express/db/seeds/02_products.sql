@@ -11,7 +11,7 @@ VALUES ('Artichokes', 'Fresh delicious artichokes', 10, './docs/artichoke.jpeg',
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
 VALUES ('Onions', 'Bag of onions', 12, './docs/onion .jpeg', 3.99, 'Vegetables', 7);
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
-VALUES ('Pasnip', 'Bunch of parsnips', 12, './docs/parsnip.jpeg', 0.99, 'Vegetables', 6);
+VALUES ('Parsnip', 'Bunch of parsnips', 12, './docs/parsnip.jpeg', 0.99, 'Vegetables', 6);
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
 VALUES ('Tomatoes', 'Box of fresh tomatoes', 14, './docs/tomato.jpeg', 2.99, 'Vegetables', 7);
 INSERT INTO products (name, description, quantity, image, price, category, store_id)
