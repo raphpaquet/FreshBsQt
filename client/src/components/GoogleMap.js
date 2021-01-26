@@ -225,8 +225,7 @@ const MapContainer = (props) => {
         lat: 45.53282392180832, 
         lng: -73.61462652787904
       },
-      opacity: 0.5,
-      message: "SORRY ! OUTSIDE YOUR AREA"
+      opacity: 1,
     },
     {
       name: 'Vito Charcuterie',
@@ -317,8 +316,7 @@ const MapContainer = (props) => {
         lat: 45.544142009973285, 
         lng: -73.62159305320061
       },
-      opacity: 0.5, 
-      message: "SORRY ! OUTSIDE YOUR AREA"
+      opacity: 1, 
     },
   ]
 

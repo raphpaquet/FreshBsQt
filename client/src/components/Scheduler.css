@@ -1,0 +1,34 @@
+.MuiDialog-paperWidthSm {
+  width: 400px;
+}
+
+.time-range-start span {
+  margin:5px;
+}
+
+.delivery-Button {
+  color: black;
+  align-items: center;
+}
+
+
+.MuiTypography-h6 {
+  font-family: none;
+  text-align: center;
+}
+
+.time-select {
+  font-family: none;
+  letter-spacing: normal;
+}
+
+.simple-button {
+  padding: 10px;
+  background-color: rgb(233, 255, 233);
+  border: 1px solid rgb(0, 95, 0);
+  font-family: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  width:30%;
+  margin: 0px 0px 20px 35%
+}

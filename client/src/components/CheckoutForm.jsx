@@ -12,6 +12,7 @@ import { finalCart } from './ItemDropDown'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SimpleSelect from './SelectModal';
+import Scheduler from './Scheduler'
 
 const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
   //to handle whether the checkbox is toggled or not
@@ -207,6 +208,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
                 />
               </span>
             </form>
+                <Scheduler />
           </div>
         </div>
         <div className="checkout-form">
@@ -229,7 +231,7 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
               CVC
             <CardCVCElement />
             </label>
-            <button type="submit" className="pay-btn submit-button" style={{ marginLeft: "50%" }}>
+            <button type="submit" className="pay-btn submit-button" style={{ marginLeft: "40%" }}>
               Pay
           </button>
           </form>

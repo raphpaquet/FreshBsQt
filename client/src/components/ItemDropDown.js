@@ -199,7 +199,7 @@ export default function ItemDropDown () {
   const getTotal = () => {
     const gstTax = (cartTotal * gst)
     const qstTax = (cartTotal * qst)
-    const total = cartTotal + qstTax + gstTax
+    const total = cartTotal + qstTax + gstTax + 5
     sessionStorage.setItem('stripeTotal', total.toFixed(2))
     return total.toFixed(2)
   }
@@ -563,10 +563,11 @@ export default function ItemDropDown () {
                 <span className="subtotal">Subtotal: ${cartTotal.toFixed(2)}</span>
                 <span className="gst">Qst: ${(cartTotal * qst).toFixed(2)}  </span>
                 <span className="qst">Gst: ${(cartTotal * gst).toFixed(2)}</span>
+                <span className="qst">Delivery fees: $5.00</span>
               </div>
             </container>
             <div className='cart-total'>Total: ${getTotal()}</div>
-            <button className="submit-button btn-to-checkout" style={{ marginRight: "50px" }} onClick={() => {
+            <button className="submit-button btn-to-checkout" style={{ width:"40%", marginBottom:"50px", marginLeft:"50%" }} onClick={() => {
               console.log("this is cart", cart)
               finalCart = cart
               console.log("FINALCART:", finalCart)
