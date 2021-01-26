@@ -71,13 +71,12 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
   const handleSubmit = async event => {
     event.preventDefault()
       if (!state.first_name || !state.last_name || !state.email || !state.address || !state.city) {
-        console.log("NOOOOO")
+
           setError('Please fill all the forms')
           console.log(error)
       } else {
         setError('')
         const { token } = await stripe.createToken()
-        console.log(selectedProduct)
         const order = await axios.post('/api/stripe/charge', {
           amount: 992,
           source: token.id,
