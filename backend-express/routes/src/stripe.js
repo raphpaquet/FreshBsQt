@@ -1,7 +1,6 @@
 const stripe = require('stripe')('sk_test_51I6Jt9HsmgbtTrbqZeHwe4pU1cmN7qxM1W3cN6W3OHrxGnHoT2zwfaFuhz6iJuD5HDgLwGPlOg2cFmYjPHqJt4pl00FiCiboql')
 
 async function postCharge(req, res) {
-  console.log(req.body)
   try {
     const { amount, source, receipt_email } = req.body
 
