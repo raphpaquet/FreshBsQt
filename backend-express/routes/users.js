@@ -76,7 +76,6 @@ module.exports = ({
             .then(user => {
 
                 if (user) {
-                    console.log("if user is found", user)
                     res.json({
                         msg: 'Sorry, a user account with this email already exists'
                     });
@@ -87,7 +86,6 @@ module.exports = ({
 
             })
             .then(newUser => {
-                console.log("look here", newUser)
               req.session.user_id = newUser.id 
               res.json(newUser)
             })
