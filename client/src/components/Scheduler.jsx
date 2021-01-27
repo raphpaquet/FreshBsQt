@@ -38,6 +38,7 @@ function SimpleDialog(props) {
     start:'07:00',
     end: '18:59'
   })
+ 
 
   useEffect (() => {
     setStartTime(timeRange.start)
@@ -61,6 +62,8 @@ function SimpleDialog(props) {
   const handleClose = () => {
     onClose(selectedValue);
     console.log('select' , selectedValue)
+    
+
   };
 
   const handleListItemClick = (value) => {
@@ -123,6 +126,7 @@ SimpleDialog.propTypes = {
 export default function SimpleDialogDemo(date) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = useState('')
+  const [message, setMessage] = useState('')
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -131,6 +135,7 @@ export default function SimpleDialogDemo(date) {
   const handleClose = (value) => {
     setOpen(false);
     setSelectedValue(value);
+    setMessage('Time slot reserved !')
   };
 
   return (
@@ -138,6 +143,7 @@ export default function SimpleDialogDemo(date) {
       {/* <div className="text-select" style={{letterSpacing:"normal"}}variant="subtitle1">Day Selected: {selectedValue}</div>
       <div className="text-select" style={{letterSpacing:"normal"}}variant="subtitle1">Time Selected: </div>  */}
       <br />
+      <div style={{marginLeft:"30%"}}>{message}</div>
       <button style={{marginLeft:"30%"}}className="submit-button delivery-button" variant="outlined" color="primary" onClick={handleClickOpen}>
         Choose your time delivery
       </button>

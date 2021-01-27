@@ -231,13 +231,13 @@ const CheckoutForm = ({ selectedProduct, stripe, history, user, props }) => {
             <CardCVCElement />
             </label>
 
-            <button type="submit" className="pay-btn submit-button" style={{ marginLeft: "40%" }}>
+            <button type="submit" className="pay-btn submit-button" style={{ marginLeft: "45%" }}>
 
               Pay
           </button>
           </form>
           <h3 style={{color:"rgb(104, 22, 22)"}}>{error}</h3>
-          <h3>Thank you for using FreshBasket</h3>
+          <h3>Thank you for using FreshBsQt</h3>
         </div>
       </div>
     </div>
