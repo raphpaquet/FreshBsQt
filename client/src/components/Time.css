@@ -1,0 +1,24 @@
+.time-range {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 30px;
+  font-family: none;
+  margin-top: 20px;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.input-range__slider {
+  background: rgb(136, 196, 136)
+}
+
+.input-range__track--active {
+  background:rgb(136, 196, 136);
+}
+
+.input-range {
+  width: 80%;
+  margin-left: 10%;
+  margin-bottom: 30px;
+}

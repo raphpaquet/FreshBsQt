@@ -28,6 +28,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-stripe-elements": "^6.1.2",
+    "react-time-range-slider": "^1.1.2",
     "sales-tax": "^2.2.5",
     "stripe": "^8.131.1",
     "use-local-storage": "^2.0.1",
