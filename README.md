@@ -16,6 +16,7 @@ It is easy to get groceries delivered from a large grocery store, yet there are 
 ## Tech/Frameworks Used
 
 Front End: ReactJS, CSS, Material-UI, Axios, Google Maps Javascript API, Stripe
+
 Back End: NodeJS, Express, PostgreSQL
 
 ## Features
@@ -28,16 +29,20 @@ Stripe. Stripe was leveraged to provide an easy checkout process. As many develo
 
 The database. Adding products to the menu is quick and easy to do. Product entries are added to the database, and the front end code renders the new products without any adjustments. 
 
-## API KEYS
+## API Keys
 
-Depending on the situation, a google maps API key may be required to run the map system. 
+Depending on the situation, a google maps API key may be required to run the map system. See setup process for more info.
 
 
-## SETUP 
+## Setup
 step 1: cd into backend-express and run "npm install".
+
 step 2: While on vagrant run "createdb final_project -O labber"
+
 step 3: run "npm run db:reset" from your backend-express folder
+
 step 4: cd into client and run "npm install".
+
 step 5: Make sure there is a google maps API key. Around line 328 in client/src/components/GoogleMap.js, there should be a valid API key for the map to work. The code should look similar to the example below. 
 
 ```
