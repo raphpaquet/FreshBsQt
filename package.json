@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "db:reset": "node ./db/reset.js",
     "dev": "nodemon ./bin/www",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm start"
   },
   "repository": {
     "type": "git",
