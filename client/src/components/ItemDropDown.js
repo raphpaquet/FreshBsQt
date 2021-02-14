@@ -224,7 +224,8 @@ export default function ItemDropDown () {
   const latitudeLocation = userLocation['latitude']
   const longitudeLocation = userLocation['longitude']
   const defaultCenter = {
-    lat: latitudeLocation, lng: longitudeLocation
+    lat: 45.518921, lng: -73.59474
+    //lat: latitudeLocation, lng: longitudeLocation
   }
 
   const stores = {
